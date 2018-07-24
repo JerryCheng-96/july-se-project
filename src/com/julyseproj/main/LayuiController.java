@@ -1,17 +1,15 @@
 package com.julyseproj.main;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.ui.ModelMap;
 
 @Controller
-@RequestMapping("/hello")
-public class HelloController {
+@RequestMapping("/spring.do")
+public class LayuiController {
     @RequestMapping(method = RequestMethod.GET)
     public String printHello(ModelMap model) {
-        model.addAttribute("message", "Hello Spring MVC Framework!");
-        return "hello";
+        return "spring";
     }
 }
-

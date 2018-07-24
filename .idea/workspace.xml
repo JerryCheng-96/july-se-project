@@ -7,11 +7,118 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9a00b940-85cb-4d1d-a6f4-bf4a01865b88" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/julyseproj/main/Student.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/julyseproj/main/StudentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/WEB-INF/jsp/result.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/WEB-INF/jsp/student.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/julyseproj/main/LayuiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/jsp/spring.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/layui.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/layui.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/layui.mobile.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/layui.mobile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/modules/code.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/modules/code.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/modules/laydate/default/laydate.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/modules/laydate/default/laydate.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/modules/layer/default/icon-ext.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/modules/layer/default/icon-ext.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/modules/layer/default/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/modules/layer/default/icon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/modules/layer/default/layer.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/modules/layer/default/layer.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/modules/layer/default/loading-0.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/modules/layer/default/loading-0.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/modules/layer/default/loading-1.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/modules/layer/default/loading-1.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/css/modules/layer/default/loading-2.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/css/modules/layer/default/loading-2.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/font/iconfont.eot" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/font/iconfont.eot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/font/iconfont.svg" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/font/iconfont.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/font/iconfont.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/font/iconfont.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/font/iconfont.woff" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/font/iconfont.woff" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/0.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/0.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/1.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/1.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/10.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/10.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/11.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/11.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/12.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/12.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/13.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/13.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/14.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/14.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/15.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/15.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/16.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/16.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/17.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/17.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/18.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/18.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/19.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/19.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/2.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/2.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/20.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/20.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/21.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/21.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/22.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/22.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/23.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/23.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/24.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/24.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/25.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/25.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/26.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/26.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/27.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/27.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/28.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/28.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/29.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/29.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/3.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/3.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/30.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/30.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/31.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/31.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/32.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/32.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/33.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/33.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/34.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/34.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/35.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/35.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/36.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/36.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/37.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/37.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/38.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/38.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/39.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/39.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/4.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/4.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/40.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/40.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/41.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/41.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/42.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/42.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/43.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/43.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/44.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/44.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/45.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/45.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/46.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/46.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/47.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/47.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/48.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/48.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/49.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/49.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/5.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/5.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/50.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/50.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/51.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/51.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/52.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/52.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/53.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/53.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/54.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/54.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/55.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/55.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/56.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/56.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/57.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/57.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/58.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/58.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/59.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/59.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/6.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/6.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/60.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/60.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/61.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/61.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/62.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/62.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/63.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/63.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/64.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/64.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/65.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/65.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/66.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/66.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/67.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/67.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/68.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/68.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/69.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/69.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/7.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/7.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/70.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/70.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/71.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/71.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/8.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/8.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/images/face/9.gif" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/images/face/9.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/carousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/carousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/code.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/code.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/element.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/element.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/flow.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/flow.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/jquery.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/laydate.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/laydate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/layedit.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/layedit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/layer.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/layer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/laypage.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/laypage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/laytpl.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/laytpl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/mobile.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/mobile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/rate.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/rate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/tree.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/tree.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/upload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/lay/modules/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/lay/modules/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/layui.all.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/layui.all.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layui/layui.js" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/layui/layui.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/julyseproj/main/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/julyseproj/main/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/applicationContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/applicationContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,79 +129,21 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/index.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="dispatcher-servlet.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HelloController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/HelloController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Student.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/Student.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-              <folding>
-                <element signature="e#164#165#0" expanded="true" />
-                <element signature="e#194#195#0" expanded="true" />
-                <element signature="e#224#225#0" expanded="true" />
-                <element signature="e#250#251#0" expanded="true" />
-                <element signature="e#290#291#0" expanded="true" />
-                <element signature="e#322#323#0" expanded="true" />
-                <element signature="e#352#353#0" expanded="true" />
-                <element signature="e#379#380#0" expanded="true" />
-                <element signature="e#416#417#0" expanded="true" />
-                <element signature="e#444#445#0" expanded="true" />
-                <element signature="e#473#474#0" expanded="true" />
-                <element signature="e#498#499#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StudentController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/StudentController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#510#511#0" expanded="true" />
-                <element signature="e#586#587#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="student.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/student.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="result.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/result.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+            <state relative-caret-position="142">
+              <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -102,15 +151,19 @@
       <file leaf-file-name="web.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+            <state relative-caret-position="289">
+              <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="applicationContext.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/applicationContext.xml">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -119,8 +172,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -138,15 +191,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/jsp/hello.jsp" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" />
-        <option value="$PROJECT_DIR$/src/com/julyseproj/main/HelloController.java" />
         <option value="$PROJECT_DIR$/src/com/julyseproj/main/Student.java" />
         <option value="$PROJECT_DIR$/src/com/julyseproj/main/StudentController.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/jsp/result.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/jsp/student.jsp" />
+        <option value="$PROJECT_DIR$/src/com/julyseproj/main/HelloController.java" />
+        <option value="$PROJECT_DIR$/src/com/julyseproj/main/LayuiController.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/jsp/spring.jsp" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/applicationContext.xml" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" />
+        <option value="$PROJECT_DIR$/web/index.jsp" />
       </list>
     </option>
   </component>
@@ -209,14 +265,13 @@
               <item name="july-se-project" type="b2602c69:ProjectViewProjectNode" />
               <item name="july-se-project" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="july-se-project" type="b2602c69:ProjectViewProjectNode" />
               <item name="july-se-project" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
               <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="jsp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -227,11 +282,19 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/WEB-INF/res" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jerry\Documents\GitHub-Clone\july-se-project\web" />
+      <recent name="C:\Users\Jerry\Documents\GitHub-Clone\july-se-project\web\WEB-INF\res" />
+      <recent name="C:\Users\Jerry\Documents\GitHub-Clone\july-se-project\web\WEB-INF" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -289,7 +352,8 @@
     </configuration>
     <configuration name="Tomcat" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.32" ALTERNATIVE_JRE_ENABLED="false">
       <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
-      <option name="UPDATING_POLICY" value="restart-server" />
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <deployment>
         <artifact name="july-se-project:war exploded">
           <settings>
@@ -370,7 +434,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1532401974207</updated>
-      <workItem from="1532401979900" duration="1679000" />
+      <workItem from="1532401979900" duration="3448000" />
+      <workItem from="1532412223806" duration="4314000" />
     </task>
     <task id="LOCAL-00001" summary="Refresh start">
       <created>1532402017826</created>
@@ -386,49 +451,90 @@
       <option name="project" value="LOCAL" />
       <updated>1532402821837</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Spring MVC - Student Form Example">
+      <created>1532403695426</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1532403695426</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1679000" />
+    <option name="totallyTimeSpent" value="7762000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="703" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Application Servers" weight="0.32881355" />
-      <window_info anchor="right" id="Maven Projects" />
-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
-      <window_info id="Capture Tool" />
-      <window_info id="Designer" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32881355" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" />
+      <window_info id="UI Designer" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info id="Image Layers" />
-      <window_info anchor="bottom" id="Java Enterprise" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="bottom" id="Version Control" weight="0.32881355" />
+      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32881355" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32881355" />
-      <window_info anchor="bottom" id="Spring" weight="0.32881355" />
-      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.32881355" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24941361" />
-      <window_info id="Web" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Web" order="2" side_tool="true" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="bottom" id="Application Servers" order="0" weight="0.32881355" />
+      <window_info id="Designer" order="0" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="bottom" id="Spring" order="1" weight="0.32881355" />
+      <window_info id="Image Layers" order="1" />
+      <window_info anchor="bottom" id="Run" order="10" visible="true" weight="0.32881355" />
+      <window_info anchor="bottom" id="Cvs" order="12" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="2" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="4" />
+      <window_info anchor="bottom" id="TODO" order="14" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.24941361" />
+      <window_info anchor="bottom" id="Java Enterprise" order="5" />
+      <window_info anchor="bottom" id="Database Changes" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32881355" />
+      <window_info anchor="right" id="Maven Projects" order="2" />
+      <window_info anchor="bottom" id="Inspection" order="13" weight="0.4" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Message" order="8" />
+      <window_info id="Web" order="5" side_tool="true" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="9" />
+      <window_info anchor="bottom" id="Debug" order="11" weight="0.4" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -475,33 +581,14 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Refresh start" />
     <MESSAGE value="Spring MVC Hello, world set." />
-    <option name="LAST_COMMIT_MESSAGE" value="Spring MVC Hello, world set." />
+    <MESSAGE value="Spring MVC - Student Form Example" />
+    <option name="LAST_COMMIT_MESSAGE" value="Spring MVC - Student Form Example" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/hello.jsp">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/spring.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/applicationContext.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/HelloController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="629">
+          <caret line="37" column="6" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -514,14 +601,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+        <state relative-caret-position="34">
+          <caret line="2" column="62" selection-start-line="2" selection-start-column="62" selection-end-line="2" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/HelloController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/hello.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/result.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/StudentController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#510#511#0" expanded="true" />
+            <element signature="e#586#587#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/Student.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
+        <state relative-caret-position="421">
           <caret line="27" column="1" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
           <folding>
             <element signature="e#164#165#0" expanded="true" />
@@ -540,29 +670,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/student.jsp">
+    <entry file="file://$PROJECT_DIR$/web/res/layui/layui.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/StudentController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="26" column="1" selection-start-line="26" selection-start-column="1" selection-end-line="26" selection-end-column="1" />
+        <state relative-caret-position="17">
+          <caret line="1" column="101" selection-start-line="1" selection-start-column="101" selection-end-line="1" selection-end-column="101" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#510#511#0" expanded="true" />
-            <element signature="e#586#587#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/result.jsp">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/student.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+        <state relative-caret-position="187">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/spring.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/LayuiController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/res/Cache.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/applicationContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="18" column="51" selection-start-line="18" selection-start-column="51" selection-end-line="18" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="33" column="16" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -571,7 +736,14 @@
     <states>
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
-          <artifact-editor />
+          <artifact-editor>
+            <show-content>
+              <type id="artifact" />
+              <type id="jpa-descriptors" />
+              <type id="javaee-facet-resources" />
+              <type id="library" />
+            </show-content>
+          </artifact-editor>
           <last-edited>july-se-project:war exploded</last-edited>
           <splitter-proportions>
             <option name="proportions">
