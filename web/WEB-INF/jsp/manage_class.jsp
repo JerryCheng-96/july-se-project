@@ -44,42 +44,18 @@
 
         //第一个实例
         table.render({
-            elem: '#demo' ,
+            elem: '#demo'
             //,url: '/demo/table/user/' //数据接口
-            width: '90%',
-            page: true, //开启分页
-            cols: [[ //表头
-                {
-                    field: 'id',
-                    title: '工号',
-                    width: 180,
-                    sort: true,
-                    fixed: 'left',
-                    templet: '<div><a href="/detail/{{d.id}}" class="layui-table-link">{{d.id}}</a></div>'
-                }
-                , {field: 'username', title: '姓名', width: 120}
-                , {field: 'sex', title: '性别', width: 160, sort: true}
-                , {field: 'enterprise', title: '公司', width: 200}
-                , {field: 'department', title: '部门', width: 180}
-                , {field: 'post', title: '职务', width: 160, sort: true}
+            , width: '90%'
+            , page: true //开启分页
+            , cols: [[ //表头
+                { field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left' }
+                , { field: 'username', title: '班名', width: 200, templet: '<div><a href="class/{{d.username}}.html" class="layui-table-link">{{d.username}}</a></div>' }
+                , { field: 'engineer', title: '工程师', width: 200, sort: true }
             ]]
-            ,
-            data: [{
-                'id': '123456',
-                'username': '王境泽',
-                'sex': 'male',
-                'enterprise': '鬼畜公司',
-                'department': 'b站鬼畜区',
-                'post': '鬼畜素材师'
-            },
-                {
-                    'id': '123457',
-                    'username': '大力哥',
-                    'sex': 'male',
-                    'enterprise': '鬼畜公司',
-                    'department': 'b站鬼畜区',
-                    'post': '鬼畜素材师'
-                }]
+            , data: [{ 'id': '1', 'username': 'A210', 'engineer': 'Gong' },
+                { 'id': '2', 'username': 'A211', 'engineer': 'Liu' }]
+
         });
 
     });

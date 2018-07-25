@@ -19,18 +19,29 @@ public class DashboardController {
         return "playground";
     }
 
-    @RequestMapping(value = "/person", method = RequestMethod.GET)
-    public String person() {
-        return "person_temp";
+    @RequestMapping(value = "/dashboard/engineer", method = RequestMethod.GET)
+    public String dashboard_engineer() {
+        return "dashboard_engineer";
     }
 
-    @RequestMapping(value = "/class", method = RequestMethod.GET)
-    public String class_class() {
-        return "class_temp";
+    @RequestMapping(value = "/dashboard/student", method = RequestMethod.GET)
+    public String dash_student() {
+        return "dashboard_student";
     }
 
-    @RequestMapping(value = "/team", method = RequestMethod.GET)
-    public String team() {
-        return "team_temp";
+    @RequestMapping(value = "/dashboard/class", method = RequestMethod.GET)
+    public String dash_class() {
+        return "dashboard_class";
     }
+
+    @RequestMapping(value = "/dashboard/person", method = RequestMethod.GET)
+    public String dash_person() {
+        return "dashboard_person";
+    }
+
+    @RequestMapping(value = "/dashboard/team", method = RequestMethod.GET)
+    public String dash_team() {
+        return "dashboard_team";
+    }
+
 }
