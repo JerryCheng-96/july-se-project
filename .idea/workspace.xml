@@ -8,9 +8,13 @@
   <component name="ChangeListManager">
     <list default="true" id="9a00b940-85cb-4d1d-a6f4-bf4a01865b88" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/july_se_project_war_exploded/WEB-INF/classes/com/julyseproj/main/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/july_se_project_war_exploded/WEB-INF/classes/com/julyseproj/main/LoginController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/july-se-project/com/julyseproj/main/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/july-se-project/com/julyseproj/main/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/july_se_project_war_exploded/WEB-INF/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/july_se_project_war_exploded/WEB-INF/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/july_se_project_war_exploded/WEB-INF/jsp/dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/july_se_project_war_exploded/WEB-INF/jsp/dashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/july_se_project_war_exploded/res/img/login_bg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/july_se_project_war_exploded/res/img/login_bg.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/css/login.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/WEB-INF/jsp/dashboard.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/jsp/dashboard.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/WEB-INF/jsp/headersidenav.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/jsp/headersidenav.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/res/img/login_bg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/web/res/img/login_bg.jpg" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,11 +42,10 @@
       <file leaf-file-name="dashboard.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/dashboard.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="421">
-              <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+            <state relative-caret-position="170">
+              <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
               <folding>
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -55,66 +58,8 @@
       <file leaf-file-name="headersidenav.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/headersidenav.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DashboardController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/DashboardController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#505#506#0" expanded="true" />
-                <element signature="e#535#536#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/LoginController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="docs.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/docs.jsp">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="dispatcher-servlet.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/WEB-INF/css/login.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/index.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+            <state relative-caret-position="221">
+              <caret line="83" column="62" selection-start-line="83" selection-start-column="62" selection-end-line="83" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -157,13 +102,13 @@
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/web/index.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/css/login.css" />
         <option value="$PROJECT_DIR$/web/WEB-INF/jsp/login.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/jsp/projects.jsp" />
         <option value="$PROJECT_DIR$/src/com/julyseproj/main/DashboardController.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/jsp/topsidenav.jsp" />
-        <option value="$PROJECT_DIR$/web/WEB-INF/jsp/headersidenav.jsp" />
         <option value="$PROJECT_DIR$/src/com/julyseproj/main/LoginController.java" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/css/login.css" />
+        <option value="$PROJECT_DIR$/web/WEB-INF/jsp/headersidenav.jsp" />
         <option value="$PROJECT_DIR$/web/WEB-INF/jsp/dashboard.jsp" />
       </list>
     </option>
@@ -275,8 +220,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Jerry\Documents\GitHub-Clone\july-se-project\web\WEB-INF\jsp" />
       <recent name="C:\Users\Jerry\Documents\GitHub-Clone\july-se-project\web\res\img" />
+      <recent name="C:\Users\Jerry\Documents\GitHub-Clone\july-se-project\web\WEB-INF\jsp" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Jerry\Documents\GitHub-Clone\july-se-project\web\res\img" />
@@ -427,7 +372,7 @@
       <workItem from="1532401979900" duration="3448000" />
       <workItem from="1532412223806" duration="5605000" />
       <workItem from="1532418388970" duration="2306000" />
-      <workItem from="1532479820204" duration="10049000" />
+      <workItem from="1532479820204" duration="12245000" />
     </task>
     <task id="LOCAL-00001" summary="Refresh start">
       <created>1532402017826</created>
@@ -471,11 +416,18 @@
       <option name="project" value="LOCAL" />
       <updated>1532484787117</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Loop for html labels in js">
+      <created>1532496046275</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1532496046275</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21408000" />
+    <option name="totallyTimeSpent" value="23604000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1293" height="703" extended-state="6" />
@@ -500,10 +452,10 @@
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32881355" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960908" weight="0.32881355" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960908" visible="true" weight="0.32881355" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.32881355" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1954652" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18921033" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32881355" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -599,7 +551,8 @@
     <MESSAGE value="Static res access and Controller redir now co-exist." />
     <MESSAGE value="Before coding for login interface" />
     <MESSAGE value="Side nav ver. 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Side nav ver. 1" />
+    <MESSAGE value="Loop for html labels in js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Loop for html labels in js" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/spring.jsp">
@@ -816,9 +769,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/res/img/Cache.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/res/layui/font/iconfont.svg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -912,9 +862,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/res/img/login_bg.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/dispatcher-servlet.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="438">
@@ -926,13 +873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/css/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
         </state>
       </provider>
     </entry>
@@ -950,10 +890,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/headersidenav.jsp">
+    <entry file="file://$PROJECT_DIR$/web/res/img/Cache.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/res/img/login_bg.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/css/login.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        <state relative-caret-position="85">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/LoginController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -969,23 +925,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/julyseproj/main/LoginController.java">
+    <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/headersidenav.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="221">
+          <caret line="83" column="62" selection-start-line="83" selection-start-column="62" selection-end-line="83" selection-end-column="62" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/WEB-INF/jsp/dashboard.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+        <state relative-caret-position="170">
+          <caret line="14" column="39" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
           <folding>
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />

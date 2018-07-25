@@ -11,7 +11,9 @@
 
 <body class="layui-layout-body" style="background-color: #F2F2F2">
 <div class="layui-layout layui-layout-admin">
-    <jsp:include page="headersidenav.jsp"/>
+    <jsp:include page="headersidenav.jsp">
+        <jsp:param name="label" value="2"/>
+    </jsp:include>
     <div class="layui-body">
         <div class="layui-row" style="padding: 15px;">
             <div id="theCards"></div>
