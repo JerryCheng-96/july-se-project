@@ -18,4 +18,9 @@ public class DashboardController {
     public String pg() {
         return "playground";
     }
+
+    @RequestMapping(value = "/person", method = RequestMethod.GET)
+    public String person() {
+        return "person_temp";
+    }
 }

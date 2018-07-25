@@ -18,8 +18,8 @@
         <div class="layui-row" style="padding: 15px;">
             <div id="theCards"></div>
         </div>
-
     </div>
+
     <script src="/res/layui/layui.js"></script>
     <script>
         layui.use('element', function () {

@@ -16,10 +16,9 @@
     </jsp:include>
     <div class="layui-body">
         <div class="layui-row" style="padding: 15px;">
-            <div id="theCards"></div>
         </div>
-    </div>
 
+    </div>
     <script src="/res/layui/layui.js"></script>
     <script>
         layui.use('element', function () {
@@ -30,20 +29,28 @@
             });
         });
 
-        var cardHtml = '';
-        for (var i = 0; i < 10; i++) {
-            if (i == 0) {
-                cardHtml += '<div class="layui-row" style="padding: 10px;">'
-            }
-            if (i > 0 && i % 2 == 0) {
-                cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
-            }
-            cardHtml += '<div class="layui-col-md5" style="padding-left: 10px;"> <div class="layui-card"> <div class="layui-card-header">卡片面板</div> <div class="layui-card-body"> 卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 </div> </div> </div>';
-        }
-        cardHtml += '</div>'
-        document.getElementById('theCards').innerHTML = cardHtml;
-
+        layui.use('layer', function(){
+            var layer = layui.layer;
+            layer.open({
+                type: 1,
+                title: '人员信息',
+                content: "<div>" +
+                '<img src="/res/icon/engineer.JPG" style="width:80px;height:80px;border-radius:80px;margin:0 auto;padding: 15px">' +
+                '<span style="font-size: 20px">张三</span>' +
+                '<br/><br/><span style="font-size: 18px;">' +
+                '<p style="padding-left:25px"><b>部门</b></p>' +
+                '<p style="padding-left:25px"><b>职务</b></p>' +
+                '<br/>' +
+                '<br/>' +
+                '</span>' +
+                "</div>",
+                area: '350px'
+            });
+        });
     </script>
 </body>
+
+
+
 </html>
 

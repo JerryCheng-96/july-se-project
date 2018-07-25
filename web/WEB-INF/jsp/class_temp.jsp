@@ -15,11 +15,28 @@
         <jsp:param name="label" value="2"/>
     </jsp:include>
     <div class="layui-body">
-        <div class="layui-row" style="padding: 15px;">
-            <div id="theCards"></div>
+        <div class="layui-container">
+            <br/>
+        <div class="layui-row" style="padding-left: 7px">
+            <h1>[班级名称]</h1>
+            <br/>
+            <h3 href="">负责工程师：[姓名]</h3>
+            <br/>
+        </div>
+        <div class="layui-row">
+        <div class="layui-tab layui-tab-card" style="width: 90%;">
+            <ul class="layui-tab-title">
+                <li class="layui-this">学员名单</li>
+                <li>小组名单</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">内容1</div>
+                <div class="layui-tab-item">内容2</div>
+            </div>
+        </div>
+        </div>
         </div>
     </div>
-
     <script src="/res/layui/layui.js"></script>
     <script>
         layui.use('element', function () {
@@ -30,20 +47,8 @@
             });
         });
 
-        var cardHtml = '';
-        for (var i = 0; i < 10; i++) {
-            if (i == 0) {
-                cardHtml += '<div class="layui-row" style="padding: 10px;">'
-            }
-            if (i > 0 && i % 2 == 0) {
-                cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
-            }
-            cardHtml += '<div class="layui-col-md5" style="padding-left: 10px;"> <div class="layui-card"> <div class="layui-card-header">卡片面板</div> <div class="layui-card-body"> 卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 </div> </div> </div>';
-        }
-        cardHtml += '</div>'
-        document.getElementById('theCards').innerHTML = cardHtml;
-
     </script>
 </body>
+
 </html>
 
