@@ -13,4 +13,9 @@ public class DashboardController {
     public String login() {
         return "dashboard";
     }
+
+    @RequestMapping(value = "/pg", method = RequestMethod.GET)
+    public String pg() {
+        return "playground";
+    }
 }

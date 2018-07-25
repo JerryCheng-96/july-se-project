@@ -26,10 +26,10 @@
                         <span class="layui-nav-more"></span>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd class="layui-this">
+                        <dd id="label1" class="layui-this">
                             <a href="javascript:;">班级管理</a>
                         </dd>
-                        <dd>
+                        <dd id="label2">
                             <a href="javascript:;">学生管理</a>
                         </dd>
                         <dd>
@@ -78,3 +78,10 @@
         </div>
     </div>
 
+<script>
+    var labelId = <%=(String)request.getParameter("label")%>;
+    if (labelId == "2") {
+        document.getElementById('label1').setAttribute('class', '');
+        document.getElementById('label2').setAttribute('class', 'layui-this');
+    }
+</script>
