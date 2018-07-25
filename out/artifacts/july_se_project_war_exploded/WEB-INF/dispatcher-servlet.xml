@@ -23,5 +23,8 @@
     </bean>
     <mvc:annotation-driven/>
     <mvc:resources location="/res/" mapping="/res/**"/>
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/*.css"/>
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/*.js"/>
+
 
 </beans>
