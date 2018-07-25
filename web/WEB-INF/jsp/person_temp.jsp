@@ -34,7 +34,8 @@
             layer.open({
                 type: 1,
                 title: '人员信息',
-                content: "<div>" +
+                content: "" +
+                "<div>" +
                 '<img src="/res/icon/engineer.JPG" style="width:80px;height:80px;border-radius:80px;margin:0 auto;padding: 15px">' +
                 '<span style="font-size: 20px">张三</span>' +
                 '<br/><br/><span style="font-size: 18px;">' +

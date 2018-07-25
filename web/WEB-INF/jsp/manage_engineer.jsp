@@ -10,11 +10,14 @@
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-    <jsp:include page="headersidenav.jsp"/>
+    <jsp:include page="headersidenav.jsp">
+        <jsp:param name="cat" value="manage"/>
+        <jsp:param name="func" value="man_engineer"/>
+    </jsp:include>
     <div class="layui-body">
         <div class="layui-row">
             <br/>
-            <span style="padding-left: 15px;"><a href="" class="layui-btn">添加学生</a></span>
+            <span style="padding-left: 15px;"><a href="" class="layui-btn">添加工程师</a></span>
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->

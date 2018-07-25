@@ -1,5 +1,4 @@
-
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
 <html>
@@ -45,7 +44,7 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">所有商品</a>
                     <dl class="layui-nav-child">
@@ -81,10 +80,10 @@
 </div>
 <script src="/res/layui/layui.js"></script>
 <script>
-    layui.use('element', function() {
+    layui.use('element', function () {
         var element = layui.element;
         //一些事件监听
-        element.on('tab(demo)', function(data){
+        element.on('tab(demo)', function (data) {
             console.log(data);
         });
     });

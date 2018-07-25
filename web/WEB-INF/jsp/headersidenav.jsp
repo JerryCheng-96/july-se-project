@@ -21,23 +21,23 @@
     <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree">
-            <li class="layui-nav-item layui-nav-itemed">
+            <li id="manage" class="layui-nav-item">
                 <a class="" href="javascript:;">实训管理
                     <span class="layui-nav-more"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd id="label1" class="layui-this">
-                        <a href="javascript:;">班级管理</a>
+                    <dd id="man_class">
+                        <a href="/manage/class">班级管理</a>
                     </dd>
-                    <dd id="label2">
-                        <a href="javascript:;">学生管理</a>
+                    <dd id="man_student">
+                        <a href="/manage/student">学生管理</a>
                     </dd>
-                    <dd>
-                        <a href="javascript:;">工程师管理</a>
+                    <dd id="man_engineer">
+                        <a href="/manage/engineer">工程师管理</a>
                     </dd>
                 </dl>
             </li>
-            <li class="layui-nav-item layui-nav-itemed">
+            <li class="layui-nav-item">
                 <a class="" href="javascript:;">项目管理
                     <span class="layui-nav-more"></span>
                 </a>
@@ -50,7 +50,7 @@
                     </dd>
                 </dl>
             </li>
-            <li class="layui-nav-item layui-nav-itemed">
+            <li class="layui-nav-item">
                 <a class="" href="javascript:;">班级管理
                     <span class="layui-nav-more"></span>
                 </a>
@@ -79,9 +79,10 @@
 </div>
 
 <script>
-    var labelId = <%=(String)request.getParameter("label")%>;
-    if (labelId == "2") {
-        document.getElementById('label1').setAttribute('class', '');
-        document.getElementById('label2').setAttribute('class', 'layui-this');
-    }
+    var catId = '<%=(String)request.getParameter("cat")%>';
+    var funcId = '<%=(String)request.getParameter("func")%>';
+    var catObj = document.getElementById(catId);
+    var funcObj = document.getElementById(funcId);
+    catObj.setAttribute('class', catObj.getAttribute('class') + ' layui-nav-itemed')
+    funcObj.setAttribute('class', funcObj.getAttribute('class') + ' layui-this')
 </script>

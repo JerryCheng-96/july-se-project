@@ -23,4 +23,14 @@ public class DashboardController {
     public String person() {
         return "person_temp";
     }
+
+    @RequestMapping(value = "/class", method = RequestMethod.GET)
+    public String class_class() {
+        return "class_temp";
+    }
+
+    @RequestMapping(value = "/team", method = RequestMethod.GET)
+    public String team() {
+        return "team_temp";
+    }
 }
