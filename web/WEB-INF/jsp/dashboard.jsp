@@ -18,7 +18,11 @@
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->
-            <table id="demo" lay-filter="test"></table>
+            <p><a href="/dashboard/class">Class Dashboard</a></p>
+            <p><a href="/dashboard/team">Team Dashboard</a>  </p>
+            <p><a href="/dashboard/engineer">Engineer Dashboard</a></p>
+            <p><a href="/dashboard/student">Student Dashboard</a>  </p>
+            <p><a href="/dashboard/person">Pop-up person info</a>  </p>
             <!--在此处添加页面代码-->
         </div>
     </div>
@@ -34,50 +38,7 @@
         });
     });
 
-    layui.use('table', function () {
-        var table = layui.table;
 
-        //第一个实例
-        table.render({
-            elem: '#demo' ,
-            //,url: '/demo/table/user/' //数据接口
-            width: '90%',
-            page: true, //开启分页
-            cols: [[ //表头
-                {
-                    field: 'id',
-                    title: '工号',
-                    width: 180,
-                    sort: true,
-                    fixed: 'left',
-                    templet: '<div><a href="/detail/{{d.id}}" class="layui-table-link">{{d.id}}</a></div>'
-                }
-                , {field: 'username', title: '姓名', width: 120}
-                , {field: 'sex', title: '性别', width: 160, sort: true}
-                , {field: 'enterprise', title: '公司', width: 200}
-                , {field: 'department', title: '部门', width: 180}
-                , {field: 'post', title: '职务', width: 160, sort: true}
-            ]]
-            ,
-            data: [{
-                'id': '123456',
-                'username': '王境泽',
-                'sex': 'male',
-                'enterprise': '鬼畜公司',
-                'department': 'b站鬼畜区',
-                'post': '鬼畜素材师'
-            },
-                {
-                    'id': '123457',
-                    'username': '大力哥',
-                    'sex': 'male',
-                    'enterprise': '鬼畜公司',
-                    'department': 'b站鬼畜区',
-                    'post': '鬼畜素材师'
-                }]
-        });
-
-    });
 </script>
 
 </body>

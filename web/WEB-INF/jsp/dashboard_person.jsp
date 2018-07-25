@@ -36,11 +36,11 @@
                 title: '人员信息',
                 content: "" +
                 "<div>" +
-                '<img src="/res/icon/engineer.JPG" style="width:80px;height:80px;border-radius:80px;margin:0 auto;padding: 15px">' +
+                '<img src="/res/icon/5.png" style="width:80px;height:80px;border-radius:80px;margin:0 auto;padding: 15px">' +
                 '<span style="font-size: 20px">张三</span>' +
                 '<br/><br/><span style="font-size: 18px;">' +
-                '<p style="padding-left:25px"><b>部门</b></p>' +
-                '<p style="padding-left:25px"><b>职务</b></p>' +
+                '<p style="padding-left:25px"><b>部门</b> - XXXXXXX</p>' +
+                '<p style="padding-left:25px"><b>职务</b> - XXXXXXX</p>' +
                 '<br/>' +
                 '<br/>' +
                 '</span>' +
