@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
     <title>Spring MVC表单处理</title>
@@ -11,15 +11,15 @@
     <table>
         <tr>
             <td><form:label path="name">名字：</form:label></td>
-            <td><form:input path="name" /></td>
+            <td><form:input path="name"/></td>
         </tr>
         <tr>
             <td><form:label path="age">年龄：</form:label></td>
-            <td><form:input path="age" /></td>
+            <td><form:input path="age"/></td>
         </tr>
         <tr>
             <td><form:label path="id">编号：</form:label></td>
-            <td><form:input path="id" /></td>
+            <td><form:input path="id"/></td>
         </tr>
         <tr>
             <td colspan="2">

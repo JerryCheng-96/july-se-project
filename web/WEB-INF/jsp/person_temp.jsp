@@ -29,7 +29,7 @@
             });
         });
 
-        layui.use('layer', function(){
+        layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
                 type: 1,
@@ -49,7 +49,6 @@
         });
     </script>
 </body>
-
 
 
 </html>
