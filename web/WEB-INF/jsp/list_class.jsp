@@ -49,12 +49,17 @@
             , width: '90%'
             , page: true //开启分页
             , cols: [[ //表头
-                { field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left' }
-                , { field: 'username', title: '班名', width: 200, templet: '<div><a href="/dashboard/class" class="layui-table-link">{{d.username}}</a></div>' }
-                , { field: 'engineer', title: '工程师', width: 200, sort: true }
+                {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
+                , {
+                    field: 'username',
+                    title: '班名',
+                    width: 200,
+                    templet: '<div><a href="/dashboard/class" class="layui-table-link">{{d.username}}</a></div>'
+                }
+                , {field: 'engineer', title: '工程师', width: 200, sort: true}
             ]]
-            , data: [{ 'id': '1', 'username': 'A210', 'engineer': 'Gong' },
-                { 'id': '2', 'username': 'A211', 'engineer': 'Liu' }]
+            , data: [{'id': '1', 'username': 'A210', 'engineer': 'Gong'},
+                {'id': '2', 'username': 'A211', 'engineer': 'Liu'}]
 
         });
 

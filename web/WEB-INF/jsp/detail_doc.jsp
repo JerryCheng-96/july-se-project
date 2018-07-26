@@ -63,21 +63,21 @@
         });
     });
 
-            var cardHtml = '';
-        for (var i = 0; i < 2; i++) {
-            if (i == 0) {
-                cardHtml += '<div class="layui-row" style="padding: 10px;">'
-            }
-            if (i > 0) {
-                cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
-            }
-            cardHtml += '<div class="layui-card"> ' +
-                '<div class="layui-card-header"><a href="/dashboard/doc"><b>卡片面板</b></a></div> ' +
-                '<div class="layui-card-body"> 卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 </div> ' +
-                '</div>';
+    var cardHtml = '';
+    for (var i = 0; i < 2; i++) {
+        if (i == 0) {
+            cardHtml += '<div class="layui-row" style="padding: 10px;">'
         }
-        cardHtml += '</div>'
-        document.getElementById('theCards').innerHTML = cardHtml;
+        if (i > 0) {
+            cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
+        }
+        cardHtml += '<div class="layui-card"> ' +
+            '<div class="layui-card-header"><a href="/dashboard/doc"><b>卡片面板</b></a></div> ' +
+            '<div class="layui-card-body"> 卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 </div> ' +
+            '</div>';
+    }
+    cardHtml += '</div>'
+    document.getElementById('theCards').innerHTML = cardHtml;
 
 </script>
 

@@ -8,6 +8,7 @@ public class Student {
     public void setAge(Integer age) {
         this.age = age;
     }
+
     public Integer getAge() {
         return age;
     }
@@ -15,6 +16,7 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return name;
     }
@@ -22,6 +24,7 @@ public class Student {
     public void setId(Integer id) {
         this.id = id;
     }
+
     public Integer getId() {
         return id;
     }

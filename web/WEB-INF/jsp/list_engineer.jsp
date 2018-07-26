@@ -42,7 +42,7 @@
 
         //第一个实例
         table.render({
-            elem: '#demo' ,
+            elem: '#demo',
             //,url: '/demo/table/user/' //数据接口
             width: '90%',
             page: true, //开启分页

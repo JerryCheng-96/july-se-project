@@ -24,10 +24,10 @@
                 <h3 href="">小组组长：[姓名]</h3>
                 <br/>
                 <div class="layui-btn-group">
-                         <button class="layui-btn layui-btn-normal">添加学生</button>
-                         <button class="layui-btn">编辑</button>
-                         <button class="layui-btn layui-btn-danger">删除</button>
-                     </div>
+                    <button class="layui-btn layui-btn-normal">添加学生</button>
+                    <button class="layui-btn">编辑</button>
+                    <button class="layui-btn layui-btn-danger">删除</button>
+                </div>
             </div>
             <div class="layui-row" style="margin-left: 7px">
                 <div class="layui-tab layui-tab-card" style="width: 90%;">
@@ -120,30 +120,72 @@
 
 
         layui.use('table', function () {
-        var table = layui.table;
+            var table = layui.table;
 
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            //,url: '/demo/table/user/' //数据接口
-            , width: '90%'
-            , page: true //开启分页
-            , cols: [[ //表头
-                { field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left' }
-                , { field: 'name', title: '姓名', width: 200, sort: true}
-                , { field: 'gender', title: '性别', width: 200, sort: true }
-                , { field: 'colleage', title: '学院', width: 200, sort: true}
-                , { field: 'majority', title: '专业', width: 200, sort: true}
-                , { field: 'grade', title: '年级', width: 200, sort: true}
-                , { field: 'class', title: '班级', width: 200, sort: true, templet: '<div><a href="class/{{d.class}}.html" class="layui-table-link">{{d.class}}</a></div>' }
-            ]]
-            , data: [{'id':10, 'name': 'Zhang', 'gender': 'male', 'colleage': 'Software','majority': 'SE','grade': '2016' ,'class':'A210'},
-                {'id':11, 'name': 'Deng', 'gender': 'male', 'colleage': 'Software','majority': 'SE','grade': '2016' ,'class':'A210'},
-                {'id':5, 'name': 'Wang', 'gender': 'male', 'colleage': 'Software','majority': 'SE','grade': '2016' ,'class':'A211'},
-                {'id':6, 'name': 'Li', 'gender': 'female', 'colleage': 'Software','majority': 'SE','grade': '2016' ,'class':'A211'}]
+            //第一个实例
+            table.render({
+                elem: '#demo'
+                //,url: '/demo/table/user/' //数据接口
+                ,
+                width: '90%'
+                ,
+                page: true //开启分页
+                ,
+                cols: [[ //表头
+                    {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
+                    , {field: 'name', title: '姓名', width: 200, sort: true}
+                    , {field: 'gender', title: '性别', width: 200, sort: true}
+                    , {field: 'colleage', title: '学院', width: 200, sort: true}
+                    , {field: 'majority', title: '专业', width: 200, sort: true}
+                    , {field: 'grade', title: '年级', width: 200, sort: true}
+                    , {
+                        field: 'class',
+                        title: '班级',
+                        width: 200,
+                        sort: true,
+                        templet: '<div><a href="class/{{d.class}}.html" class="layui-table-link">{{d.class}}</a></div>'
+                    }
+                ]]
+                ,
+                data: [{
+                    'id': 10,
+                    'name': 'Zhang',
+                    'gender': 'male',
+                    'colleage': 'Software',
+                    'majority': 'SE',
+                    'grade': '2016',
+                    'class': 'A210'
+                },
+                    {
+                        'id': 11,
+                        'name': 'Deng',
+                        'gender': 'male',
+                        'colleage': 'Software',
+                        'majority': 'SE',
+                        'grade': '2016',
+                        'class': 'A210'
+                    },
+                    {
+                        'id': 5,
+                        'name': 'Wang',
+                        'gender': 'male',
+                        'colleage': 'Software',
+                        'majority': 'SE',
+                        'grade': '2016',
+                        'class': 'A211'
+                    },
+                    {
+                        'id': 6,
+                        'name': 'Li',
+                        'gender': 'female',
+                        'colleage': 'Software',
+                        'majority': 'SE',
+                        'grade': '2016',
+                        'class': 'A211'
+                    }]
 
+            });
         });
-    });
 
 
     </script>

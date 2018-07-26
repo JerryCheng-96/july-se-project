@@ -40,26 +40,26 @@
     });
 
     var cardHtml = '';
-        for (var i = 0; i < 9; i++) {
-            if (i == 0) {
-                cardHtml += '<div class="layui-row" style="padding: 10px;">'
-            }
-            if (i > 0 && i % 2 == 0) {
-                cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
-            }
-            cardHtml += '<div class="layui-col-md6" style="padding-left: 10px;"> ' +
-                '<div class="layui-card" style="background-color: #F7F7F7"> ' +
-                "<div class='layui-card-header'><a href='/dashboard/project'><b>项目 " +
-                i.toString() +
-                "</b></a></div> " +
-                '<div class="layui-card-body"> ' +
-                '卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 ' +
-                '</div>' +
-                '</div>' +
-                '</div>';
+    for (var i = 0; i < 9; i++) {
+        if (i == 0) {
+            cardHtml += '<div class="layui-row" style="padding: 10px;">'
         }
-        cardHtml += '</div>'
-        document.getElementById('theCards').innerHTML = cardHtml;
+        if (i > 0 && i % 2 == 0) {
+            cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
+        }
+        cardHtml += '<div class="layui-col-md6" style="padding-left: 10px;"> ' +
+            '<div class="layui-card" style="background-color: #F7F7F7"> ' +
+            "<div class='layui-card-header'><a href='/dashboard/project'><b>项目 " +
+            i.toString() +
+            "</b></a></div> " +
+            '<div class="layui-card-body"> ' +
+            '卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 ' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+    }
+    cardHtml += '</div>'
+    document.getElementById('theCards').innerHTML = cardHtml;
 
     layui.use('table', function () {
         var table = layui.table;
@@ -71,12 +71,17 @@
             , width: '90%'
             , page: true //开启分页
             , cols: [[ //表头
-                { field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left' }
-                , { field: 'username', title: '班名', width: 200, templet: '<div><a href="class/{{d.username}}.html" class="layui-table-link">{{d.username}}</a></div>' }
-                , { field: 'engineer', title: '工程师', width: 200, sort: true }
+                {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
+                , {
+                    field: 'username',
+                    title: '班名',
+                    width: 200,
+                    templet: '<div><a href="class/{{d.username}}.html" class="layui-table-link">{{d.username}}</a></div>'
+                }
+                , {field: 'engineer', title: '工程师', width: 200, sort: true}
             ]]
-            , data: [{ 'id': '1', 'username': 'A210', 'engineer': 'Gong' },
-                { 'id': '2', 'username': 'A211', 'engineer': 'Liu' }]
+            , data: [{'id': '1', 'username': 'A210', 'engineer': 'Gong'},
+                {'id': '2', 'username': 'A211', 'engineer': 'Liu'}]
 
         });
 
