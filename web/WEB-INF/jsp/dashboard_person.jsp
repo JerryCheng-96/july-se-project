@@ -16,6 +16,7 @@
     </jsp:include>
     <div class="layui-body">
         <div class="layui-row" style="padding: 15px;">
+            <span style="padding-left: 15px;"><a href="javascript:popup_layer()" class="layui-btn">添加班级</a></span>
         </div>
 
     </div>
@@ -29,6 +30,7 @@
             });
         });
 
+        function popup_layer() {
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
@@ -47,7 +49,7 @@
                 "</div>",
                 area: '350px'
             });
-        });
+        });}
     </script>
 </body>
 
