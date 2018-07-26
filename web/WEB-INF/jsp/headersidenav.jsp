@@ -21,6 +21,9 @@
     <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree">
+            <li id="dashboard" class="layui-nav-item">
+                <a class="" href="/dashboard">我的仪表板 </a>
+            </li>
             <li id="manage" class="layui-nav-item">
                 <a class="" href="javascript:;">实训管理
                     <span class="layui-nav-more"></span>
@@ -37,15 +40,15 @@
                     </dd>
                 </dl>
             </li>
-            <li class="layui-nav-item">
+            <li id="project" class="layui-nav-item">
                 <a class="" href="javascript:;">项目管理
                     <span class="layui-nav-more"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd>
+                    <dd id="proj_list">
                         <a href="javascript:;">项目列表</a>
                     </dd>
-                    <dd>
+                    <dd id="proj_approve">
                         <a href="javascript:;">项目评审</a>
                     </dd>
                 </dl>

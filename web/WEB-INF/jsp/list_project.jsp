@@ -10,16 +10,16 @@
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
+
     <jsp:include page="headersidenav.jsp">
-        <jsp:param name="cat" value="manage"/>
-        <jsp:param name="func" value="man_student"/>
+        <jsp:param name="cat" value="project"/>
+        <jsp:param name="func" value="proj_list"/>
     </jsp:include>
 
     <div class="layui-body">
         <div class="layui-row">
             <br/>
-            <span style="padding-left: 15px;"><a href="" class="layui-btn">添加学生</a></span>
-            <span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-primary">批量导入</a></span>
+            <span style="padding-left: 15px;"><a href="" class="layui-btn">添加班级</a></span>
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->
@@ -50,20 +50,13 @@
             , page: true //开启分页
             , cols: [[ //表头
                 { field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left' }
-                , { field: 'name', title: '姓名', width: 200, sort: true}
-                , { field: 'gender', title: '性别', width: 200, sort: true }
-                , { field: 'colleage', title: '学院', width: 200, sort: true}
-                , { field: 'majority', title: '专业', width: 200, sort: true}
-                , { field: 'grade', title: '年级', width: 200, sort: true}
-                , { field: 'class', title: '班级', width: 200, sort: true, templet: '<div><a href="class/{{d.class}}.html" class="layui-table-link">{{d.class}}</a></div>' }
+                , { field: 'username', title: '班名', width: 200, templet: '<div><a href="class/{{d.username}}.html" class="layui-table-link">{{d.username}}</a></div>' }
+                , { field: 'engineer', title: '工程师', width: 200, sort: true }
             ]]
-            , data: [{'id':10, 'name': 'Zhang', 'gender': 'male', 'colleage': 'Software','majority': 'SE','grade': '2016' ,'class':'A210'},
-                {'id':11, 'name': 'Deng', 'gender': 'male', 'colleage': 'Software','majority': 'SE','grade': '2016' ,'class':'A210'},
-                {'id':5, 'name': 'Wang', 'gender': 'male', 'colleage': 'Software','majority': 'SE','grade': '2016' ,'class':'A211'},
-                {'id':6, 'name': 'Li', 'gender': 'female', 'colleage': 'Software','majority': 'SE','grade': '2016' ,'class':'A211'}]
+            , data: [{ 'id': '1', 'username': 'A210', 'engineer': 'Gong' },
+                { 'id': '2', 'username': 'A211', 'engineer': 'Liu' }]
 
         });
-
 
     });
 </script>

@@ -12,7 +12,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="headersidenav.jsp">
-        <jsp:param name="label" value="2"/>
+        <jsp:param name="func" value="2"/>
     </jsp:include>
     <div class="layui-body">
         <div class="layui-container">

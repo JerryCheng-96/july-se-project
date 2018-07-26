@@ -21,13 +21,15 @@
             <form class="layui-form" style="padding-top: 10%; ">
                 <div class="layui-form-item">
                     <div class="layui-input-block" style="margin-left: 5%;margin-right: 5%">
-                        <input type="text" name="title" required lay-verify="required" placeholder="用户名"
+                        <input type="text" name="title" placeholder="用户名"
+                        <%--<input type="text" name="title" required lay-verify="required" placeholder="用户名"--%>
                                autocomplete="off" class="layui-input">
                     </div>
                     <br/>
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="margin-left: 5%;margin-right: 5%">
-                            <input type="text" name="title" required lay-verify="required" placeholder="密码"
+                            <input type="text" name="title" placeholder="密码"
+                            <%--<input type="text" name="title" required lay-verify="required" placeholder="密码"--%>
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
@@ -41,7 +43,8 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block" style="margin-left: 5%;margin-right: 5%">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+                        <%--<button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>--%>
+                        <a class="layui-btn" href="/dashboard">登录</a>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
