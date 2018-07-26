@@ -27,5 +27,9 @@ public class ManageController {
         return "list_project";
     }
 
+    @RequestMapping(value = "/manage/docs", method = RequestMethod.GET)
+    public String docs_manage() {
+        return "list_docs";
+    }
 
 }

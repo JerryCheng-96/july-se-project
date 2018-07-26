@@ -10,8 +10,8 @@
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-    <jsp:include page="headersidenav.jsp">
-        <jsp:param name="cat" value="manage"/>
+    <jsp:include page="frame.jsp">
+        <jsp:param name="cat" value="manage_person"/>
         <jsp:param name="func" value="man_engineer"/>
     </jsp:include>
     <div class="layui-body">

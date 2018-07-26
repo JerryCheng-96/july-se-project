@@ -5,7 +5,7 @@
     <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item">
             <a href="javascript:;">
-                <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                <img src="/res/icon/9.jpg" class="layui-nav-img">
                 User X
             </a>
             <dl class="layui-nav-child">
@@ -22,16 +22,20 @@
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree">
             <li id="dashboard" class="layui-nav-item">
-                <a class="" href="/dashboard">我的仪表板 </a>
+                <a class="" href="/dashboard">个人中心</a>
             </li>
-            <li id="manage" class="layui-nav-item">
-                <a class="" href="javascript:;">实训管理
+            <li id="projects" class="layui-nav-item">
+                <a class="" href="/manage/project">项目库</a>
+            </li>
+            <li id="docs" class="layui-nav-item">
+                <a class="" href="/manage/docs">文档库</a>
+            </li>
+            <li id="manage_person" class="layui-nav-item">
+                <a href="javascript:;">
                     <span class="layui-nav-more"></span>
+                    人员管理
                 </a>
                 <dl class="layui-nav-child">
-                    <dd id="man_class">
-                        <a href="/manage/class">班级管理</a>
-                    </dd>
                     <dd id="man_student">
                         <a href="/manage/student">学生管理</a>
                     </dd>
@@ -40,21 +44,12 @@
                     </dd>
                 </dl>
             </li>
-            <li id="project" class="layui-nav-item">
-                <a class="" href="javascript:;">项目管理
-                    <span class="layui-nav-more"></span>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd id="proj_list">
-                        <a href="javascript:;">项目列表</a>
-                    </dd>
-                    <dd id="proj_approve">
-                        <a href="javascript:;">项目评审</a>
-                    </dd>
-                </dl>
+            <li id="class_team" class="layui-nav-item">
+                <a class="" href="/manage/class">班组管理</a>
             </li>
             <li class="layui-nav-item">
-                <a class="" href="javascript:;">班级管理
+                <a class="" href="javascript:;">
+                    教学管理
                     <span class="layui-nav-more"></span>
                 </a>
                 <dl class="layui-nav-child">
@@ -62,20 +57,11 @@
                         <a href="javascript:;">教学计划</a>
                     </dd>
                     <dd>
-                        <a href="javascript:;">分组管理</a>
+                        <a href="javascript:;">教学任务</a>
                     </dd>
                 </dl>
             </li>
-            <li class="layui-nav-item layui-nav-itemed">
-                <a class="" href="javascript:;">文档管理
-                    <span class="layui-nav-more"></span>
-                </a>
-                <dl class="layui-nav-child">
-                    <dd>
-                        <a href="javascript:;">文档列表</a>
-                    </dd>
-                </dl>
-            </li>
+
             <span class="layui-nav-bar" style="top: 317.5px; height: 0px; opacity: 0;"></span>
         </ul>
     </div>

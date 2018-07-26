@@ -11,21 +11,25 @@
 
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-    <jsp:include page="headersidenav.jsp">
-        <jsp:param name="label" value="2"/>
+    <jsp:include page="frame.jsp">
+        <jsp:param name="func" value="class_team"/>
+        <jsp:param name="cat" value="class_team"/>
     </jsp:include>
     <div class="layui-body">
         <div class="layui-container">
             <br/>
             <div class="layui-row" style="padding-left: 7px">
                 <h1>[班级名称] - [小组名称]</h1>
-                <br/>
                 <h3 href="">负责工程师：[姓名]</h3>
-                <br/>
                 <h3 href="">小组组长：[姓名]</h3>
                 <br/>
+                <div class="layui-btn-group">
+                         <button class="layui-btn layui-btn-normal">添加学生</button>
+                         <button class="layui-btn">编辑</button>
+                         <button class="layui-btn layui-btn-danger">删除</button>
+                     </div>
             </div>
-            <div class="layui-row">
+            <div class="layui-row" style="margin-left: 7px">
                 <div class="layui-tab layui-tab-card" style="width: 90%;">
                     <ul class="layui-tab-title">
                         <li class="layui-this">学员名单</li>

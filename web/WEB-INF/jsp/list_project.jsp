@@ -11,19 +11,19 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
 
-    <jsp:include page="headersidenav.jsp">
-        <jsp:param name="cat" value="project"/>
-        <jsp:param name="func" value="proj_list"/>
+    <jsp:include page="frame.jsp">
+        <jsp:param name="cat" value="projects"/>
+        <jsp:param name="func" value="projects"/>
     </jsp:include>
 
     <div class="layui-body">
         <div class="layui-row">
             <br/>
-            <span style="padding-left: 15px;"><a href="" class="layui-btn">添加班级</a></span>
+            <span style="padding-left: 35px;"><a href="" class="layui-btn">添加项目</a></span>
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->
-            <table id="demo" lay-filter="test"></table>
+            <div id="theCards"></div>
             <!--在此处添加页面代码-->
         </div>
     </div>
@@ -38,6 +38,28 @@
             console.log(data);
         });
     });
+
+    var cardHtml = '';
+        for (var i = 0; i < 9; i++) {
+            if (i == 0) {
+                cardHtml += '<div class="layui-row" style="padding: 10px;">'
+            }
+            if (i > 0 && i % 2 == 0) {
+                cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
+            }
+            cardHtml += '<div class="layui-col-md6" style="padding-left: 10px;"> ' +
+                '<div class="layui-card" style="background-color: #F7F7F7"> ' +
+                "<div class='layui-card-header'><a href='/dashboard/project'><b>项目 " +
+                i.toString() +
+                "</b></a></div> " +
+                '<div class="layui-card-body"> ' +
+                '卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 ' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
+        cardHtml += '</div>'
+        document.getElementById('theCards').innerHTML = cardHtml;
 
     layui.use('table', function () {
         var table = layui.table;
