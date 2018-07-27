@@ -11,25 +11,36 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="frame.jsp">
-        <jsp:param name="func" value="dashboard"/>
-        <jsp:param name="cat" value="dashboard"/>
+        <jsp:param name="func" value="projects"/>
+        <jsp:param name="cat" value="projects"/>
     </jsp:include>
     <div class="layui-body">
         <div class="layui-row" style="padding-left:30px;padding-top:25px;padding-right:30px;">
             <div>
                 <table border="0">
                     <tr>
-                        <th rowspan="2">
-                            <img src="/res/icon/8.jpg"
-                                 style="width:120px;height:120px;border-radius:120px;margin:0 auto;padding:5px;">
-                        </th>
                         <td height="60%">
-                            <span style="font-size:30px; margin:0 auto; padding-left: 30px;">张三</span>
+                            <span style="font-size:30px; margin:0 auto;">项目 ABCD</span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span style="padding-left:30px; font-size: 17px">[公司], [部门], [职务]</span>
+                            <span style="font-size: 17px;">负责工程师：[名字]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span style="font-size: 17px">适用教学计划：[教学计划]</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br/>
+                            <div class="layui-btn-group">
+                                <button class="layui-btn layui-btn-disabled">审批已通过</button>
+                                <button class="layui-btn">编辑</button>
+                                <button class="layui-btn layui-btn-danger">删除</button>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -37,47 +48,33 @@
             </div>
         </div>
         <div class="layui-row" style="padding-left:20px;padding-right:20px;">
-            <div class="layui-col-md4" style="padding:10px;">
-                <div class="layui-card" style="background-color: #F7F7F7;">
-                    <div class="layui-card-header"><b>项目</b></div>
+            <div class="layui-col-md8" style="padding:10px;">
+                <div class="layui-card" style="background-color: #F7F7F7">
+                    <div class="layui-card-header"><b>项目描述</b></div>
                     <div class="layui-card-body">
-                        <p>项目 1</p>
-                        <p>项目 2</p>
-                        <p>项目 3</p>
-                        <br/>
-                        <a href="" style="color: blue">查看更多...</a>
+                        layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+                        不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
+                        无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔
                     </div>
                 </div>
             </div>
-            <div class="layui-col-md4" style="padding:10px;">
+            <div class="layui-col-md4" style="padding: 10px;">
                 <div class="layui-card" style="background-color: #F7F7F7">
-                    <div class="layui-card-header"><b>教学计划</b></div>
+                    <div class="layui-card-header"><b>小组</b></div>
                     <div class="layui-card-body">
-                        <p>教学计划 A</p>
+                        <p>小组 1</p>
+                        <p>小组 2</p>
+                        <p>小组 3</p>
+                        <p>小组 4</p>
                         <br/>
-                        <a href="" style="color: blue">查看更多...</a>
+                        <span style="color:blue;">查看更多...</span>
                     </div>
                 </div>
-                <div class="layui-card" style="background-color: #F7F7F7">
-                    <div class="layui-card-header"><b>教学任务</b></div>
-                    <div class="layui-card-body">
-                        <p style="color: #CCCCCC">当前无教学任务</p>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-col-md4" style="padding:10px;">
-                <div class="layui-card" style="background-color: #F7F7F7">
-                    <div class="layui-card-header"><b>负责班级</b></div>
-                    <div class="layui-card-body">
-                        <p>班级 1</p>
-                        <p>班级 2</p>
-                        <br/>
-                        <a href="" style="color: blue">查看更多...</a>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
+
 </div>
 <script src="/res/layui/layui.js"></script>
 <script>
@@ -90,7 +87,7 @@
     });
 
     var cardHtml = '';
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 2; i++) {
         if (i == 0) {
             cardHtml += '<div class="layui-row" style="padding: 10px;">'
         }

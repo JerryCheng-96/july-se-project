@@ -11,7 +11,7 @@
 
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-    <jsp:include page="headersidenav.jsp">
+    <jsp:include page="frame.jsp">
         <jsp:param name="label" value="2"/>
     </jsp:include>
     <div class="layui-body">
