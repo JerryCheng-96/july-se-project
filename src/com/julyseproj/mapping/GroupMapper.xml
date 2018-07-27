@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.julyseproj.IDao.GroupMapper">
+  <resultMap id="BaseResultMap" type="com.julyseproj.entity.Group">
+    <id column="group_id" jdbcType="INTEGER" property="groupId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="group_fromclass" jdbcType="INTEGER" property="groupFromclass" />
+    <result column="group_onproject" jdbcType="INTEGER" property="groupOnproject" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    group_id, group_name, group_fromclass, group_onproject
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from group
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.julyseproj.entity.Group">
+    insert into group (group_id, group_name, group_fromclass, 
+      group_onproject)
+    values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{groupFromclass,jdbcType=INTEGER}, 
+      #{groupOnproject,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.julyseproj.entity.Group">
+    insert into group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="groupFromclass != null">
+        group_fromclass,
+      </if>
+      <if test="groupOnproject != null">
+        group_onproject,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupFromclass != null">
+        #{groupFromclass,jdbcType=INTEGER},
+      </if>
+      <if test="groupOnproject != null">
+        #{groupOnproject,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.julyseproj.entity.Group">
+    update group
+    <set>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupFromclass != null">
+        group_fromclass = #{groupFromclass,jdbcType=INTEGER},
+      </if>
+      <if test="groupOnproject != null">
+        group_onproject = #{groupOnproject,jdbcType=INTEGER},
+      </if>
+    </set>
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.julyseproj.entity.Group">
+    update group
+    set group_name = #{groupName,jdbcType=VARCHAR},
+      group_fromclass = #{groupFromclass,jdbcType=INTEGER},
+      group_onproject = #{groupOnproject,jdbcType=INTEGER}
+    where group_id = #{groupId,jdbcType=INTEGER}
+  </update>
+</mapper>
