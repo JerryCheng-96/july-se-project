@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.julyseproj.IDao.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.julyseproj.entity.Task">
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="task_name" jdbcType="VARCHAR" property="taskName" />
+    <result column="task_description" jdbcType="VARCHAR" property="taskDescription" />
+    <result column="task_engineer" jdbcType="INTEGER" property="taskEngineer" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, task_name, task_description, task_engineer
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.julyseproj.entity.Task">
+    insert into task (task_id, task_name, task_description, 
+      task_engineer)
+    values (#{taskId,jdbcType=INTEGER}, #{taskName,jdbcType=VARCHAR}, #{taskDescription,jdbcType=VARCHAR}, 
+      #{taskEngineer,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.julyseproj.entity.Task">
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="taskName != null">
+        task_name,
+      </if>
+      <if test="taskDescription != null">
+        task_description,
+      </if>
+      <if test="taskEngineer != null">
+        task_engineer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="taskName != null">
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDescription != null">
+        #{taskDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="taskEngineer != null">
+        #{taskEngineer,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.julyseproj.entity.Task">
+    update task
+    <set>
+      <if test="taskName != null">
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDescription != null">
+        task_description = #{taskDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="taskEngineer != null">
+        task_engineer = #{taskEngineer,jdbcType=INTEGER},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.julyseproj.entity.Task">
+    update task
+    set task_name = #{taskName,jdbcType=VARCHAR},
+      task_description = #{taskDescription,jdbcType=VARCHAR},
+      task_engineer = #{taskEngineer,jdbcType=INTEGER}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+</mapper>
