@@ -22,7 +22,7 @@
             <div class="layui-row" style="padding-left: 7px">
                 <h1>[班级名称]</h1>
                 <h3 href="">负责工程师：[姓名]</h3>
-                <br/>
+                <hr>
                 <div class="layui-btn-group">
                     <button class="layui-btn layui-btn-normal">添加学生</button>
                     <button class="layui-btn layui-btn-normal">添加小组</button>
@@ -33,19 +33,19 @@
             <div class="layui-row" style="margin-left: 7px;">
                 <div class="layui-tab layui-tab-card" style="width: 90%;">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">学员名单</li>
-                        <li>小组名单</li>
+                        <li class="layui-this">小组名单</li>
+                        <li>学员名单</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
+                            <table id="demo2" lay-filter="test"></table>
+                        </div>
+                        <div class="layui-tab-item">
                             <div class="layui-row" style="padding: 0px;">
                                 <!--在此处添加页面代码-->
                                 <table id="demo" lay-filter="test"></table>
                                 <!--在此处添加页面代码-->
                             </div>
-                        </div>
-                        <div class="layui-tab-item">
-                            <table id="demo2" lay-filter="test"></table>
                         </div>
                     </div>
                 </div>

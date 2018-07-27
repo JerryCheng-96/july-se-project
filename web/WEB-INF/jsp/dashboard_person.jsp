@@ -19,7 +19,7 @@
             <div class="layui-btn-container">
                 <span style="padding-left: 15px;"><a href="javascript:popup_layer_engineer()"
                                                      class="layui-btn">工程师信息显示</a></span>
-                <span style="padding-left: 15px;"><a href="javascript:popup_layer_engineer()"
+                <span style="padding-left: 15px;"><a href="javascript:popup_layer_engineer_edit()"
                                                      class="layui-btn">工程师信息修改</a></span>
                 <span style="padding-left: 15px;"><a href="javascript:popup_layer_engineer()"
                                                      class="layui-btn">学生信息显示</a></span>
@@ -98,6 +98,80 @@
                 });
             });
         }
+
+        function popup_layer_engineer_edit() {
+            layui.use(['layer', 'form'], function () {
+                var layer = layui.layer;
+                var form = layui.form;
+
+                //监听提交
+                form.on('submit(formDemo)', function (data) {
+                    layer.msg(JSON.stringify(data.field));
+                    return false;
+                });
+
+                layer.open({
+                    type: 1,
+                    title: '人员信息',
+                    content: "<div style='width: 90%; margin-right: 30px';>" +
+                    "<form class=\"layui-form\" action=\"\"'>" +
+                    "  <div class=\"layui-form-item\" style='padding-top:20px'>" +
+                    "    <label class=\"layui-form-label\"'>工号</label>" +
+                    "    <div class=\"layui-input-block\" >" +
+                    "      <input type=\"text\" name=\"title\" required  lay-verify=\"required\" placeholder=\"请输入标题\" autocomplete=\"off\" class=\"layui-input\">" +
+                    "    </div>" +
+                    "  </div>" +
+
+                    "  <div class=\"layui-form-item\" >" +
+                    "    <label class=\"layui-form-label\" style='margin-left: 0px'>姓名</label>" +
+                    "    <div class=\"layui-input-block\">" +
+                    "      <input type=\"text\" name=\"title\" required  lay-verify=\"required\" placeholder=\"请输入标题\" autocomplete=\"off\" class=\"layui-input\">" +
+                    "    </div>" +
+                    "  </div>" +
+
+                    "  <div class=\"layui-form-item\">" +
+                    "    <label class=\"layui-form-label\">性别</label>" +
+                    "    <div class=\"layui-input-block\">" +
+                    "      <input type=\"radio\" name=\"sex\" value=\"男\" title=\"男\">" +
+                    "      <input type=\"radio\" name=\"sex\" value=\"女\" title=\"女\" checked>" +
+                    "    </div>" +
+                    "  </div>" +
+
+                    "  <div class=\"layui-form-item\">" +
+                    "    <label class=\"layui-form-label\">公司</label>" +
+                    "    <div class=\"layui-input-block\">" +
+                    "      <input type=\"text\" name=\"title\" required  lay-verify=\"required\" placeholder=\"请输入标题\" autocomplete=\"off\" class=\"layui-input\">" +
+                    "    </div>" +
+                    "  </div>" +
+
+                    "  <div class=\"layui-form-item\">" +
+                    "    <label class=\"layui-form-label\">部门</label>" +
+                    "    <div class=\"layui-input-block\">" +
+                    "      <input type=\"text\" name=\"title\" required  lay-verify=\"required\" placeholder=\"请输入标题\" autocomplete=\"off\" class=\"layui-input\">" +
+                    "    </div>" +
+                    "  </div>" +
+
+                    "  <div class=\"layui-form-item\">" +
+                    "    <label class=\"layui-form-label\">职务</label>" +
+                    "    <div class=\"layui-input-block\">" +
+                    "      <input type=\"text\" name=\"title\" required  lay-verify=\"required\" placeholder=\"请输入标题\" autocomplete=\"off\" class=\"layui-input\">" +
+                    "    </div>" +
+                    "  </div>" +
+
+                    "  <div class=\"layui-form-item\">" +
+                    "    <div class=\"layui-input-block\">" +
+                    "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">确定</button>" +
+                    "      <button type=\"reset\" class=\"layui-btn layui-btn-primary\">取消</button>" +
+                    "    </div>" +
+                    "  </div>" +
+                    "</form>" +
+                    "</div>",
+                });
+
+                form.render();
+            });
+        }
+
     </script>
 </body>
 

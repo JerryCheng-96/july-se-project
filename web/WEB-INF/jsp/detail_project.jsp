@@ -35,7 +35,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <br/>
+                            <hr>
                             <div class="layui-btn-group">
                                 <button class="layui-btn layui-btn-disabled">审批已通过</button>
                                 <button class="layui-btn">编辑</button>

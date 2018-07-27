@@ -20,9 +20,8 @@
             <br/>
             <div class="layui-row" style="padding-left: 7px">
                 <h1>[班级名称] - [小组名称]</h1>
-                <h3 href="">负责工程师：[姓名]</h3>
-                <h3 href="">小组组长：[姓名]</h3>
-                <br/>
+                <h3 href="">负责工程师：[姓名]&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;小组组长：[姓名]</h3>
+                <hr>
                 <div class="layui-btn-group">
                     <button class="layui-btn layui-btn-normal">添加学生</button>
                     <button class="layui-btn">编辑</button>

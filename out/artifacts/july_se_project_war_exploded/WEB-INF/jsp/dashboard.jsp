@@ -18,11 +18,9 @@
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->
-            <p><a href="/dashboard/class">Class Dashboard</a></p>
-            <p><a href="/dashboard/team">Team Dashboard</a>  </p>
             <p><a href="/dashboard/engineer">Engineer Dashboard</a></p>
-            <p><a href="/dashboard/student">Student Dashboard</a>  </p>
-            <p><a href="/dashboard/person">Pop-up person info</a>  </p>
+            <p><a href="/dashboard/student">Student Dashboard</a></p>
+            <p><a href="/dashboard/person">Pop-up person info</a></p>
             <!--在此处添加页面代码-->
         </div>
     </div>
