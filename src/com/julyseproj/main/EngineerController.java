@@ -33,4 +33,10 @@ public class EngineerController {
         mnv.setViewName("allEngineers");
         return mnv;
     }
+
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    @ResponseBody
+    public String test(int page,int limit){
+        return es.getAllEngineerJson(page,limit);
+    }
 }

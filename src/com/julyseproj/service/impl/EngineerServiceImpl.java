@@ -7,6 +7,7 @@ import com.julyseproj.IDao.EngineerMapper;
 
 import javax.annotation.Resource;
 import java.util.List;
+import com.google.gson.Gson;
 
 @Service("engineerService")
 public class EngineerServiceImpl implements EngineerService{
@@ -16,5 +17,25 @@ public class EngineerServiceImpl implements EngineerService{
     @Override
     public List<Engineer> getAllEngineer() {
         return em.selectAll();
+    }
+
+    @Override
+    public String getAllEngineerJson(int page, int maxrow) {
+        EngineerListJson response = new EngineerListJson();
+        response.code=0;
+        response.msg="";
+        List<Engineer> allEnginner = getAllEngineer();
+        response.data = allEnginner.subList(page*maxrow,(page+1)*maxrow);
+        response.count = allEnginner.size();
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        return responseJson;
+    }
+
+    private class EngineerListJson{
+        int code;
+        String msg;
+        int count;
+        List<Engineer> data;
     }
 }
