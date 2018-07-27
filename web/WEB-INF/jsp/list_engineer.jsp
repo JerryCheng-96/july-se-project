@@ -43,7 +43,7 @@
         //第一个实例
         table.render({
             elem: '#demo',
-            //,url: '/demo/table/user/' //数据接口
+            url: '/manage/engineer/data' //数据接口
             width: '90%',
             page: true, //开启分页
             cols: [[ //表头
@@ -62,22 +62,6 @@
                 , {field: 'post', title: '职务', width: 160, sort: true}
             ]]
             ,
-            data: [{
-                'id': '123456',
-                'username': '王境泽',
-                'sex': 'male',
-                'enterprise': '鬼畜公司',
-                'department': 'b站鬼畜区',
-                'post': '鬼畜素材师'
-            },
-                {
-                    'id': '123457',
-                    'username': '大力哥',
-                    'sex': 'male',
-                    'enterprise': '鬼畜公司',
-                    'department': 'b站鬼畜区',
-                    'post': '鬼畜素材师'
-                }]
         });
 
     });
