@@ -11,9 +11,9 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
 
-    <jsp:include page="headersidenav.jsp">
-        <jsp:param name="cat" value="manage"/>
-        <jsp:param name="func" value="man_class"/>
+    <jsp:include page="frame.jsp">
+        <jsp:param name="cat" value="class_team"/>
+        <jsp:param name="func" value="class_team"/>
     </jsp:include>
 
     <div class="layui-body">
@@ -49,12 +49,17 @@
             , width: '90%'
             , page: true //开启分页
             , cols: [[ //表头
-                { field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left' }
-                , { field: 'username', title: '班名', width: 200, templet: '<div><a href="class/{{d.username}}.html" class="layui-table-link">{{d.username}}</a></div>' }
-                , { field: 'engineer', title: '工程师', width: 200, sort: true }
+                {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
+                , {
+                    field: 'username',
+                    title: '班名',
+                    width: 200,
+                    templet: '<div><a href="/dashboard/class" class="layui-table-link">{{d.username}}</a></div>'
+                }
+                , {field: 'engineer', title: '工程师', width: 200, sort: true}
             ]]
-            , data: [{ 'id': '1', 'username': 'A210', 'engineer': 'Gong' },
-                { 'id': '2', 'username': 'A211', 'engineer': 'Liu' }]
+            , data: [{'id': '1', 'username': 'A210', 'engineer': 'Gong'},
+                {'id': '2', 'username': 'A211', 'engineer': 'Liu'}]
 
         });
 

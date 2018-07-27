@@ -10,7 +10,7 @@
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
-    <jsp:include page="headersidenav.jsp"/>
+    <jsp:include page="frame.jsp"/>
     <div class="layui-body">
         <div class="layui-row">
             <br/>
@@ -19,10 +19,10 @@
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->
             <p><a href="/dashboard/class">Class Dashboard</a></p>
-            <p><a href="/dashboard/team">Team Dashboard</a>  </p>
+            <p><a href="/dashboard/team">Team Dashboard</a></p>
             <p><a href="/dashboard/engineer">Engineer Dashboard</a></p>
-            <p><a href="/dashboard/student">Student Dashboard</a>  </p>
-            <p><a href="/dashboard/person">Pop-up person info</a>  </p>
+            <p><a href="/dashboard/student">Student Dashboard</a></p>
+            <p><a href="/dashboard/person">Pop-up person info</a></p>
             <!--在此处添加页面代码-->
         </div>
     </div>
