@@ -92,3 +92,35 @@ function table_group() {
         });
     })
 }
+
+function table_engineer() {
+    layui.use('table', function () {
+        var table_engineer = layui.table;
+
+        //第一个实例
+        table_engineer.render({
+            elem: '#table_engineer',
+            //,url: '/demo/table/user/' //数据接口
+            width: '90%',
+            page: true, //开启分页
+            cols: [[ //表头
+                {field: 'selected', title: '', width: 40, fixed: 'left',type: 'checkbox'}
+                , { field: 'id', title: '工号', width: 120, sort: true, fixed: 'left', templet: '<div><a href="/detail/{{d.id}}" class="layui-table-link">{{d.id}}</a></div>' }
+                , {field: 'username', title: '姓名', width: 100, sort: true, fixed: 'left'}
+                , {field: 'sex', title: '性别', width: 160, sort: true}
+                , {field: 'enterprise', title: '公司', width: 200}
+                , {field: 'department', title: '部门', width: 180}
+                , {field: 'post', title: '职务', width: 160, sort: true}
+            ]]
+            ,
+            data: [
+                { 'id': '123456', 'username': '王境泽', 'sex': 'male', 'enterprise': '鬼畜公司', 'department': 'b站鬼畜区', 'post': '鬼畜素材师' },
+                { 'id': '123457', 'username': '大力哥', 'sex': 'male', 'enterprise': '鬼畜公司', 'department': 'b站鬼畜区', 'post': '鬼畜素材师' },
+                { 'id': '123457', 'username': '大力哥', 'sex': 'male', 'enterprise': '鬼畜公司', 'department': 'b站鬼畜区', 'post': '鬼畜素材师' },
+                { 'id': '123457', 'username': '大力哥', 'sex': 'male', 'enterprise': '鬼畜公司', 'department': 'b站鬼畜区', 'post': '鬼畜素材师' },
+                { 'id': '123457', 'username': '大力哥', 'sex': 'male', 'enterprise': '鬼畜公司', 'department': 'b站鬼畜区', 'post': '鬼畜素材师' }
+            ]
+        });
+
+    });
+}

@@ -53,7 +53,7 @@
         </div>
     </div>
     <script src="/res/layui/layui.js"></script>
-        <script src="/js/Form.js"></script>
+    <script src="/js/Table.js"></script>
     <script>
         layui.use('element', function () {
             var element = layui.element;
