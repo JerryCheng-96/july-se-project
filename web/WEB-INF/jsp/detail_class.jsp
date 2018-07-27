@@ -38,12 +38,12 @@
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                            <table id="demo2" lay-filter="test"></table>
+                            <table id="table_group" lay-filter="test"></table>
                         </div>
                         <div class="layui-tab-item">
                             <div class="layui-row" style="padding: 0px;">
                                 <!--在此处添加页面代码-->
-                                <table id="demo" lay-filter="test"></table>
+                                <table id="table_class" lay-filter="test"></table>
                                 <!--在此处添加页面代码-->
                             </div>
                         </div>
@@ -53,6 +53,7 @@
         </div>
     </div>
     <script src="/res/layui/layui.js"></script>
+        <script src="/js/Form.js"></script>
     <script>
         layui.use('element', function () {
             var element = layui.element;
@@ -62,97 +63,8 @@
             });
         });
 
-        layui.use('table', function () {
-            var table = layui.table;
-
-            //第一个实例
-            table.render({
-                elem: '#demo'
-                //,url: '/demo/table/user/' //数据接口
-                ,
-                width: '90%'
-                ,
-                page: true //开启分页
-                ,
-                cols: [[ //表头
-                    {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
-                    , {field: 'name', title: '姓名', width: 200, sort: true}
-                    , {field: 'gender', title: '性别', width: 200, sort: true}
-                    , {field: 'colleage', title: '学院', width: 200, sort: true}
-                    , {field: 'majority', title: '专业', width: 200, sort: true}
-                    , {field: 'grade', title: '年级', width: 200, sort: true}
-                    , {
-                        field: 'class',
-                        title: '班级',
-                        width: 200,
-                        sort: true,
-                        templet: '<div><a href="class/{{d.class}}.html" class="layui-table-link">{{d.class}}</a></div>'
-                    }
-                ]]
-                ,
-                data: [{
-                    'id': 10,
-                    'name': 'Zhang',
-                    'gender': 'male',
-                    'colleage': 'Software',
-                    'majority': 'SE',
-                    'grade': '2016',
-                    'class': 'A210'
-                },
-                    {
-                        'id': 11,
-                        'name': 'Deng',
-                        'gender': 'male',
-                        'colleage': 'Software',
-                        'majority': 'SE',
-                        'grade': '2016',
-                        'class': 'A210'
-                    },
-                    {
-                        'id': 5,
-                        'name': 'Wang',
-                        'gender': 'male',
-                        'colleage': 'Software',
-                        'majority': 'SE',
-                        'grade': '2016',
-                        'class': 'A211'
-                    },
-                    {
-                        'id': 6,
-                        'name': 'Li',
-                        'gender': 'female',
-                        'colleage': 'Software',
-                        'majority': 'SE',
-                        'grade': '2016',
-                        'class': 'A211'
-                    }]
-
-            });
-
-
-            //第一个实例
-            table.render({
-                elem: '#demo2'
-                //,url: '/demo/table/user/' //数据接口
-                , width: '90%'
-                , page: true //开启分页
-                , cols: [[ //表头
-                    {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
-                    , {
-                        field: 'username',
-                        title: '组名',
-                        width: 200,
-                        templet: '<div><a href="/dashboard/team" class="layui-table-link">{{d.username}}</a></div>'
-                    }
-                    , {field: 'engineer', title: '项目', width: 200, sort: true}
-                ]]
-                , data: [{'id': '1', 'username': 'iiiiii', 'engineer': 'adfdsafafd'},
-                    {'id': '2', 'username': 'aaaa', 'engineer': 'lkjljjilkj'}]
-
-            });
-
-        });
-
+        table_class();
+        table_group();
     </script>
 </body>
 
