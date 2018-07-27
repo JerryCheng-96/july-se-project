@@ -11,36 +11,25 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <jsp:include page="frame.jsp">
-        <jsp:param name="func" value="projects"/>
-        <jsp:param name="cat" value="projects"/>
+        <jsp:param name="func" value="dashboard"/>
+        <jsp:param name="cat" value="dashboard"/>
     </jsp:include>
     <div class="layui-body">
         <div class="layui-row" style="padding-left:30px;padding-top:25px;padding-right:30px;">
             <div>
                 <table border="0">
                     <tr>
+                        <th rowspan="2">
+                            <img src="/res/icon/A.jpg"
+                                 style="width:120px;height:120px;border-radius:120px;margin:0 auto;padding:5px;">
+                        </th>
                         <td height="60%">
-                            <span style="font-size:30px; margin:0 auto;">项目 ABCD</span>
+                            <span style="font-size:30px; margin:0 auto; padding-left: 30px;">张三</span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span style="font-size: 17px;">负责工程师：[名字]</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <span style="font-size: 17px">适用教学计划：[教学计划]</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr>
-                            <div class="layui-btn-group">
-                                <button class="layui-btn layui-btn-disabled">审批已通过</button>
-                                <button class="layui-btn">编辑</button>
-                                <button class="layui-btn layui-btn-danger">删除</button>
-                            </div>
+                            <span style="padding-left:30px; font-size: 17px">XXX班  >  xxxx小组</span>
                         </td>
                     </tr>
                 </table>
@@ -48,26 +37,38 @@
             </div>
         </div>
         <div class="layui-row" style="padding-left:20px;padding-right:20px;">
-            <div class="layui-col-md8" style="padding:10px;">
+            <div class="layui-col-md6" style="padding:10px;">
                 <div class="layui-card" style="background-color: #F7F7F7">
-                    <div class="layui-card-header"><b>项目描述</b></div>
+                    <div class="layui-card-header"><b>工作日志</b></div>
                     <div class="layui-card-body">
-                        layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-                        不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-                        无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔
+                        <ul class="layui-timeline" style="padding-top: 10px">
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                                <div class="layui-timeline-content layui-text">
+                                    <h3 class="layui-timeline-title">8月18日</h3>
+                                    <p>
+                                        layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
+                                        <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
+                                        <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
+                                    </p>
+                                </div>
+                            </li>
+                            <li class="layui-timeline-item">
+                                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                                <div class="layui-timeline-content layui-text">
+                                    <div class="layui-timeline-title">过去</div>
+                                </div>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
-            <div class="layui-col-md4" style="padding: 10px;">
+            <div class="layui-col-md6" style="padding: 10px;">
                 <div class="layui-card" style="background-color: #F7F7F7">
-                    <div class="layui-card-header"><b>小组</b></div>
+                    <div class="layui-card-header"><b>最近文档</b></div>
                     <div class="layui-card-body">
-                        <p>小组 1</p>
-                        <p>小组 2</p>
-                        <p>小组 3</p>
-                        <p>小组 4</p>
-                        <br/>
-                        <span style="color:blue;">查看更多...</span>
+                        <div id="theCards"></div>
                     </div>
                 </div>
 
