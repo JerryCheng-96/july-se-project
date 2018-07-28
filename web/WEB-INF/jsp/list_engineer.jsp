@@ -19,17 +19,23 @@
             <br/>
             <div>
                 <div style="float: left"><span style="padding-left: 15px;"><a
-                        href="javascript:popup_layer_engineer_edit()" class="layui-btn">添加工程师</a></span>
+                        href="javascript:popup_layer_engineer_edit(undefined, theTable);" class="layui-btn">添加工程师</a></span>
                 </div>
                 <div style="float: right; margin-right: 15px;">
                     <div>
-                        <div style="float: right;margin-top: 1%"><span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-sm layui-btn-primary"><i
-                                class="layui-icon layui-icon-align-left"></i></a></span></div>
+                        <div style="float: right;margin-top: 1%">
+                            <span style="padding-left: 15px;">
+                            <a href="javascript:popup_sorting()" class="layui-btn layui-btn-sm layui-btn-primary">
+                            <i class="layui-icon layui-icon-align-left"></i>
+                            </a>
+                        </span>
+                        </div>
                         <div class="layui-input-block" style="float: left;">
                             <input type="text" name="title" required lay-verify="required" placeholder="查询..."
                                    autocomplete="off" class="layui-input">
                         </div>
-                        <div style="float: right; margin-top: 1%"><span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-sm"><i
+                        <div style="float: right; margin-top: 1%"><span style="padding-left: 15px;"><a href=""
+                                                                                                       class="layui-btn layui-btn-sm"><i
                                 class="layui-icon layui-icon-search"></i></a></span></div>
 
                     </div>
@@ -52,6 +58,8 @@
     <script src="/res/layui/layui.js"></script>
     <script src="/js/PopUp.js"></script>
     <script>
+        var theTable;
+
         layui.use('element', function () {
             var element = layui.element;
             //一些事件监听
@@ -71,7 +79,7 @@
         };
 
         layui.use('table', function () {
-            var theTable = layui.table;
+            theTable = layui.table;
 
             //第一个实例
             theTable.render({
@@ -82,8 +90,15 @@
                 cols: [[ //表头
                     {field: 'selected', title: '', width: 40, fixed: 'left', type: 'checkbox'}
                     , {field: 'engineerId', title: '工号', width: 60, sort: true, fixed: 'left'}
-                    , {field: 'engineerName', title: '姓名', width: 120, sort: true, fixed: 'left'
-                        , templet: '<div><a href="javascript:popup_layer_engineer(testEngineer)" class="layui-table-link">{{d.engineerName}}</a></div>'}
+                    , {
+                        field: 'engineerName',
+                        title: '姓名',
+                        width: 120,
+                        sort: true,
+                        fixed: 'left'
+                        ,
+                        templet: '<div><a href="javascript:popup_layer_engineer(testEngineer)" class="layui-table-link">{{d.engineerName}}</a></div>'
+                    }
                     , {field: 'engineerSex', title: '性别', width: 160, sort: true}
                     , {field: 'engineerCompany', title: '公司', width: 200}
                     , {field: 'engineerDepartment', title: '部门', width: 180}
@@ -110,7 +125,21 @@
                 }
             });
         });
-    </script>
 
+        function popup_sorting() {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.open({
+                    type: 1,
+                    title: '',
+                    content: "",
+                });
+            });
+        }
+    </script>
 </body>
 </html>
+
+<div>
+
+</div>

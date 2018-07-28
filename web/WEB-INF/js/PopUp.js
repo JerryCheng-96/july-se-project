@@ -51,7 +51,7 @@ function popup_layer_engineer(theEngineer) {
     });
 }
 
-function popup_layer_engineer_edit(theEngineer) {
+function popup_layer_engineer_edit(theEngineer, theTable) {
     console.log(theEngineer);
     var buttonText = '更改';
     if (typeof theEngineer == "undefined") {
@@ -126,7 +126,10 @@ function popup_layer_engineer_edit(theEngineer) {
                 "  </div>" +
                 "</form>" +
                 "</div>",
-            area: '450px'
+            area: '450px',
+            end: function () {
+                theTable.reload();
+            }
         });
 
         form.render();
