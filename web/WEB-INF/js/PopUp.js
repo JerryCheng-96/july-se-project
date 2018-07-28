@@ -133,16 +133,14 @@ function popup_layer_engineer_edit(theEngineer) {
 
         //监听提交
         form.on('submit(formDemo)', function (data) {
-            console.log(data);
             var xhr = new XMLHttpRequest();
             if (buttonText == '添加') {
                 xhr.open("POST", "/manage/engineer/new", true);
             }
             else {
                 xhr.open("POST", "/manage/engineer/alter?engineerId=" + data.field.engineerId, true);
-
             }
-            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
@@ -155,7 +153,8 @@ function popup_layer_engineer_edit(theEngineer) {
                     }
                 }
             };
-            xhr.send(JSON.stringify(data.field));
+            xhr.send(encodeURI(JSON.stringify(data.field)));
+            console.log(encodeURI(JSON.stringify(data.field)));
             return false;
         });
     });
