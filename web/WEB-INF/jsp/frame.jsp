@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
-<div class="layui-header">
+<%--<div class="layui-header">
     <div class="layui-logo">TOSIT 实训管理系统</div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-right">
@@ -15,10 +15,14 @@
             </dl>
         </li>
     </ul>
-</div>
+</div>--%>
 
 <div class="layui-side" style="background-color: #0C0C0C">
-    <div class="layui-side-scroll">
+    <div style="text-align: center">
+        <img src="/res/icon/A.jpg" style="width:80px;height:80px;border-radius:80px;margin-top:10%;"/>
+        <h2 style="margin-top: 5%; margin-bottom: 10%; color: #F0F0F0">张三</h2>
+    </div>
+    <div class="">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <ul class="layui-nav layui-nav-tree">
             <li id="dashboard" class="layui-nav-item">

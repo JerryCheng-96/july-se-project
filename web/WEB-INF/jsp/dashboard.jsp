@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/res/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
+<div class="">
     <jsp:include page="frame.jsp"/>
     <div class="layui-body">
         <div class="layui-row">
