@@ -53,6 +53,7 @@ function popup_layer_engineer(theEngineer) {
 
 function popup_layer_engineer_edit(theEngineer) {
     console.log(theEngineer);
+    var buttonText = '更改';
     if (typeof theEngineer == "undefined") {
         theEngineer = {
             "engineerId": '',
@@ -62,7 +63,9 @@ function popup_layer_engineer_edit(theEngineer) {
             "engineerDepartment": "",
             "engineerJob": ""
         };
+        buttonText = '添加';
     }
+
     layui.use(['layer', 'form'], function () {
         var layer = layui.layer;
         var form = layui.form;
@@ -75,7 +78,7 @@ function popup_layer_engineer_edit(theEngineer) {
                 "  <div class=\"layui-form-item\" style='padding-top:20px'>" +
                 "    <label class=\"layui-form-label\"'>工号</label>" +
                 "    <div class=\"layui-input-block\" >" +
-                "      <input type=\"text\" name=\"engineerId\" value='" + theEngineer.engineerId + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "      <input type=\"text\" name=\"engineerId\" value='" + theEngineer.engineerId + "' " +  (theEngineer.engineerId != '' ? 'disabled="disabled"' : '')  + " required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
                 "    </div>" +
                 "  </div>" +
 
@@ -117,8 +120,8 @@ function popup_layer_engineer_edit(theEngineer) {
 
                 "  <div class=\"layui-form-item\">" +
                 "    <div class=\"layui-input-block\">" +
-                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">确定</button>" +
-                "      <button type=\"reset\" class=\"layui-btn layui-btn-primary\">取消</button>" +
+                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">" + buttonText + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
                 "    </div>" +
                 "  </div>" +
                 "</form>" +

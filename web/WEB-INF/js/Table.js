@@ -1,3 +1,4 @@
+
 function table_class() {
     layui.use('table', function () {
         var table_class = layui.table;
@@ -94,24 +95,25 @@ function table_group() {
 }
 
 function table_engineer() {
-    layui.use('table', function () {
-        var table_engineer = layui.table;
+     layui.use('table', function () {
+         var theTable = layui.table;
 
-        //第一个实例
-        table_engineer.render({
-            elem: '#table_engineer',
-            url: '/manage/engineer/data', //数据接口
-            width: '90%',
-            page: true, //开启分页
-            cols: [[ //表头
-                {field: 'selected', title: '', width: 40, fixed: 'left',type: 'checkbox'}
-                , { field: 'engineerId', title: '工号', width: 120, sort: true, fixed: 'left'}
-                , {field: 'engineerName', title: '姓名', width: 100, sort: true, fixed: 'left'}
-                , {field: 'engineerSex', title: '性别', width: 160, sort: true}
-                , {field: 'engineerCompany', title: '公司', width: 200}
-                , {field: 'engineerDepartment', title: '部门', width: 180}
-                , {field: 'engineerJob', title: '职务', width: 160, sort: true}
-            ]]
-        });
-    });
+         //第一个实例
+         theTable.render({
+             elem: '#table_engineer',
+             url: '/manage/engineer/data', //数据接口
+             width: '90%',
+             page: true, //开启分页
+             cols: [[ //表头
+                 {field: 'selected', title: '', width: 40, fixed: 'left', type: 'checkbox'}
+                 , {field: 'engineerId', title: '工号', width: 120, sort: true, fixed: 'left'}
+                 , {field: 'engineerName', title: '姓名', width: 100, sort: true, fixed: 'left'}
+                 , {field: 'engineerSex', title: '性别', width: 160, sort: true}
+                 , {field: 'engineerCompany', title: '公司', width: 200}
+                 , {field: 'engineerDepartment', title: '部门', width: 180}
+                 , {field: 'engineerJob', title: '职务', width: 160, sort: true}
+                 , {fixed: 'right', width: 120, align: 'center', toolbar: '#barDemo'}
+             ]]
+         });
+     });
 }
