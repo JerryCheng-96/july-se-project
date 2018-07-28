@@ -23,12 +23,15 @@
                 </div>
                 <div style="float: right; margin-right: 15px;">
                     <div>
+                        <div style="float: right;margin-top: 1%"><span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-sm layui-btn-primary"><i
+                                class="layui-icon layui-icon-align-left"></i></a></span></div>
                         <div class="layui-input-block" style="float: left;">
                             <input type="text" name="title" required lay-verify="required" placeholder="查询..."
                                    autocomplete="off" class="layui-input">
                         </div>
-                        <div style="float: right"><span style="padding-left: 15px;"><a href="" class="layui-btn"><i
+                        <div style="float: right; margin-top: 1%"><span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-sm"><i
                                 class="layui-icon layui-icon-search"></i></a></span></div>
+
                     </div>
                 </div>
                 <div class="layui-row" style="padding: 15px;">

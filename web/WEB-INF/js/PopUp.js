@@ -154,6 +154,7 @@ function popup_layer_engineer_edit(theEngineer) {
                 }
             };
             xhr.send(encodeURI(JSON.stringify(data.field)));
+            console.log((JSON.stringify(data.field)));
             console.log(encodeURI(JSON.stringify(data.field)));
             return false;
         });
