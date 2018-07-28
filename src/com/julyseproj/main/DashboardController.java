@@ -51,4 +51,10 @@ public class DashboardController {
         return "detail_doc";
     }
 
+
+
+    @RequestMapping(value = "/edit/project", method = RequestMethod.GET)
+    public String edit_project() {
+        return "edit_project";
+    }
 }

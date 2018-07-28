@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/res/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
+<div class="">
 
     <jsp:include page="frame.jsp">
         <jsp:param name="cat" value="docs"/>

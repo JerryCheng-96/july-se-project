@@ -25,8 +25,8 @@ public class EngineerServiceImpl implements EngineerService{
         response.code=0;
         response.msg="";
         List<Engineer> allEnginner = getAllEngineer();
-        response.data = allEnginner.subList(page*maxrow,(page+1)*maxrow);
         response.count = allEnginner.size();
+        response.data = allEnginner.subList((page-1)*maxrow,(page*maxrow)<response.count?page*maxrow:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         return responseJson;
