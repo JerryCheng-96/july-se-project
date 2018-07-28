@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>XXX，欢迎来到实训管理系统！</title>
+    <title>XXX - 个人中心</title>
     <link rel="stylesheet" href="/res/layui/css/layui.css">
 </head>
 
@@ -17,7 +17,7 @@
     <div class="layui-body">
         <div class="layui-row" style="padding: 15px;">
             <div class="layui-btn-container">
-                <span style="padding-left: 15px;"><a href="javascript:popup_layer_engineer()"
+                <span style="padding-left: 15px;"><a href="javascript:popup_layer_engineer(testEngineer)"
                                                      class="layui-btn">工程师信息显示</a></span>
                 <span style="padding-left: 15px;"><a href="javascript:popup_layer_engineer_edit()"
                                                      class="layui-btn">工程师信息修改</a></span>
@@ -46,6 +46,16 @@
                 console.log(data);
             });
         });
+
+        // Testing Data
+        testEngineer = {
+            "engineerId": 100000,
+            "engineerName": "OPST",
+            "engineerSex": "男",
+            "engineerCompany": "Google",
+            "engineerDepartment": "Maintenance",
+            "engineerJob": "Programmer"
+        };
     </script>
     <script src="/js/PopUp.js"></script>
 </body>

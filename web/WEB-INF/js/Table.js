@@ -112,8 +112,6 @@ function table_engineer() {
                 , {field: 'engineerDepartment', title: '部门', width: 180}
                 , {field: 'engineerJob', title: '职务', width: 160, sort: true}
             ]]
-
         });
-
     });
 }

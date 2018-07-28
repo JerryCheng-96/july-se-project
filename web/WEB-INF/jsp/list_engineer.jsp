@@ -18,7 +18,7 @@
         <div class="layui-row">
             <br/>
             <div>
-                <div style="float: left"><span style="padding-left: 15px;"><a href="" class="layui-btn">添加工程师</a></span>
+                <div style="float: left"><span style="padding-left: 15px;"><a href="javascript:popup_layer_engineer_edit(testEngineer)" class="layui-btn">添加工程师</a></span>
                 </div>
                 <div style="float: right; margin-right: 15px;">
                     <div>
@@ -41,6 +41,7 @@
     </div>
     <script src="/res/layui/layui.js"></script>
     <script src="/js/Table.js"></script>
+    <script src="/js/PopUp.js"></script>
     <script>
         layui.use('element', function () {
             var element = layui.element;
@@ -49,6 +50,16 @@
                 console.log(data);
             });
         });
+
+        // Testing Data
+        testEngineer = {
+            "engineerId": 100000,
+            "engineerName": "OPST",
+            "engineerSex": "女",
+            "engineerCompany": "Google",
+            "engineerDepartment": "Maintenance",
+            "engineerJob": "Programmer"
+        };
 
         table_engineer();
 
