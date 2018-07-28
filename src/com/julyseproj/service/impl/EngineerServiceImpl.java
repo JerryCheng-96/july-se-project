@@ -50,7 +50,9 @@ public class EngineerServiceImpl implements EngineerService{
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
+            System.out.println(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"));
             Engineer toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Engineer.class);
+
             em.insert(toInsert);
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -62,6 +64,8 @@ public class EngineerServiceImpl implements EngineerService{
             e.printStackTrace();
             res.setStatus(148);
             return;
+        }catch (Exception e) {
+            e.printStackTrace();
         }
         res.setStatus(200);
         return;
