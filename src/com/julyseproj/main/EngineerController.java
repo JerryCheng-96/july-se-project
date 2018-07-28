@@ -37,4 +37,41 @@ public class EngineerController {
         es.getAllEngineerJson(page,limit,res);
         return;
     }
+
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    public void getByPrimaryKeyJson(int engineerid, HttpServletResponse res){
+        es.getEngineerByPrimaryKeyJson(engineerid, res);
+        return;
+    }
+
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    public void deleteByPrimaryKey(int engineerid, HttpServletResponse res){
+        es.deletetEngineerByPrimaryKey(engineerid, res);
+        return;
+    }
+
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    public void insert(Engineer engineer, HttpServletResponse res){
+        es.insertEngineer(engineer, res);
+        return;
+    }
+
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    public void insertSelective(Engineer engineer, HttpServletResponse res){
+        es.insertSelectiveEngineer(engineer, res);
+        return;
+    }
+
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    public void updateSelective(Engineer engineer, HttpServletResponse res){
+        es.updateEngineerByPrimaryKeySelective(engineer, res);
+        return;
+    }
+
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    public void update(Engineer engineer, HttpServletResponse res){
+        es.updateEngineerByPrimaryKey(engineer, res);
+        return;
+    }
+
 }

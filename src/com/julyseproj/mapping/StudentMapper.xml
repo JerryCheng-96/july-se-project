@@ -15,6 +15,9 @@
     student_id, student_name, student_sex, student_grade, student_department, student_major, 
     student_class, student_group
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.student">
+    select * from student;
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
