@@ -4,16 +4,14 @@ import com.julyseproj.entity.Engineer;
 import com.julyseproj.service.EngineerService;
 
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,8 +33,8 @@ public class EngineerController {
     }
 
     @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
-    @ResponseBody
-    public String test(int page,int limit){
-        return es.getAllEngineerJson(page,limit);
+    public void test(int page, int limit, HttpServletResponse res){
+        es.getAllEngineerJson(page,limit,res);
+        return;
     }
 }
