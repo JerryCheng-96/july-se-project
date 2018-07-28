@@ -51,7 +51,7 @@ function popup_layer_engineer(theEngineer) {
     });
 }
 
-function popup_layer_engineer_edit(theEngineer) {
+function popup_layer_engineer_edit(theEngineer, theTable) {
     console.log(theEngineer);
     var buttonText = '更改';
     if (typeof theEngineer == "undefined") {
@@ -126,15 +126,45 @@ function popup_layer_engineer_edit(theEngineer) {
                 "  </div>" +
                 "</form>" +
                 "</div>",
-            area: '450px'
+            area: '450px',
+            end: function () {
+                theTable.reload('table_engineer');
+            }
         });
 
         form.render();
 
         //监听提交
         form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
+            var xhr = new XMLHttpRequest();
+            if (buttonText == '添加') {
+                xhr.open("POST", "/manage/engineer/new", true);
+            }
+            else {
+                xhr.open("POST", "/manage/engineer/alter?engineerId=" + data.field.engineerId, true);
+            }
+            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log('POST succeeded!!!')
+                        layer.close(layer.index);
+                    }
+                    if (xhr.status != 200) {
+                        console.log('POST failed!!!')
+                        layer.alert('数据提交失败，请重试。')
+                    }
+                }
+            };
+            xhr.send((JSON.stringify(data.field)));
+            console.log((JSON.stringify(data.field)));
+            console.log(encodeURI(JSON.stringify(data.field)));
             return false;
         });
     });
+}
+
+
+function POSTJson (theObj) {
+
 }

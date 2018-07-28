@@ -4,6 +4,7 @@ import com.julyseproj.entity.Engineer;
 import com.julyseproj.service.EngineerService;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class EngineerController {
     }
 
     @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
-    public void test(int page, int limit, HttpServletResponse res){
+    public void getAllEngineerHandler(int page, int limit, HttpServletResponse res){
         es.getAllEngineerJson(page,limit,res);
         return;
     }
