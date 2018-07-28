@@ -133,8 +133,35 @@ function popup_layer_engineer_edit(theEngineer) {
 
         //监听提交
         form.on('submit(formDemo)', function (data) {
-            layer.msg(JSON.stringify(data.field));
+            console.log(data);
+            var xhr = new XMLHttpRequest();
+            if (buttonText == '添加') {
+                xhr.open("POST", "/manage/engineer/new", true);
+            }
+            else {
+                xhr.open("POST", "/manage/engineer/alter?engineerId=" + data.field.engineerId, true);
+
+            }
+            xhr.setRequestHeader("Content-type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        console.log('POST succeeded!!!')
+                        layer.close(layer.index);
+                    }
+                    if (xhr.status != 200) {
+                        console.log('POST failed!!!')
+                        layer.alert('数据提交失败，请重试。')
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(data.field));
             return false;
         });
     });
+}
+
+
+function POSTJson (theObj) {
+
 }
