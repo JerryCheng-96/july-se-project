@@ -7,6 +7,8 @@ public class Project {
 
     private Integer projectCreator;
 
+    private Byte projectApproved;
+
     private String projectDescription;
 
     public Integer getProjectId() {
@@ -31,6 +33,14 @@ public class Project {
 
     public void setProjectCreator(Integer projectCreator) {
         this.projectCreator = projectCreator;
+    }
+
+    public Byte getProjectApproved() {
+        return projectApproved;
+    }
+
+    public void setProjectApproved(Byte projectApproved) {
+        this.projectApproved = projectApproved;
     }
 
     public String getProjectDescription() {

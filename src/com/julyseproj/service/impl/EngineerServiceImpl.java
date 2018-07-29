@@ -107,24 +107,17 @@ public class EngineerServiceImpl implements EngineerService{
             String requestContent = req.getReader().readLine();
             Engineer toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Engineer.class);
             em.insert(toInsert);
-        }catch (IOException e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            res.setStatus(500);
-            return;
-        }catch (org.springframework.dao.DuplicateKeyException e ) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
-            return;
-        }catch (org.springframework.dao.DataIntegrityViolationException e2) {
-            res.setStatus(148);
-            e2.printStackTrace();
-            return;
         }catch (Exception e) {
             e.printStackTrace();
-            res.setStatus(999);
+            if (e instanceof IOException){
+                res.setStatus(500);
+            }else if(e instanceof DuplicateKeyException){
+                res.setStatus(148);
+            }else if(e instanceof DataIntegrityViolationException){
+                res.setStatus(148);
+            }else {
+                res.setStatus(999);
+            }
             return;
         }
         res.setStatus(200);
@@ -138,16 +131,23 @@ public class EngineerServiceImpl implements EngineerService{
             String requestContent = req.getReader().readLine();
             Engineer toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Engineer.class);
             em.updateByPrimaryKey(toUpdate);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (IOException e) {
             e.printStackTrace();
             res.setStatus(500);
             return;
-        }catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
+        }catch (DuplicateKeyException e) {
             e.printStackTrace();
             //Throwable cause = e.getCause();
             res.setStatus(148);
+            return;
+        }catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            //Throwable cause = e.getCause();
+            res.setStatus(148);
+            return;
+        }catch (Exception e) {
+            e.printStackTrace();
+            res.setStatus(999);
             return;
         }
         res.setStatus(200);
