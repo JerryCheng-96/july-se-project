@@ -5,9 +5,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Service;
-import com.julyseproj.entity.Engineer;
-import com.julyseproj.service.EngineerService;
-import com.julyseproj.IDao.EngineerMapper;
+import com.julyseproj.entity.Project;
+import com.julyseproj.service.ProjectService;
+import com.julyseproj.IDao.ProjectMapper;
 import com.julyseproj.utils.ListSorter;
 
 import javax.annotation.Resource;
@@ -20,24 +20,24 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
 
-@Service("engineerService")
-public class EngineerServiceImpl implements EngineerService{
+@Service("projectService")
+public class ProjectServiceImpl implements ProjectService{
     @Resource
-    private EngineerMapper em;
+    private ProjectMapper em;
 
     @Override
-    public List<Engineer> getAllEngineer() {
+    public List<Project> getAllProject() {
         return em.selectAll();
     }
 
     /*
     @Override
-    public String getAllEngineerJson(int page, int maxrow, HttpServletResponse res) {
+    public String getAllProjectJson(int page, int maxrow, HttpServletResponse res) {
         res.setContentType("text/html;charset=UTF-8");
-        EngineerListJson response = new EngineerListJson();
+        ProjectListJson response = new ProjectListJson();
         response.code=0;
         response.msg="";
-        List<Engineer> allEnginner = getAllEngineer();
+        List<Project> allEnginner = getAllProject();
         response.count = allEnginner.size();
         response.data = allEnginner.subList((page-1)*maxrow,(page*maxrow)<response.count?page*maxrow:response.count);
         Gson gson = new Gson();
@@ -53,9 +53,9 @@ public class EngineerServiceImpl implements EngineerService{
     */
 
     @Override
-    public String getAllEngineerJson(HttpServletRequest req,HttpServletResponse res){
+    public String getAllProjectJson(HttpServletRequest req,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        EngineerListJson response = new EngineerListJson();
+        ProjectListJson response = new ProjectListJson();
         response.code=0;
         response.msg="";
 
@@ -63,7 +63,7 @@ public class EngineerServiceImpl implements EngineerService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Engineer> allEnginner = getAllEngineer();
+        List<Project> allEnginner = getAllProject();
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
@@ -84,9 +84,9 @@ public class EngineerServiceImpl implements EngineerService{
     }
 
     @Override
-    public String getEngineerByInstance(int ID,HttpServletResponse res){
+    public String getProjectByInstance(int ID,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        Engineer response = em.selectByPrimaryKey(ID);
+        Project response = em.selectByPrimaryKey(ID);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
@@ -101,11 +101,11 @@ public class EngineerServiceImpl implements EngineerService{
     }
 
     @Override
-    public void insertEngineerByInstance(HttpServletRequest req, HttpServletResponse res) {
+    public void insertProjectByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
-            Engineer toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Engineer.class);
+            Project toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Project.class);
             em.insert(toInsert);
         }catch (Exception e) {
             e.printStackTrace();
@@ -125,11 +125,11 @@ public class EngineerServiceImpl implements EngineerService{
     }
 
     @Override
-    public void updateEngineerByInstance(HttpServletRequest req, HttpServletResponse res) {
+    public void updateProjectByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
-            Engineer toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Engineer.class);
+            Project toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Project.class);
             em.updateByPrimaryKey(toUpdate);
         }catch (Exception e) {
             e.printStackTrace();
@@ -148,7 +148,7 @@ public class EngineerServiceImpl implements EngineerService{
         return;
     }
 
-    public void deleteEngineerByInstance(int ID,HttpServletResponse res){
+    public void deleteProjectByInstance(int ID,HttpServletResponse res){
         try {
             em.deleteByPrimaryKey(ID);
         } catch (DataIntegrityViolationException e){
@@ -160,10 +160,10 @@ public class EngineerServiceImpl implements EngineerService{
         return;
     }
 
-    private class EngineerListJson{
+    private class ProjectListJson{
         int code;
         String msg;
         int count;
-        List<Engineer> data;
+        List<Project> data;
     }
 }
