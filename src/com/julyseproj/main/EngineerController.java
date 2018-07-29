@@ -33,11 +33,18 @@ public class EngineerController {
         return mnv;
     }
 
+
     @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    public void getAllEngineerHandler(HttpServletRequest req ,HttpServletResponse res){
+        es.getAllEngineerJson(req,res);
+    }
+
+    /*
     public void getAllEngineerHandler(int page, int limit, HttpServletResponse res){
         es.getAllEngineerJson(page,limit,res);
         return;
     }
+    */
 
     @RequestMapping(value = "/manage/engineer/getOne",method = RequestMethod.GET)
     public void getEngineerByIdHandler(int ID,HttpServletResponse res){

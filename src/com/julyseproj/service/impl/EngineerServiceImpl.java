@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import com.julyseproj.entity.Engineer;
 import com.julyseproj.service.EngineerService;
 import com.julyseproj.IDao.EngineerMapper;
+import com.julyseproj.utils.ListSorter;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ public class EngineerServiceImpl implements EngineerService{
         return em.selectAll();
     }
 
+    /*
     @Override
     public String getAllEngineerJson(int page, int maxrow, HttpServletResponse res) {
         res.setContentType("text/html;charset=UTF-8");
@@ -36,6 +39,37 @@ public class EngineerServiceImpl implements EngineerService{
         List<Engineer> allEnginner = getAllEngineer();
         response.count = allEnginner.size();
         response.data = allEnginner.subList((page-1)*maxrow,(page*maxrow)<response.count?page*maxrow:response.count);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return responseJson;
+    }
+    */
+
+    @Override
+    public String getAllEngineerJson(HttpServletRequest req,HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        EngineerListJson response = new EngineerListJson();
+        response.code=0;
+        response.msg="";
+
+        int page = new Integer(req.getParameter("page"));
+        int limit = new Integer(req.getParameter("limit"));
+        String fieldName = req.getParameter("field");
+
+        List<Engineer> allEnginner = getAllEngineer();
+
+        if (fieldName!=null) {
+            boolean isAsc = new Boolean(req.getParameter("isAsc"));
+            ListSorter.sort(allEnginner, isAsc, fieldName);
+        }
+        response.count = allEnginner.size();
+        response.data = allEnginner.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
