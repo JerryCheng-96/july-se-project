@@ -1,5 +1,19 @@
+function show_popup_layer_engineer(engineerId) {
+    HttpGetResponse('/manage/engineer/getOne?ID=' + engineerId,
+        function (response) {
+            popup_layer_engineer(JSON.parse(response));
+        }, undefined);
+}
+
+function show_popup_layer_engineer_edit(engineerId, whenDone) {
+    HttpGetResponse('/manage/engineer/getOne?ID=' + engineerId,
+        function (response) {
+            popup_layer_engineer_edit(JSON.parse(response), whenDone);
+        }, undefined);
+}
 
 function popup_layer_engineer(theEngineer) {
+    console.log(theEngineer);
     layui.use('layer', function () {
         var layer = layui.layer;
         layer.open({

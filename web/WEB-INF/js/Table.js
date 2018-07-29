@@ -25,44 +25,6 @@ function table_class() {
                     templet: '<div><a href="class/{{d.class}}.html" class="layui-table-link">{{d.class}}</a></div>'
                 }
             ]]
-            ,
-            data: [{
-                'id': 10,
-                'name': 'Zhang',
-                'gender': 'male',
-                'colleage': 'Software',
-                'majority': 'SE',
-                'grade': '2016',
-                'class': 'A210'
-            },
-                {
-                    'id': 11,
-                    'name': 'Deng',
-                    'gender': 'male',
-                    'colleage': 'Software',
-                    'majority': 'SE',
-                    'grade': '2016',
-                    'class': 'A210'
-                },
-                {
-                    'id': 5,
-                    'name': 'Wang',
-                    'gender': 'male',
-                    'colleage': 'Software',
-                    'majority': 'SE',
-                    'grade': '2016',
-                    'class': 'A211'
-                },
-                {
-                    'id': 6,
-                    'name': 'Li',
-                    'gender': 'female',
-                    'colleage': 'Software',
-                    'majority': 'SE',
-                    'grade': '2016',
-                    'class': 'A211'
-                }]
-
         });
     });
 }
@@ -110,7 +72,7 @@ function table_engineer(theTable, update_table) {
                     sort: true,
                     fixed: 'left'
                     ,
-                    templet: '<div><a href="javascript:popup_layer_engineer(testEngineer)" class="layui-table-link">{{d.engineerName}}</a></div>'
+                    templet: '<div><a href="javascript:show_popup_layer_engineer({{d.engineerId}})" class="layui-table-link">{{d.engineerName}}</a></div>'
                 }
                 , {field: 'engineerSex', title: '性别', width: 80}
                 , {field: 'engineerCompany', title: '公司', width: 200, sort: true}
@@ -125,7 +87,7 @@ function table_engineer(theTable, update_table) {
 
             if (layEvent === 'del') { //删除
                 console.log(obj);
-                layer.confirm('真的删除行么', function (index) {
+                layer.confirm('确认删除?', function (index) {
                     console.log('/manage/engineer/delete?ID=' + obj.data.engineerId);
                     layer.close(index);
                     HttpGet('/manage/engineer/delete?ID=' + obj.data.engineerId, update_table, function (msg) {
@@ -135,7 +97,7 @@ function table_engineer(theTable, update_table) {
             } else if (layEvent === 'edit') { //编辑
                 //do something
                 console.log(obj.data)
-                popup_layer_engineer_edit(obj.data, update_table);
+                show_popup_layer_engineer_edit(obj.data.engineerId, update_table);
             }
         });
 

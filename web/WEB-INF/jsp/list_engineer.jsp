@@ -76,31 +76,6 @@
 
         console.log(lay);
 
-        // Testing Data
-        testEngineer = {
-            "engineerId": 100000,
-            "engineerName": "OPST",
-            "engineerSex": "女",
-            "engineerCompany": "Google",
-            "engineerDepartment": "Maintenance",
-            "engineerJob": "Programmer"
-        };
-
-        function update() {
-            console.log('now in update!');
-            theTable.reload('table_engineer');
-        }
-
-        function popup_sorting() {
-            layui.use('layer', function () {
-                var layer = layui.layer;
-                layer.open({
-                    type: 1,
-                    title: '',
-                    content: "",
-                });
-            });
-        }
     </script>
 </body>
 </html>
