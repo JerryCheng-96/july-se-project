@@ -13,6 +13,7 @@ import com.julyseproj.utils.ListSorter;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Enumeration;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -106,16 +107,24 @@ public class EngineerServiceImpl implements EngineerService{
             String requestContent = req.getReader().readLine();
             Engineer toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Engineer.class);
             em.insert(toInsert);
-        }catch (IOException e){
+        }catch (IOException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
             res.setStatus(500);
             return;
-        }catch (DataIntegrityViolationException e){
+        }catch (org.springframework.dao.DuplicateKeyException e ) {
             System.out.println(e.getMessage());
             e.printStackTrace();
             //Throwable cause = e.getCause();
             res.setStatus(148);
+            return;
+        }catch (org.springframework.dao.DataIntegrityViolationException e2) {
+            res.setStatus(148);
+            e2.printStackTrace();
+            return;
+        }catch (Exception e) {
+            e.printStackTrace();
+            res.setStatus(999);
             return;
         }
         res.setStatus(200);
