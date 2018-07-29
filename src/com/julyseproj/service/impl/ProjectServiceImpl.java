@@ -5,9 +5,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Service;
-import com.julyseproj.entity.Student;
-import com.julyseproj.service.StudentService;
-import com.julyseproj.IDao.StudentMapper;
+import com.julyseproj.entity.Project;
+import com.julyseproj.service.ProjectService;
+import com.julyseproj.IDao.ProjectMapper;
 import com.julyseproj.utils.ListSorter;
 
 import javax.annotation.Resource;
@@ -18,20 +18,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
 
-@Service("studentService")
-public class StudentServiceImpl implements StudentService{
+@Service("projectService")
+public class ProjectServiceImpl implements ProjectService{
     @Resource
-    private StudentMapper em;
+    private ProjectMapper em;
 
     @Override
-    public List<Student> getAllStudent() {
+    public List<Project> getAllProject() {
         return em.selectAll();
     }
 
     @Override
-    public String getAllStudentJson(HttpServletRequest req,HttpServletResponse res){
+    public String getAllProjectJson(HttpServletRequest req,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        StudentListJson response = new StudentListJson();
+        ProjectListJson response = new ProjectListJson();
         response.code=0;
         response.msg="";
 
@@ -39,14 +39,14 @@ public class StudentServiceImpl implements StudentService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Student> allStudent = getAllStudent();
+        List<Project> allProject = getAllProject();
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
-            ListSorter.sort(allStudent, isAsc, fieldName);
+            ListSorter.sort(allProject, isAsc, fieldName);
         }
-        response.count = allStudent.size();
-        response.data = allStudent.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        response.count = allProject.size();
+        response.data = allProject.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
@@ -59,9 +59,9 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public String getStudentByInstance(int ID,HttpServletResponse res){
+    public String getProjectByInstance(int ID,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        Student response = em.selectByPrimaryKey(ID);
+        Project response = em.selectByPrimaryKey(ID);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
@@ -77,11 +77,11 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void insertStudentByInstance(HttpServletRequest req, HttpServletResponse res) {
+    public void insertProjectByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
-            Student toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Student.class);
+            Project toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Project.class);
             em.insert(toInsert);
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -100,11 +100,11 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void updateStudentByInstance(HttpServletRequest req, HttpServletResponse res) {
+    public void updateProjectByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
-            Student toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Student.class);
+            Project toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Project.class);
             em.updateByPrimaryKey(toUpdate);
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -122,7 +122,7 @@ public class StudentServiceImpl implements StudentService{
         return;
     }
 
-    public void deleteStudentByInstance(int ID,HttpServletResponse res){
+    public void deleteProjectByInstance(int ID,HttpServletResponse res){
         try {
             em.deleteByPrimaryKey(ID);
         } catch (DataIntegrityViolationException e){
@@ -136,10 +136,10 @@ public class StudentServiceImpl implements StudentService{
         return;
     }
 
-    private class StudentListJson{
+    private class ProjectListJson{
         int code;
         String msg;
         int count;
-        List<Student> data;
+        List<Project> data;
     }
 }

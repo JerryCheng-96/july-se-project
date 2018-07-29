@@ -11,6 +11,9 @@
   <sql id="Base_Column_List">
     doc_name, doc_url, doc_description, doc_uploader, doc_group
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Document">
+    select * from document;
+  </select>
   <select id="selectByPrimaryKey" parameterType="com.julyseproj.entity.DocumentKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

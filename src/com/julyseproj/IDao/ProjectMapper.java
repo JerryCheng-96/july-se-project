@@ -2,7 +2,11 @@ package com.julyseproj.IDao;
 
 import com.julyseproj.entity.Project;
 
+import java.util.List;
+
 public interface ProjectMapper {
+    List<Project> selectAll();
+
     int deleteByPrimaryKey(Integer projectId);
 
     int insert(Project record);
