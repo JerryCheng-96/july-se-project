@@ -149,6 +149,7 @@ function popup_layer_engineer_edit(theEngineer, theTable) {
                     if (xhr.status == 200) {
                         console.log('POST succeeded!!!')
                         layer.close(layer.index);
+                        theTable.reload('table_engineer');
                     }
                     if (xhr.status != 200) {
                         console.log('POST failed!!!')
@@ -156,7 +157,7 @@ function popup_layer_engineer_edit(theEngineer, theTable) {
                     }
                 }
             };
-            xhr.send(encodeURI(JSON.stringify(data.field)));
+            xhr.send((JSON.stringify(data.field)));
             console.log((JSON.stringify(data.field)));
             console.log(encodeURI(JSON.stringify(data.field)));
             return false;
