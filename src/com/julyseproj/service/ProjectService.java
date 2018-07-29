@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface ProjectService {
     public List<Project> getAllProject();
+    public void setApproved(int ID,HttpServletResponse res);
     public String getAllProjectJson(HttpServletRequest req, HttpServletResponse res);
     //public String getAllProjectJsonSortedByField(int page, int maxrow, String fieldName, boolean isAsc,HttpServletResponse res);
     public String getProjectByInstance(int ID,HttpServletResponse res);

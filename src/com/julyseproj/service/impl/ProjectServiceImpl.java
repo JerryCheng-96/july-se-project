@@ -30,6 +30,12 @@ public class ProjectServiceImpl implements ProjectService{
         return em.selectAll();
     }
 
+    @Override
+    public void setApproved(int ID,HttpServletResponse res){
+        Byte approved = 1;
+        em.setApprovedByID(ID,approved);
+    }
+
     /*
     @Override
     public String getAllProjectJson(int page, int maxrow, HttpServletResponse res) {
@@ -63,14 +69,14 @@ public class ProjectServiceImpl implements ProjectService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Project> allEnginner = getAllProject();
-
+        List<Project> allProject = getAllProject();
+        System.out.println(allProject);
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
-            ListSorter.sort(allEnginner, isAsc, fieldName);
+            ListSorter.sort(allProject, isAsc, fieldName);
         }
-        response.count = allEnginner.size();
-        response.data = allEnginner.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        response.count = allProject.size();
+        response.data = allProject.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);

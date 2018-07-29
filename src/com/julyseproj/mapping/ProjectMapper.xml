@@ -10,6 +10,7 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.julyseproj.entity.Project">
     <result column="project_description" jdbcType="LONGVARCHAR" property="projectDescription" />
   </resultMap>
+
   <sql id="Base_Column_List">
     project_id, project_name, project_creator, project_approved
   </sql>
@@ -19,6 +20,14 @@
 
   <select id="selectAll" resultMap="ResultMapWithBLOBs">
     select * from project;
+  </select>
+
+  <select id="setApprovedByID">
+    update project
+    <set>
+      project_approved = #{projectApproved,jdbcType=TINYINT},
+    </set>
+    where project_id = #{projectID,jdbcType=INTEGER}
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">

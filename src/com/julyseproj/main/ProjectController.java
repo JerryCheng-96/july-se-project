@@ -28,6 +28,11 @@ public class ProjectController {
         es.getAllProjectJson(req,res);
     }
 
+    @RequestMapping(value = "/manage/project/approve",method = RequestMethod.GET)
+    public void setApprovedByIDHandler(int ID, HttpServletResponse res){
+        es.setApproved(ID,res);
+    }
+
     /*
     public void getAllProjectHandler(int page, int limit, HttpServletResponse res){
         es.getAllProjectJson(page,limit,res);

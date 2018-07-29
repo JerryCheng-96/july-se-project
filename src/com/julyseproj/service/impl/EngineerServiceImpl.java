@@ -63,14 +63,14 @@ public class EngineerServiceImpl implements EngineerService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Engineer> allEnginner = getAllEngineer();
+        List<Engineer> allEngineer = getAllEngineer();
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
-            ListSorter.sort(allEnginner, isAsc, fieldName);
+            ListSorter.sort(allEngineer, isAsc, fieldName);
         }
-        response.count = allEnginner.size();
-        response.data = allEnginner.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        response.count = allEngineer.size();
+        response.data = allEngineer.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
