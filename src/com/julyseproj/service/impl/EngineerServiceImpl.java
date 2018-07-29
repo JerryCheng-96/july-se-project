@@ -1,5 +1,7 @@
 package com.julyseproj.service.impl;
 
+import com.mysql.jdbc.MysqlDataTruncation;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,24 @@ public class EngineerServiceImpl implements EngineerService{
     }
 
     @Override
+    public String getEngineerByInstance(int ID,HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        Engineer response = em.selectByPrimaryKey(ID);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            res.setStatus(500);
+            return "";
+        }
+        return responseJson;
+    }
+
+    @Override
     public void insertEngineerByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
@@ -57,9 +77,10 @@ public class EngineerServiceImpl implements EngineerService{
             e.printStackTrace();
             res.setStatus(500);
             return;
-        }catch (DuplicateKeyException e){
+        }catch (DataIntegrityViolationException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
+            //Throwable cause = e.getCause();
             res.setStatus(148);
             return;
         }
@@ -69,7 +90,39 @@ public class EngineerServiceImpl implements EngineerService{
 
     @Override
     public void updateEngineerByInstance(HttpServletRequest req, HttpServletResponse res) {
+        try {
+            Gson gson = new Gson();
+            String requestContent = req.getReader().readLine();
+            Engineer toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Engineer.class);
+            em.updateByPrimaryKey(toUpdate);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            res.setStatus(500);
+            return;
+        }catch (DataIntegrityViolationException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            //Throwable cause = e.getCause();
+            res.setStatus(148);
+            return;
+        }
+        res.setStatus(200);
+        return;
+    }
 
+    public void deleteEngineerByInstance(int ID,HttpServletResponse res){
+        try {
+            em.deleteByPrimaryKey(ID);
+        } catch (DataIntegrityViolationException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            //Throwable cause = e.getCause();
+            res.setStatus(148);
+            return;
+        }
+        res.setStatus(200);
+        return;
     }
 
     private class EngineerListJson{

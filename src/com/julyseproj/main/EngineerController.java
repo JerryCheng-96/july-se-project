@@ -39,8 +39,23 @@ public class EngineerController {
         return;
     }
 
+    @RequestMapping(value = "/manage/engineer/getOne",method = RequestMethod.GET)
+    public void getEngineerByIdHandler(int ID,HttpServletResponse res){
+        es.getEngineerByInstance(ID,res);
+    }
+
     @RequestMapping(value = "/manage/engineer/new",method = RequestMethod.POST)
     public void insertEngineerByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertEngineerByInstance(req,res);
+    }
+
+    @RequestMapping(value = "/manage/engineer/update",method = RequestMethod.POST)
+    public void updateEngineerByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
+        es.updateEngineerByInstance(req,res);
+    }
+
+    @RequestMapping(value = "/manage/engineer/delete",method = RequestMethod.GET)
+    public void deleteEngineerByIdHandler(int ID,HttpServletResponse res){
+        es.deleteEngineerByInstance(ID,res);
     }
 }
