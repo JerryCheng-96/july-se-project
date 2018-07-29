@@ -56,3 +56,31 @@ function HttpGet(url, whenDone, whenErr) {
     };
     xhr.send(null);
 }
+
+function HttpGetResponse(url, whenDone, whenErr) {
+    console.log("Now in HTTPGet!!")
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            console.log('status code: ' + xhr.status);
+            if (xhr.status == 200) {
+                console.log('GET succeeded!!!')
+                console.log(xhr);
+                whenDone(xhr.response);
+            }
+            else if (xhr.status == 500) {
+                console.log('GET failed!!! Server Internal Error');
+                whenErr('server_internal_err');
+            }
+            else if (xhr.status == 148) {
+                console.log('GET failed!!! Data Format Error');
+                whenErr('data_format_err');
+            }
+            else {
+                whenErr('unknown_err');
+            }
+        }
+    };
+    xhr.send(null);
+}
