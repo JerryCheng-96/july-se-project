@@ -44,7 +44,7 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="margin-left: 5%;margin-right: 5%">
                             <%--<button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>--%>
-                            <a class="layui-btn" href="/dashboard">登录</a>
+                            <a class="layui-btn" href="/login?username=test_user&password=pass">登录</a>
                             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                         </div>
                     </div>
