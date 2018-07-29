@@ -1,8 +1,11 @@
 package com.julyseproj.IDao;
 
 import com.julyseproj.entity.Student;
+import java.util.*;
 
 public interface StudentMapper {
+    List<Student> selectAll();
+
     int deleteByPrimaryKey(Integer studentId);
 
     int insert(Student record);

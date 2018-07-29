@@ -128,7 +128,7 @@ function popup_layer_engineer_edit(theEngineer, theTable) {
                 "</div>",
             area: '450px',
             end: function () {
-                theTable.reload();
+                theTable.reload('table_engineer');
             }
         });
 
