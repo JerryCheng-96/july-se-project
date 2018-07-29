@@ -3,7 +3,11 @@ package com.julyseproj.IDao;
 import com.julyseproj.entity.Document;
 import com.julyseproj.entity.DocumentKey;
 
+import java.util.List;
+
 public interface DocumentMapper {
+    List<Document> selectAll();
+
     int deleteByPrimaryKey(DocumentKey key);
 
     int insert(Document record);

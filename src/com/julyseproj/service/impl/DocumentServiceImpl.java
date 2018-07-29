@@ -1,13 +1,14 @@
 package com.julyseproj.service.impl;
 
+import com.julyseproj.entity.DocumentKey;
 import com.mysql.jdbc.MysqlDataTruncation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Service;
-import com.julyseproj.entity.Student;
-import com.julyseproj.service.StudentService;
-import com.julyseproj.IDao.StudentMapper;
+import com.julyseproj.entity.Document;
+import com.julyseproj.service.DocumentService;
+import com.julyseproj.IDao.DocumentMapper;
 import com.julyseproj.utils.ListSorter;
 
 import javax.annotation.Resource;
@@ -18,20 +19,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
 
-@Service("studentService")
-public class StudentServiceImpl implements StudentService{
+@Service("documentService")
+public class DocumentServiceImpl implements DocumentService{
     @Resource
-    private StudentMapper em;
+    private DocumentMapper em;
 
     @Override
-    public List<Student> getAllStudent() {
+    public List<Document> getAllDocument() {
         return em.selectAll();
     }
 
     @Override
-    public String getAllStudentJson(HttpServletRequest req,HttpServletResponse res){
+    public String getAllDocumentJson(HttpServletRequest req,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        StudentListJson response = new StudentListJson();
+        DocumentListJson response = new DocumentListJson();
         response.code=0;
         response.msg="";
 
@@ -39,14 +40,14 @@ public class StudentServiceImpl implements StudentService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Student> allStudent = getAllStudent();
+        List<Document> allDocument = getAllDocument();
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
-            ListSorter.sort(allStudent, isAsc, fieldName);
+            ListSorter.sort(allDocument, isAsc, fieldName);
         }
-        response.count = allStudent.size();
-        response.data = allStudent.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        response.count = allDocument.size();
+        response.data = allDocument.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
@@ -59,9 +60,9 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public String getStudentByInstance(int ID,HttpServletResponse res){
+    public String getDocumentByInstance(DocumentKey dk, HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        Student response = em.selectByPrimaryKey(ID);
+        Document response = em.selectByPrimaryKey(dk);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
@@ -77,11 +78,11 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void insertStudentByInstance(HttpServletRequest req, HttpServletResponse res) {
+    public void insertDocumentByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
-            Student toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Student.class);
+            Document toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Document.class);
             em.insert(toInsert);
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -99,32 +100,9 @@ public class StudentServiceImpl implements StudentService{
         return;
     }
 
-    @Override
-    public void updateStudentByInstance(HttpServletRequest req, HttpServletResponse res) {
+    public void deleteDocumentByInstance(DocumentKey dk,HttpServletResponse res){
         try {
-            Gson gson = new Gson();
-            String requestContent = req.getReader().readLine();
-            Student toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Student.class);
-            em.updateByPrimaryKey(toUpdate);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            res.setStatus(500);
-            return;
-        }catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
-            return;
-        }
-        res.setStatus(200);
-        return;
-    }
-
-    public void deleteStudentByInstance(int ID,HttpServletResponse res){
-        try {
-            em.deleteByPrimaryKey(ID);
+            em.deleteByPrimaryKey(dk);
         } catch (DataIntegrityViolationException e){
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -136,10 +114,10 @@ public class StudentServiceImpl implements StudentService{
         return;
     }
 
-    private class StudentListJson{
+    private class DocumentListJson{
         int code;
         String msg;
         int count;
-        List<Student> data;
+        List<Document> data;
     }
 }

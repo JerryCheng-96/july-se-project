@@ -1,11 +1,10 @@
 package com.julyseproj.service;
 
-import com.julyseproj.entity.Engineer;
 import com.julyseproj.entity.Project;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
 
 public interface ProjectService {
     public List<Project> getAllProject();
