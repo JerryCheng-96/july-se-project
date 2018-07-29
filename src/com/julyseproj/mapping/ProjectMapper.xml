@@ -5,16 +5,22 @@
     <id column="project_id" jdbcType="INTEGER" property="projectId" />
     <result column="project_name" jdbcType="VARCHAR" property="projectName" />
     <result column="project_creator" jdbcType="INTEGER" property="projectCreator" />
+    <result column="project_approved" jdbcType="TINYINT" property="projectApproved" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.julyseproj.entity.Project">
     <result column="project_description" jdbcType="LONGVARCHAR" property="projectDescription" />
   </resultMap>
   <sql id="Base_Column_List">
-    project_id, project_name, project_creator
+    project_id, project_name, project_creator, project_approved
   </sql>
   <sql id="Blob_Column_List">
     project_description
   </sql>
+
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select * from project;
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
@@ -29,9 +35,11 @@
   </delete>
   <insert id="insert" parameterType="com.julyseproj.entity.Project">
     insert into project (project_id, project_name, project_creator, 
-      project_description)
+      project_approved, project_description
+      )
     values (#{projectId,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectCreator,jdbcType=INTEGER}, 
-      #{projectDescription,jdbcType=LONGVARCHAR})
+      #{projectApproved,jdbcType=TINYINT}, #{projectDescription,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.julyseproj.entity.Project">
     insert into project
@@ -44,6 +52,9 @@
       </if>
       <if test="projectCreator != null">
         project_creator,
+      </if>
+      <if test="projectApproved != null">
+        project_approved,
       </if>
       <if test="projectDescription != null">
         project_description,
@@ -59,6 +70,9 @@
       <if test="projectCreator != null">
         #{projectCreator,jdbcType=INTEGER},
       </if>
+      <if test="projectApproved != null">
+        #{projectApproved,jdbcType=TINYINT},
+      </if>
       <if test="projectDescription != null">
         #{projectDescription,jdbcType=LONGVARCHAR},
       </if>
@@ -73,6 +87,9 @@
       <if test="projectCreator != null">
         project_creator = #{projectCreator,jdbcType=INTEGER},
       </if>
+      <if test="projectApproved != null">
+        project_approved = #{projectApproved,jdbcType=TINYINT},
+      </if>
       <if test="projectDescription != null">
         project_description = #{projectDescription,jdbcType=LONGVARCHAR},
       </if>
@@ -83,13 +100,15 @@
     update project
     set project_name = #{projectName,jdbcType=VARCHAR},
       project_creator = #{projectCreator,jdbcType=INTEGER},
+      project_approved = #{projectApproved,jdbcType=TINYINT},
       project_description = #{projectDescription,jdbcType=LONGVARCHAR}
     where project_id = #{projectId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.julyseproj.entity.Project">
     update project
     set project_name = #{projectName,jdbcType=VARCHAR},
-      project_creator = #{projectCreator,jdbcType=INTEGER}
+      project_creator = #{projectCreator,jdbcType=INTEGER},
+      project_approved = #{projectApproved,jdbcType=TINYINT}
     where project_id = #{projectId,jdbcType=INTEGER}
   </update>
 </mapper>

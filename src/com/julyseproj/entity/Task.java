@@ -1,5 +1,7 @@
 package com.julyseproj.entity;
 
+import java.util.Date;
+
 public class Task {
     private Integer taskId;
 
@@ -8,6 +10,8 @@ public class Task {
     private String taskDescription;
 
     private Integer taskEngineer;
+
+    private Date taskTime;
 
     public Integer getTaskId() {
         return taskId;
@@ -39,5 +43,13 @@ public class Task {
 
     public void setTaskEngineer(Integer taskEngineer) {
         this.taskEngineer = taskEngineer;
+    }
+
+    public Date getTaskTime() {
+        return taskTime;
+    }
+
+    public void setTaskTime(Date taskTime) {
+        this.taskTime = taskTime;
     }
 }

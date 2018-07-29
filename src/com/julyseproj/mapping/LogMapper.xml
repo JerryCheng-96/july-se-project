@@ -5,12 +5,13 @@
     <id column="log_id" jdbcType="INTEGER" property="logId" />
     <result column="log_uploader" jdbcType="INTEGER" property="logUploader" />
     <result column="log_group" jdbcType="INTEGER" property="logGroup" />
+    <result column="log_time" jdbcType="TIMESTAMP" property="logTime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.julyseproj.entity.Log">
     <result column="log_content" jdbcType="LONGVARCHAR" property="logContent" />
   </resultMap>
   <sql id="Base_Column_List">
-    log_id, log_uploader, log_group
+    log_id, log_uploader, log_group, log_time
   </sql>
   <sql id="Blob_Column_List">
     log_content
@@ -29,9 +30,9 @@
   </delete>
   <insert id="insert" parameterType="com.julyseproj.entity.Log">
     insert into log (log_id, log_uploader, log_group, 
-      log_content)
+      log_time, log_content)
     values (#{logId,jdbcType=INTEGER}, #{logUploader,jdbcType=INTEGER}, #{logGroup,jdbcType=INTEGER}, 
-      #{logContent,jdbcType=LONGVARCHAR})
+      #{logTime,jdbcType=TIMESTAMP}, #{logContent,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.julyseproj.entity.Log">
     insert into log
@@ -44,6 +45,9 @@
       </if>
       <if test="logGroup != null">
         log_group,
+      </if>
+      <if test="logTime != null">
+        log_time,
       </if>
       <if test="logContent != null">
         log_content,
@@ -59,6 +63,9 @@
       <if test="logGroup != null">
         #{logGroup,jdbcType=INTEGER},
       </if>
+      <if test="logTime != null">
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="logContent != null">
         #{logContent,jdbcType=LONGVARCHAR},
       </if>
@@ -73,6 +80,9 @@
       <if test="logGroup != null">
         log_group = #{logGroup,jdbcType=INTEGER},
       </if>
+      <if test="logTime != null">
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="logContent != null">
         log_content = #{logContent,jdbcType=LONGVARCHAR},
       </if>
@@ -83,13 +93,15 @@
     update log
     set log_uploader = #{logUploader,jdbcType=INTEGER},
       log_group = #{logGroup,jdbcType=INTEGER},
+      log_time = #{logTime,jdbcType=TIMESTAMP},
       log_content = #{logContent,jdbcType=LONGVARCHAR}
     where log_id = #{logId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.julyseproj.entity.Log">
     update log
     set log_uploader = #{logUploader,jdbcType=INTEGER},
-      log_group = #{logGroup,jdbcType=INTEGER}
+      log_group = #{logGroup,jdbcType=INTEGER},
+      log_time = #{logTime,jdbcType=TIMESTAMP}
     where log_id = #{logId,jdbcType=INTEGER}
   </update>
 </mapper>
