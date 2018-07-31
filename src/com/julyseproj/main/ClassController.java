@@ -58,4 +58,14 @@ public class ClassController {
     public void deleteClassByIdHandler(int ID,HttpServletResponse res){
         es.deleteClassByInstance(ID,res);
     }
+
+    @RequestMapping(value = "/manage/class/update",method = RequestMethod.POST)
+    public void getByManagerHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
+        es.getByManagerJson(engineerID,req,res);
+    }
+
+    @RequestMapping(value = "/manage/class/update",method = RequestMethod.POST)
+    public void getByProgramHandler(int programID,HttpServletRequest req,HttpServletResponse res){
+        es.getByProgramJson(programID,req,res);
+    }
 }
