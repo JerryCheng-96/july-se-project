@@ -63,8 +63,7 @@ function table_engineer(theTable, update_table) {
             width: '90%',
             page: true, //开启分页
             cols: [[ //表头
-                {field: 'selected', title: '', width: 40, fixed: 'left', type: 'checkbox'}
-                , {field: 'engineerId', title: '工号', width: 100, sort: true, fixed: 'left'}
+                {field: 'engineerId', title: '工号', width: 100, sort: true, fixed: 'left'}
                 , {
                     field: 'engineerName',
                     title: '姓名',

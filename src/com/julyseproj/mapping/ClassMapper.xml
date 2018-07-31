@@ -14,6 +14,12 @@
   <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Class">
     select * from class;
   </select>
+  <select id="selectByManager" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from class where class_manager = #{engineerId,jdbcType=INTEGER};
+  </select>
+  <select id="selectByProgram" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from class where class_program = #{programId,jdbcType=INTEGER};
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
