@@ -10,6 +10,7 @@ import com.julyseproj.entity.Document;
 import com.julyseproj.service.DocumentService;
 import com.julyseproj.IDao.DocumentMapper;
 import com.julyseproj.utils.ListSorter;
+import com.julyseproj.utils.RequestExceptionResolver;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -78,6 +79,16 @@ public class DocumentServiceImpl implements DocumentService{
     }
 
     @Override
+    public Document getDocumentByInstance(DocumentKey dk){
+        return em.selectByPrimaryKey(dk);
+    }
+
+    @Override
+    public void updateDocumentByInstance(Document doc){
+        em.updateByPrimaryKey(doc);
+    }
+
+    @Override
     public void insertDocumentByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
@@ -100,6 +111,12 @@ public class DocumentServiceImpl implements DocumentService{
         return;
     }
 
+    @Override
+    public void insertDocumentByInstance(Document doc){
+        em.insert(doc);
+    }
+
+    @Override
     public void deleteDocumentByInstance(DocumentKey dk,HttpServletResponse res){
         try {
             em.deleteByPrimaryKey(dk);
@@ -112,6 +129,11 @@ public class DocumentServiceImpl implements DocumentService{
         }
         res.setStatus(200);
         return;
+    }
+
+    @Override
+    public void deleteDocumentByInstance(DocumentKey dk){
+        em.deleteByPrimaryKey(dk);
     }
 
     private class DocumentListJson{

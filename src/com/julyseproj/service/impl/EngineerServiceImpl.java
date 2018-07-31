@@ -9,6 +9,7 @@ import com.julyseproj.entity.Engineer;
 import com.julyseproj.service.EngineerService;
 import com.julyseproj.IDao.EngineerMapper;
 import com.julyseproj.utils.ListSorter;
+import com.julyseproj.utils.RequestExceptionResolver;
 
 import javax.annotation.Resource;
 import java.io.IOException;
@@ -78,7 +79,7 @@ public class EngineerServiceImpl implements EngineerService{
             res.getWriter().write(responseJson);
         }catch (Exception e){
             e.printStackTrace();
-            res.setStatus(500);
+            RequestExceptionResolver.handle(e,res);
         }
         return responseJson;
     }
@@ -94,7 +95,7 @@ public class EngineerServiceImpl implements EngineerService{
             res.getWriter().write(responseJson);
         }catch (Exception e){
             e.printStackTrace();
-            res.setStatus(500);
+            RequestExceptionResolver.handle(e,res);
             return "";
         }
         return responseJson;
@@ -109,15 +110,7 @@ public class EngineerServiceImpl implements EngineerService{
             em.insert(toInsert);
         }catch (Exception e) {
             e.printStackTrace();
-            if (e instanceof IOException){
-                res.setStatus(500);
-            }else if(e instanceof DuplicateKeyException){
-                res.setStatus(148);
-            }else if(e instanceof DataIntegrityViolationException){
-                res.setStatus(148);
-            }else {
-                res.setStatus(999);
-            }
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -133,15 +126,7 @@ public class EngineerServiceImpl implements EngineerService{
             em.updateByPrimaryKey(toUpdate);
         }catch (Exception e) {
             e.printStackTrace();
-            if (e instanceof IOException){
-                res.setStatus(500);
-            }else if(e instanceof DuplicateKeyException){
-                res.setStatus(148);
-            }else if(e instanceof DataIntegrityViolationException){
-                res.setStatus(148);
-            }else {
-                res.setStatus(999);
-            }
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -151,9 +136,9 @@ public class EngineerServiceImpl implements EngineerService{
     public void deleteEngineerByInstance(int ID,HttpServletResponse res){
         try {
             em.deleteByPrimaryKey(ID);
-        } catch (DataIntegrityViolationException e){
+        } catch (Exception e){
             e.printStackTrace();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);

@@ -23,15 +23,15 @@ public class EngineerController {
     @Resource(name = "engineerService")
     private EngineerService es;
 
-    @RequestMapping(value = "/engineer",method = RequestMethod.GET)
-    public ModelAndView getAll(){
-        ModelAndView mnv = new ModelAndView();
-        List<Engineer> allEngineers = es.getAllEngineer();
-        System.out.println(allEngineers.iterator().next().getEngineerName());
-        mnv.addObject("engineers",allEngineers);
-        mnv.setViewName("allEngineers");
-        return mnv;
-    }
+//    @RequestMapping(value = "/engineer",method = RequestMethod.GET)
+//    public ModelAndView getAll(){
+//        ModelAndView mnv = new ModelAndView();
+//        List<Engineer> allEngineers = es.getAllEngineer();
+//        System.out.println(allEngineers.iterator().next().getEngineerName());
+//        mnv.addObject("engineers",allEngineers);
+//        mnv.setViewName("allEngineers");
+//        return mnv;
+//    }
 
 
     @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)

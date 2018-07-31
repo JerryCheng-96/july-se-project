@@ -12,6 +12,10 @@ public interface DocumentService {
     public String getAllDocumentJson(HttpServletRequest req, HttpServletResponse res);
     //public String getAllDocumentJsonSortedByField(int page, int maxrow, String fieldName, boolean isAsc,HttpServletResponse res);
     public String getDocumentByInstance(DocumentKey dk, HttpServletResponse res);
+    public Document getDocumentByInstance(DocumentKey dk);
     public void insertDocumentByInstance(HttpServletRequest req,HttpServletResponse res);
+    public void insertDocumentByInstance(Document doc);
+    public void updateDocumentByInstance(Document doc);
     public void deleteDocumentByInstance(DocumentKey dk,HttpServletResponse res);
+    public void deleteDocumentByInstance(DocumentKey dk);
 }
