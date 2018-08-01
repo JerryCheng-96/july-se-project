@@ -51,7 +51,7 @@ public class ProjectController {
     }
 
     @RequestMapping(value = "/manage/project/update",method = RequestMethod.POST)
-    public void updateEngineerByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
+    public void updateProjectByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateProjectByInstance(req,res);
     }
 
@@ -60,7 +60,7 @@ public class ProjectController {
         es.deleteProjectByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/class/getbycreator",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/engineer/project",method = RequestMethod.POST)
     public void getByCreatorHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
         es.getByCreatorJson(engineerID,req,res);
     }
