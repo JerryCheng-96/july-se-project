@@ -56,7 +56,7 @@ public class ProgramController {
     }
 
     @RequestMapping(value = "/manage/engineer/program",method = RequestMethod.POST)
-    public void getByCreatorHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
+    public void getByAuthorHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
         es.getByAuthorJson(engineerID,req,res);
     }
 }
