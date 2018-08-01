@@ -13,4 +13,6 @@ public interface StudentService {
     public void updateStudentByInstance(HttpServletRequest req,HttpServletResponse res);
     public void insertStudentByInstance(HttpServletRequest req,HttpServletResponse res);
     public void deleteStudentByInstance(int ID,HttpServletResponse res);
+    public void getStudentByClass(Integer classID, HttpServletRequest req, HttpServletResponse res);
+    public void getStudentByGroup(Integer groupID, HttpServletRequest req, HttpServletResponse res);
 }
