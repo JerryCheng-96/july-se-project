@@ -59,4 +59,9 @@ public class ProjectController {
     public void deleteProjectByIdHandler(int ID,HttpServletResponse res){
         es.deleteProjectByInstance(ID,res);
     }
+
+    @RequestMapping(value = "/manage/class/update",method = RequestMethod.POST)
+    public void getByCreatorHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
+        es.getByCreatorJson(engineerID,req,res);
+    }
 }

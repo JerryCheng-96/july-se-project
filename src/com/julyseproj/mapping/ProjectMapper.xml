@@ -22,6 +22,10 @@
     select * from project;
   </select>
 
+  <select id="selectByCreator" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from project where project_creator = #{engineerId,jdbcType=INTEGER};
+  </select>
+
   <select id="setApprovedByID">
     update project
     <set>

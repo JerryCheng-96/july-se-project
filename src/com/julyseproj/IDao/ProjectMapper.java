@@ -9,6 +9,8 @@ public interface ProjectMapper {
 
     List<Project> selectAll();
 
+    List<Project> selectByCreator(Integer engineerId);
+
     void setApprovedByID(@Param("projectID")Integer projectID, @Param("projectApproved")Byte projectApproved);
 
     int deleteByPrimaryKey(Integer projectId);
