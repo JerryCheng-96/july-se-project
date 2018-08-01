@@ -74,14 +74,14 @@ public class ClassServiceImpl implements ClassService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Class> allClass = getByManager(engineerID);
+        List<Class> selectedClass = getByManager(engineerID);
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
-            ListSorter.sort(allClass, isAsc, fieldName);
+            ListSorter.sort(selectedClass, isAsc, fieldName);
         }
-        response.count = allClass.size();
-        response.data = allClass.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        response.count = selectedClass.size();
+        response.data = selectedClass.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
