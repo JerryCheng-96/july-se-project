@@ -10,11 +10,17 @@
   <sql id="Base_Column_List">
     program_id, program_name, program_description, program_author
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Program">
+    select * from program;
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from program
     where program_id = #{programId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByAuthor" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from program where program_author = #{engineerId,jdbcType=INTEGER};
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from program

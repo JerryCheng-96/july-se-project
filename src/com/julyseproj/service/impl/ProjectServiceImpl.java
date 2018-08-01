@@ -90,6 +90,41 @@ public class ProjectServiceImpl implements ProjectService{
     }
 
     @Override
+    public List<Project> getByCreator(int engineerID) {
+        return em.selectByCreator(engineerID);
+    }
+
+    @Override
+    public String getByCreatorJson(int engineerID, HttpServletRequest req,HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        ProjectListJson response = new ProjectListJson();
+        response.code=0;
+        response.msg="";
+
+        int page = new Integer(req.getParameter("page"));
+        int limit = new Integer(req.getParameter("limit"));
+        String fieldName = req.getParameter("field");
+
+        List<Project> selectedPeoject = getByCreator(engineerID);
+
+        if (fieldName!=null) {
+            boolean isAsc = new Boolean(req.getParameter("isAsc"));
+            ListSorter.sort(selectedPeoject, isAsc, fieldName);
+        }
+        response.count = selectedPeoject.size();
+        response.data = selectedPeoject.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return responseJson;
+    }
+
+    @Override
     public String getProjectByInstance(int ID,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
         Project response = em.selectByPrimaryKey(ID);

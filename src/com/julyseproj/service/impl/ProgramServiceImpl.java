@@ -5,9 +5,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Service;
-import com.julyseproj.entity.Class;
-import com.julyseproj.service.ClassService;
-import com.julyseproj.IDao.ClassMapper;
+import com.julyseproj.entity.Program;
+import com.julyseproj.service.ProgramService;
+import com.julyseproj.IDao.ProgramMapper;
 import com.julyseproj.utils.ListSorter;
 
 import javax.annotation.Resource;
@@ -18,20 +18,20 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
 
-@Service("classService")
-public class ClassServiceImpl implements ClassService{
+@Service("programService")
+public class ProgramServiceImpl implements ProgramService{
     @Resource
-    private ClassMapper em;
+    private ProgramMapper em;
 
     @Override
-    public List<Class> getAllClass() {
+    public List<Program> getAllProgram() {
         return em.selectAll();
     }
 
     @Override
-    public String getAllClassJson(HttpServletRequest req,HttpServletResponse res){
+    public String getAllProgramJson(HttpServletRequest req,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        ClassListJson response = new ClassListJson();
+        ProgramListJson response = new ProgramListJson();
         response.code=0;
         response.msg="";
 
@@ -39,14 +39,14 @@ public class ClassServiceImpl implements ClassService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Class> allClass = getAllClass();
+        List<Program> allProgram = getAllProgram();
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
-            ListSorter.sort(allClass, isAsc, fieldName);
+            ListSorter.sort(allProgram, isAsc, fieldName);
         }
-        response.count = allClass.size();
-        response.data = allClass.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        response.count = allProgram.size();
+        response.data = allProgram.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
@@ -59,14 +59,14 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public List<Class> getByManager(int engineerID) {
-        return em.selectByManager(engineerID);
+    public List<Program> getByAuthor(int engineerID) {
+        return em.selectByAuthor(engineerID);
     }
 
     @Override
-    public String getByManagerJson(int engineerID, HttpServletRequest req,HttpServletResponse res){
+    public String getByAuthorJson(int engineerID, HttpServletRequest req,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        ClassListJson response = new ClassListJson();
+        ProgramListJson response = new ProgramListJson();
         response.code=0;
         response.msg="";
 
@@ -74,14 +74,14 @@ public class ClassServiceImpl implements ClassService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Class> selectedClass = getByManager(engineerID);
+        List<Program> selectedProgram = getByAuthor(engineerID);
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
-            ListSorter.sort(selectedClass, isAsc, fieldName);
+            ListSorter.sort(selectedProgram, isAsc, fieldName);
         }
-        response.count = selectedClass.size();
-        response.data = selectedClass.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        response.count = selectedProgram.size();
+        response.data = selectedProgram.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
@@ -93,45 +93,11 @@ public class ClassServiceImpl implements ClassService{
         return responseJson;
     }
 
-    @Override
-    public List<Class> getByProgram(int programID) {
-        return em.selectByProgram(programID);
-    }
 
     @Override
-    public String getByProgramJson(int programID, HttpServletRequest req,HttpServletResponse res){
+    public String getProgramByInstance(int ID,HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
-        ClassListJson response = new ClassListJson();
-        response.code=0;
-        response.msg="";
-
-        int page = new Integer(req.getParameter("page"));
-        int limit = new Integer(req.getParameter("limit"));
-        String fieldName = req.getParameter("field");
-
-        List<Class> allClass = getByProgram(programID);
-
-        if (fieldName!=null) {
-            boolean isAsc = new Boolean(req.getParameter("isAsc"));
-            ListSorter.sort(allClass, isAsc, fieldName);
-        }
-        response.count = allClass.size();
-        response.data = allClass.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
-        Gson gson = new Gson();
-        String responseJson = gson.toJson(response);
-        System.out.println(responseJson);
-        try {
-            res.getWriter().write(responseJson);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-        return responseJson;
-    }
-
-    @Override
-    public String getClassByInstance(int ID,HttpServletResponse res){
-        res.setContentType("text/html;charset=UTF-8");
-        Class response = em.selectByPrimaryKey(ID);
+        Program response = em.selectByPrimaryKey(ID);
         Gson gson = new Gson();
         String responseJson = gson.toJson(response);
         System.out.println(responseJson);
@@ -147,11 +113,11 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public void insertClassByInstance(HttpServletRequest req, HttpServletResponse res) {
+    public void insertProgramByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
-            Class toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Class.class);
+            Program toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Program.class);
             em.insert(toInsert);
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -170,11 +136,11 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public void updateClassByInstance(HttpServletRequest req, HttpServletResponse res) {
+    public void updateProgramByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
-            Class toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Class.class);
+            Program toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Program.class);
             em.updateByPrimaryKey(toUpdate);
         }catch (IOException e){
             System.out.println(e.getMessage());
@@ -192,7 +158,7 @@ public class ClassServiceImpl implements ClassService{
         return;
     }
 
-    public void deleteClassByInstance(int ID,HttpServletResponse res){
+    public void deleteProgramByInstance(int ID,HttpServletResponse res){
         try {
             em.deleteByPrimaryKey(ID);
         } catch (DataIntegrityViolationException e){
@@ -206,10 +172,10 @@ public class ClassServiceImpl implements ClassService{
         return;
     }
 
-    private class ClassListJson{
+    private class ProgramListJson{
         int code;
         String msg;
         int count;
-        List<Class> data;
+        List<Program> data;
     }
 }
