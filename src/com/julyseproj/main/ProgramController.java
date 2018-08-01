@@ -28,6 +28,12 @@ public class ProgramController {
         es.getAllProgramJson(req,res);
     }
 
+    @RequestMapping(value = "/manage/program/moreData",method = RequestMethod.GET)
+    public void getAllProgramWithAuthorHandler(HttpServletRequest req ,HttpServletResponse res){
+        es.getAllProgramJsonWithAuthor(req,res);
+        return;
+    }
+
     /*
     public void getAllProgramHandler(int page, int limit, HttpServletResponse res){
         es.getAllProgramJson(page,limit,res);

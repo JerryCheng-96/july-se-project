@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface StudentService {
     public List<Student> getAllStudent();
     public String getAllStudentJson(HttpServletRequest req, HttpServletResponse res);
+    public String getAllStudentJsonWithName(HttpServletRequest req, HttpServletResponse res);
     public String getStudentByInstance(int ID,HttpServletResponse res);
     public void updateStudentByInstance(HttpServletRequest req,HttpServletResponse res);
     public void insertStudentByInstance(HttpServletRequest req,HttpServletResponse res);

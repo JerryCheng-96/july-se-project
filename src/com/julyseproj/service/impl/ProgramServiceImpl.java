@@ -1,5 +1,6 @@
 package com.julyseproj.service.impl;
 
+import com.julyseproj.entity.view.ProgramWithAuthor;
 import com.julyseproj.utils.RequestExceptionResolver;
 import com.mysql.jdbc.MysqlDataTruncation;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -41,6 +42,38 @@ public class ProgramServiceImpl implements ProgramService{
         String fieldName = req.getParameter("field");
 
         List<Program> allProgram = getAllProgram();
+
+        if (fieldName!=null) {
+            boolean isAsc = new Boolean(req.getParameter("isAsc"));
+            ListSorter.sort(allProgram, isAsc, fieldName);
+        }
+        response.count = allProgram.size();
+        response.data = allProgram.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
+        }
+        return responseJson;
+    }
+
+    @Override
+    public String getAllProgramJsonWithAuthor(HttpServletRequest req,HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        ProgramListJsonWithAuthor response = new ProgramListJsonWithAuthor();
+        response.code=0;
+        response.msg="";
+
+        int page = new Integer(req.getParameter("page"));
+        int limit = new Integer(req.getParameter("limit"));
+        String fieldName = req.getParameter("field");
+
+        List<ProgramWithAuthor> allProgram = em.selectAllWithAuthor();
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));
@@ -167,5 +200,12 @@ public class ProgramServiceImpl implements ProgramService{
         String msg;
         int count;
         List<Program> data;
+    }
+
+    private class ProgramListJsonWithAuthor{
+        int code;
+        String msg;
+        int count;
+        List<ProgramWithAuthor> data;
     }
 }

@@ -11,14 +11,31 @@
     <result column="student_class" jdbcType="INTEGER" property="studentClass" />
     <result column="student_group" jdbcType="INTEGER" property="studentGroup" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithName" type="com.julyseproj.entity.view.StudentWithName">
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+  </resultMap>
   <sql id="Base_Column_List">
     student_id, student_name, student_sex, student_grade, student_department, student_major, 
     student_class, student_group
   </sql>
 
-  <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Student">
+  <select id="selectAll" resultMap="BaseResultMap">
     select * from student;
   </select>
+
+  <select id="selectAllWithName" resultMap="ResultMapWithName">
+    select * from student;
+  </select>
+
+  <select id="selectClassNameById" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select class_name from class where class_id=#{classId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectGroupNameById" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select group_name from `group` where group_id=#{groupId,jdbcType=INTEGER}
+  </select>
+
 
   <select id="selectByClass" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select * from student where student_class

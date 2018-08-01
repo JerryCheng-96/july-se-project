@@ -7,12 +7,20 @@
     <result column="program_description" jdbcType="VARCHAR" property="programDescription" />
     <result column="program_author" jdbcType="INTEGER" property="programAuthor" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithAuthor" type="com.julyseproj.entity.view.ProgramWithAuthor">
+    <result column="engineer_name" jdbcType="VARCHAR" property="engineerName" />
+  </resultMap>
   <sql id="Base_Column_List">
     program_id, program_name, program_description, program_author
   </sql>
   <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Program">
     select * from program;
   </select>
+
+  <select id = "selectAllWithAuthor" resultMap="ResultMapWithAuthor">
+    select program_id, program_name, program_description, program_author,engineer_name from engineer,program where program_author=engineer_id
+  </select>
+
   <select id="selectMaxID" resultType="java.lang.Integer">
     select max(program_id) from program;
   </select>

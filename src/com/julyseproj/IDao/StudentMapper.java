@@ -1,12 +1,19 @@
 package com.julyseproj.IDao;
 
 import com.julyseproj.entity.Student;
+import com.julyseproj.entity.view.StudentWithName;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface StudentMapper {
     List<Student> selectAll();
+
+    List<StudentWithName> selectAllWithName();
+
+    String selectClassNameById(Integer classId);
+
+    String selectGroupNameById(Integer groupId);
 
     List<Student>selectByClass(Integer classId);
 

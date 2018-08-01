@@ -29,6 +29,12 @@ public class StudentController {
         return;
     }
 
+    @RequestMapping(value = "/manage/student/moreData",method = RequestMethod.GET)
+    public void getAllStudentWithNameHandler(HttpServletRequest req ,HttpServletResponse res){
+        es.getAllStudentJsonWithName(req,res);
+        return;
+    }
+
     @RequestMapping(value = "/manage/student/getOne",method = RequestMethod.GET)
     public void getStudentByIdHandler(int ID,HttpServletResponse res){
         es.getStudentByInstance(ID,res);
