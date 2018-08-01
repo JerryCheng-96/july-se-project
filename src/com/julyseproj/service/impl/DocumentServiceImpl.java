@@ -61,6 +61,76 @@ public class DocumentServiceImpl implements DocumentService{
     }
 
     @Override
+    public List<Document> getByUploader(int studentID) {
+        return em.selectByUploader(studentID);
+    }
+
+    @Override
+    public String getByUploaderJson(int studentID, HttpServletRequest req,HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        DocumentListJson response = new DocumentListJson();
+        response.code=0;
+        response.msg="";
+
+        int page = new Integer(req.getParameter("page"));
+        int limit = new Integer(req.getParameter("limit"));
+        String fieldName = req.getParameter("field");
+
+        List<Document> selectedDocument = getByUploader(studentID);
+
+        if (fieldName!=null) {
+            boolean isAsc = new Boolean(req.getParameter("isAsc"));
+            ListSorter.sort(selectedDocument, isAsc, fieldName);
+        }
+        response.count = selectedDocument.size();
+        response.data = selectedDocument.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return responseJson;
+    }
+
+    @Override
+    public List<Document> getByGroup(int groupID) {
+        return em.selectByGroup(groupID);
+    }
+
+    @Override
+    public String getByGroupJson(int groupID, HttpServletRequest req,HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        DocumentListJson response = new DocumentListJson();
+        response.code=0;
+        response.msg="";
+
+        int page = new Integer(req.getParameter("page"));
+        int limit = new Integer(req.getParameter("limit"));
+        String fieldName = req.getParameter("field");
+
+        List<Document> selectedDocument = getByGroup(groupID);
+
+        if (fieldName!=null) {
+            boolean isAsc = new Boolean(req.getParameter("isAsc"));
+            ListSorter.sort(selectedDocument, isAsc, fieldName);
+        }
+        response.count = selectedDocument.size();
+        response.data = selectedDocument.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return responseJson;
+    }
+
+    @Override
     public String getDocumentByInstance(DocumentKey dk, HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
         Document response = em.selectByPrimaryKey(dk);

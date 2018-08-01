@@ -23,7 +23,7 @@ public class ProjectController {
     @Resource(name = "projectService")
     private ProjectService es;
 
-    @RequestMapping(value = "/manage/project/data",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/project/data",method = RequestMethod.POST)
     public void getAllProjectHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllProjectJson(req,res);
     }
@@ -45,12 +45,12 @@ public class ProjectController {
         es.getProjectByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/project/new",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/project/new",method = RequestMethod.GET)
     public void insertProjectByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertProjectByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/project/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/project/update",method = RequestMethod.GET)
     public void updateProjectByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateProjectByInstance(req,res);
     }

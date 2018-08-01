@@ -33,7 +33,7 @@ public class ClassController {
         return mnv;
     }
 
-    @RequestMapping(value = "/manage/class/data",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/class/data",method = RequestMethod.POST)
     public void getAllClassHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllClassJson(req,res);
         return;
@@ -44,12 +44,12 @@ public class ClassController {
         es.getClassByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/class/new",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/class/new",method = RequestMethod.GET)
     public void insertClassByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertClassByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/class/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/class/update",method = RequestMethod.GET)
     public void updateClassByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateClassByInstance(req,res);
     }

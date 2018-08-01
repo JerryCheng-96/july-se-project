@@ -23,7 +23,7 @@ public class ProgramController {
     @Resource(name = "programService")
     private ProgramService es;
 
-    @RequestMapping(value = "/manage/program/data",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/program/data",method = RequestMethod.POST)
     public void getAllProgramHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllProgramJson(req,res);
     }
@@ -40,12 +40,12 @@ public class ProgramController {
         es.getProgramByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/program/new",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/program/new",method = RequestMethod.GET)
     public void insertProgramByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertProgramByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/program/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/program/update",method = RequestMethod.GET)
     public void updateProgramByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateProgramByInstance(req,res);
     }
