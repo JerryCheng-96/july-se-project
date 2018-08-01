@@ -91,7 +91,7 @@
                 HttpGet('/manage/project/approve?ID=' + theProjId, function () {
                     document.getElementById('projectApproved').setAttribute('class', document.getElementById('projectApproved').getAttribute('class') + ' layui-btn-disabled');
                     document.getElementById('projectApproved').innerHTML = '审批已通过';
-                    layer.alert('项目审批已经通过。');
+                    layer.close(index);
                 });
             })
         });
@@ -134,6 +134,7 @@
     }
 
     refresh();
+
 </script>
 
 </body>

@@ -76,8 +76,7 @@
 
                 console.log((theJson));
                 HttpPost("/manage/project/update", theJson, function () {
-                    history.go(-1);
-                    ;
+                    window.location.href = '/dashboard/project?id=' + theJson.projectId;
                 }, function () {
                    ;
                 });
@@ -85,8 +84,7 @@
             else {
                 console.log((theJson));
                 HttpPost("/manage/project/new", theJson, function () {
-                    history.go(-1);
-                    ;
+                    window.location.href = '/manage/project';
                 }, function () {
                     ;
                 });
