@@ -31,39 +31,20 @@
 </div>
 <script src="/res/layui/layui.js"></script>
 <script>
-    layui.use('element', function () {
+    layui.use(['table', 'element'], function () {
         var element = layui.element;
-        //一些事件监听
+        var table = layui.table;
+
         element.on('tab(demo)', function (data) {
             console.log(data);
         });
-    });
 
-    layui.use('table', function () {
-        var table = layui.table;
-
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            //,url: '/demo/table/user/' //数据接口
-            , width: '90%'
-            , page: true //开启分页
-            , cols: [[ //表头
-                {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
-                , {
-                    field: 'username',
-                    title: '班名',
-                    width: 200,
-                    templet: '<div><a href="/dashboard/class" class="layui-table-link">{{d.username}}</a></div>'
-                }
-                , {field: 'engineer', title: '工程师', width: 200, sort: true}
-            ]]
-            , data: [{'id': '1', 'username': 'A210', 'engineer': 'Gong'},
-                {'id': '2', 'username': 'A211', 'engineer': 'Liu'}]
-
-        });
+        table_class(table, function () {
+            ;
+        }, '/manage/class/data');
 
     });
+
 </script>
 
 </body>

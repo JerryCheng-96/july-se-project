@@ -81,7 +81,6 @@
         });
     });
 
-
     var theProjId = getQueryVariable('id');
 
     function approveProj() {
