@@ -5,6 +5,13 @@ function show_popup_layer_engineer(engineerId) {
         }, undefined);
 }
 
+function show_popup_student(studentId) {
+    HttpGetResponse('/manage/student/getOne?ID=' + studentId,
+        function (response) {
+            popup_student(JSON.parse(response));
+        }, undefined);
+}
+
 function show_popup_layer_engineer_edit(engineerId, whenDone) {
     HttpGetResponse('/manage/engineer/getOne?ID=' + engineerId,
         function (response) {
@@ -163,7 +170,56 @@ function popup_layer_engineer_edit(theEngineer, whenDone) {
     });
 }
 
-
-function POSTJson (theObj) {
-
+function popup_student(theStudent) {
+    console.log(theStudent);
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.open({
+            type: 1,
+            title: '人员信息',
+            content: "" +
+                '<div style="width: 90%">' +
+                '<table border="0" style="margin:3%">' +
+                '<tr>' +
+                '<td>' +
+                '<img src="/res/icon/5.png" style="width:80px;height:80px;border-radius:80px;margin:10px;">' +
+                '</td>' +
+                '<td colspan=2><span style="font-size:30px; margin-left:10px;">' + theStudent.studentName + '</span></td>' +
+                '</tr>' +
+                '<tr">' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>性别</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentSex + '</span></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>学号</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentId + '</span></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>年级</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentGrade + '</span></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>学院</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">'+ theStudent.studentDepartment +'</span></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>专业</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentMajor + '</span></td>' +
+                '</tr>' +
+                '<tr/>' +
+                '</table>' +
+                '<br/>' +
+                '' +
+                '' +
+                '' +
+                "</div>",
+            area: '400px'
+        });
+    });
 }
+

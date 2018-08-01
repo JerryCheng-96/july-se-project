@@ -55,6 +55,26 @@ function table_group() {
     })
 }
 
+function table_student(theTable, update_table) {
+    theTable.render({
+            elem: '#tableStudent'
+            ,url: '/manage/student/data'
+            , width: '90%'
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'studentId', title: 'ID', width: 100, sort: true, fixed: 'left'}
+                , {field: 'studentName', title: '姓名', width: 120, sort: true
+                    , templet: '<div><a href="javascript:show_popup_student({{d.studentId}})" class="layui-table-link">{{d.studentName}}</a></div>'
+                }
+                , {field: 'studentSex', title: '性别', width: 80, sort: true}
+                , {field: 'studentDepartment', title: '学院', width: 150, sort: true}
+                , {field: 'studentMajor', title: '专业', width: 150, sort: true}
+                , {field: 'studentGrade', title: '年级', width: 150, sort: true}
+                , {field: 'studentClass', title: '班级', width: 150, sort: true, templet: '' }
+            ]]
+        });
+}
+
 function table_engineer(theTable, update_table) {
         //第一个实例
         theTable.render({
