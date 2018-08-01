@@ -54,10 +54,11 @@
         });
 
         var theProjId = getQueryVariable('id');
+        var theJson = {};
 
         if (theProjId != false) {
             HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {
-                var theJson = JSON.parse(response);
+                theJson = JSON.parse(response);
                 console.log(theJson);
                 document.getElementById('projectName').setAttribute('value', theJson.projectName);
                 document.getElementById('projectDescription').innerText = theJson.projectDescription;
@@ -68,19 +69,25 @@
 
         var form = layui.form;
         form.on('submit(formDemo)', function (data) {
-            var theData = data.field;
-
             if (theProjId != false) {
-                theData.projectApproved = 0;
-                theData.projectId = theProjId;
+                theJson.projectApproved = 0;
+                theJson.projectName = data.field.projectName;
+                theJson.projectDescription = data.field.projectDescription;
 
-                layer.msg(JSON.stringify(theData));
-                HttpPost("/manage/project/update", JSON.stringify(theData), function () {
+                console.log((theJson));
+                HttpPost("/manage/project/update", theJson, function () {
                     history.go(-1);
+                    ;
+                }, function () {
+                   ;
                 });
             }
             else {
-                HttpPost("/manage/project/new", JSON.stringify(theData), function () {
+                console.log((theJson));
+                HttpPost("/manage/project/new", theJson, function () {
+                    history.go(-1);
+                    ;
+                }, function () {
                     ;
                 });
             }

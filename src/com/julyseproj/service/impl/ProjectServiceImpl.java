@@ -162,6 +162,7 @@ public class ProjectServiceImpl implements ProjectService{
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
+            System.out.println("UPDATING - " + new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"));
             Project toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Project.class);
             em.updateByPrimaryKey(toUpdate);
         }catch (Exception e) {
