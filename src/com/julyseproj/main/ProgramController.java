@@ -40,12 +40,12 @@ public class ProgramController {
         es.getProgramByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/program/new",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/program/new",method = RequestMethod.POST)
     public void insertProgramByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertProgramByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/program/update",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/program/update",method = RequestMethod.POST)
     public void updateProgramByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateProgramByInstance(req,res);
     }
@@ -55,7 +55,7 @@ public class ProgramController {
         es.deleteProgramByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/engineer/program",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/engineer/getProgram",method = RequestMethod.GET)
     public void getByAuthorHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
         es.getByAuthorJson(engineerID,req,res);
     }
