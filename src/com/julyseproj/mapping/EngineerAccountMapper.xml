@@ -5,10 +5,17 @@
     <id column="account_e_id" jdbcType="INTEGER" property="accountEId" />
     <result column="account_e_password" jdbcType="INTEGER" property="accountEPassword" />
     <result column="account_e_owner" jdbcType="INTEGER" property="accountEOwner" />
+    <result column="account_e_session" jdbcType="VARCHAR" property="accountESession" />
   </resultMap>
   <sql id="Base_Column_List">
-    account_e_id, account_e_password, account_e_owner
+    account_e_id, account_e_password, account_e_owner, account_e_session
   </sql>
+  <select id="selectByOwner" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from account_engineer
+    where account_e_owner = #{engineerId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -20,10 +27,10 @@
     where account_e_id = #{accountEId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.julyseproj.entity.EngineerAccount">
-    insert into account_engineer (account_e_id, account_e_password, account_e_owner
-      )
-    values (#{accountEId,jdbcType=INTEGER}, #{accountEPassword,jdbcType=INTEGER}, #{accountEOwner,jdbcType=INTEGER}
-      )
+    insert into account_engineer (account_e_id, account_e_password, account_e_owner, 
+      account_e_session)
+    values (#{accountEId,jdbcType=INTEGER}, #{accountEPassword,jdbcType=INTEGER}, #{accountEOwner,jdbcType=INTEGER}, 
+      #{accountESession,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.julyseproj.entity.EngineerAccount">
     insert into account_engineer
@@ -37,6 +44,9 @@
       <if test="accountEOwner != null">
         account_e_owner,
       </if>
+      <if test="accountESession != null">
+        account_e_session,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="accountEId != null">
@@ -47,6 +57,9 @@
       </if>
       <if test="accountEOwner != null">
         #{accountEOwner,jdbcType=INTEGER},
+      </if>
+      <if test="accountESession != null">
+        #{accountESession,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -59,13 +72,17 @@
       <if test="accountEOwner != null">
         account_e_owner = #{accountEOwner,jdbcType=INTEGER},
       </if>
+      <if test="accountESession != null">
+        account_e_session = #{accountESession,jdbcType=VARCHAR},
+      </if>
     </set>
     where account_e_id = #{accountEId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.julyseproj.entity.EngineerAccount">
     update account_engineer
     set account_e_password = #{accountEPassword,jdbcType=INTEGER},
-      account_e_owner = #{accountEOwner,jdbcType=INTEGER}
+      account_e_owner = #{accountEOwner,jdbcType=INTEGER},
+      account_e_session = #{accountESession,jdbcType=VARCHAR}
     where account_e_id = #{accountEId,jdbcType=INTEGER}
   </update>
 </mapper>
