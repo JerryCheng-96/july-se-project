@@ -51,12 +51,11 @@
             console.log(data);
         });
 
-        var theProjId = getQueryVariable('id');
-        var theJson = {};
+                var theProjId = getQueryVariable('id');
 
         if (theProjId != false) {
             HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {
-                theJson = JSON.parse(response);
+                var theJson = JSON.parse(response);
                 console.log(theJson);
                 document.getElementById('projectName').setAttribute('value', theJson.projectName);
                 document.getElementById('projectDescription').innerText =  theJson.projectDescription;
@@ -66,23 +65,20 @@
         }
 
         var form = layui.form;
-        form.on('submit(formDemo)', function (data) {
-            theJson.projectApproved = 0;
-            theJson.projectName = data.field.projectName;
-            theJson.projectDescription = data.field.projectDescription;
+        form.on('submit(formDemo)', function(data){
+            var theData = data.field;
 
             if (theProjId != false) {
-                console.log(JSON.stringify(theJson));
-                HttpPost("/manage/project/update", JSON.stringify(theJson), function () {
+                theData.projectApproved = 0;
+                theData.projectId = theProjId;
+
+                layer.msg(JSON.stringify(theData));
+                HttpPost("/manage/project/update", JSON.stringify(theData), function () {
                     history.go(-1);
                 });
             }
             else {
-                theJson.projectCreator = 100001;
-                theJson.projectId = -1;
-
-                console.log(JSON.stringify(theJson));
-                HttpPost("/manage/project/new", JSON.stringify(theJson), function () {
+                HttpPost("/manage/project/new", JSON.stringify(theData), function () {
                     ;
                 });
             }

@@ -34,7 +34,7 @@ public class EngineerController {
 //    }
 
 
-    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.POST)
     public void getAllEngineerHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllEngineerJson(req,res);
     }
