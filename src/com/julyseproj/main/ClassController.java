@@ -59,12 +59,12 @@ public class ClassController {
         es.deleteClassByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/class/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/class/getbymanager",method = RequestMethod.POST)
     public void getByManagerHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
         es.getByManagerJson(engineerID,req,res);
     }
 
-    @RequestMapping(value = "/manage/class/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/class/getbyprogram",method = RequestMethod.POST)
     public void getByProgramHandler(int programID,HttpServletRequest req,HttpServletResponse res){
         es.getByProgramJson(programID,req,res);
     }

@@ -60,7 +60,7 @@ public class ProjectController {
         es.deleteProjectByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/class/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/class/getbycreator",method = RequestMethod.POST)
     public void getByCreatorHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
         es.getByCreatorJson(engineerID,req,res);
     }
