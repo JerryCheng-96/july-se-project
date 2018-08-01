@@ -8,6 +8,10 @@ import java.util.List;
 public interface DocumentMapper {
     List<Document> selectAll();
 
+    List<Document> selectByUploader(Integer studentID);
+
+    List<Document> selectByGroup(Integer groupID);
+
     int deleteByPrimaryKey(DocumentKey key);
 
     int insert(Document record);

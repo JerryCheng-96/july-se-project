@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 public interface DocumentService {
     public List<Document> getAllDocument();
     public String getAllDocumentJson(HttpServletRequest req, HttpServletResponse res);
+    public List<Document> getByUploader(int studentID);
+    public String getByUploaderJson(int studentID, HttpServletRequest req, HttpServletResponse res);
+    public List<Document> getByGroup(int groupID);
+    public String getByGroupJson(int groupID, HttpServletRequest req, HttpServletResponse res);
     //public String getAllDocumentJsonSortedByField(int page, int maxrow, String fieldName, boolean isAsc,HttpServletResponse res);
     public String getDocumentByInstance(DocumentKey dk, HttpServletResponse res);
     public Document getDocumentByInstance(DocumentKey dk);

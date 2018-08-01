@@ -33,7 +33,7 @@ public class StudentController {
         return mnv;
     }
 
-    @RequestMapping(value = "/manage/student/data",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/student/data",method = RequestMethod.POST)
     public void getAllStudentHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllStudentJson(req,res);
         return;
@@ -44,12 +44,12 @@ public class StudentController {
         es.getStudentByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/student/new",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/student/new",method = RequestMethod.GET)
     public void insertStudentByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertStudentByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/student/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/student/update",method = RequestMethod.GET)
     public void updateStudentByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateStudentByInstance(req,res);
     }

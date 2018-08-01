@@ -47,6 +47,16 @@ public class DocumentController {
         return;
     }
 
+    @RequestMapping(value = "/manage/student/document",method = RequestMethod.POST)
+    public void getByUploaderHandler(int studentID,HttpServletRequest req,HttpServletResponse res){
+        es.getByUploaderJson(studentID,req,res);
+    }
+
+    @RequestMapping(value = "/manage/group/document",method = RequestMethod.POST)
+    public void getByGroupHandler(int groupID,HttpServletRequest req,HttpServletResponse res){
+        es.getByGroupJson(groupID,req,res);
+    }
+
     @RequestMapping(value = "/manage/document/getOne",method = RequestMethod.GET)
     public void getDocumentByIdHandler(String docName, String docUrl, HttpServletResponse res){
         DocumentKey dk = new DocumentKey();

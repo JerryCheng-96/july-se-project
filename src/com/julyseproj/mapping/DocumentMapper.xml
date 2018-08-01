@@ -14,6 +14,12 @@
   <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Document">
     select * from document;
   </select>
+  <select id="selectByUploader" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from document where document_uploader = #{studentId,jdbcType=INTEGER};
+  </select>
+  <select id="selectByGroup" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from document where document_group = #{groupId,jdbcType=INTEGER};
+  </select>
   <select id="selectByPrimaryKey" parameterType="com.julyseproj.entity.DocumentKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
