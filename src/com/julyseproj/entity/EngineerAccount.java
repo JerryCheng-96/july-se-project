@@ -7,6 +7,8 @@ public class EngineerAccount {
 
     private Integer accountEOwner;
 
+    private String accountESession;
+
     public Integer getAccountEId() {
         return accountEId;
     }
@@ -29,5 +31,13 @@ public class EngineerAccount {
 
     public void setAccountEOwner(Integer accountEOwner) {
         this.accountEOwner = accountEOwner;
+    }
+
+    public String getAccountESession() {
+        return accountESession;
+    }
+
+    public void setAccountESession(String accountESession) {
+        this.accountESession = accountESession == null ? null : accountESession.trim();
     }
 }
