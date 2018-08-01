@@ -26,6 +26,10 @@
     select * from project where project_creator = #{engineerId,jdbcType=INTEGER};
   </select>
 
+  <select id="selectMaxID" resultType="java.lang.Integer">
+    select max(project_id) from project;
+  </select>
+
   <select id="setApprovedByID">
     update project
     <set>

@@ -6,6 +6,10 @@ import java.util.List;
 public interface StudentMapper {
     List<Student> selectAll();
 
+    List<Student>selectByClass(Integer classId);
+
+    List<Student>selectByGroup(Integer groupId);
+
     int deleteByPrimaryKey(Integer studentId);
 
     int insert(Student record);

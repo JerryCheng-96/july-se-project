@@ -23,17 +23,7 @@ public class StudentController {
     @Resource(name = "studentService")
     private StudentService es;
 
-    @RequestMapping(value = "/student",method = RequestMethod.GET)
-    public ModelAndView getAll(){
-        ModelAndView mnv = new ModelAndView();
-        List<Student> allStudents = es.getAllStudent();
-        System.out.println(allStudents.iterator().next().getStudentName());
-        mnv.addObject("students",allStudents);
-        mnv.setViewName("allStudents");
-        return mnv;
-    }
-
-    @RequestMapping(value = "/manage/student/data",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/student/data",method = RequestMethod.GET)
     public void getAllStudentHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllStudentJson(req,res);
         return;
@@ -57,5 +47,15 @@ public class StudentController {
     @RequestMapping(value = "/manage/student/delete",method = RequestMethod.GET)
     public void deleteStudentByIdHandler(int ID,HttpServletResponse res){
         es.deleteStudentByInstance(ID,res);
+    }
+
+    @RequestMapping(value = "/manage/class/getStudent",method = RequestMethod.GET)
+    public void getStudentByClassHandler(Integer classID,HttpServletRequest req,HttpServletResponse res){
+        es.getStudentByClass(classID, req, res);
+    }
+
+    @RequestMapping(value = "/manage/group/getStudent",method = RequestMethod.GET)
+    public void getStudentByGroupHandler(Integer groupID,HttpServletRequest req,HttpServletResponse res){
+        es.getStudentByClass(groupID, req, res);
     }
 }

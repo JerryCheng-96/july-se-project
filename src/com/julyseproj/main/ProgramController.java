@@ -23,7 +23,7 @@ public class ProgramController {
     @Resource(name = "programService")
     private ProgramService es;
 
-    @RequestMapping(value = "/manage/program/data",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/program/data",method = RequestMethod.GET)
     public void getAllProgramHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllProgramJson(req,res);
     }
