@@ -26,14 +26,16 @@
 
                 <div class="layui-form-item">
                     <div class="layui-input-block" style="margin-left: 3%;">
-                        <input type="text" id="projectName" name="projectName" required lay-verify="required" placeholder="项目标题"
+                        <input type="text" id="projectName" name="projectName" required lay-verify="required"
+                               placeholder="项目标题"
                                autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item layui-form-text">
                     <div class="layui-input-block" style="margin-left: 3%;">
-                        <textarea id="projectDescription" name="projectDescription" placeholder="项目描述" class="layui-textarea"></textarea>
+                        <textarea id="projectDescription" name="projectDescription" placeholder="项目描述"
+                                  class="layui-textarea"></textarea>
                     </div>
                 </div>
             </form>
@@ -51,21 +53,21 @@
             console.log(data);
         });
 
-                var theProjId = getQueryVariable('id');
+        var theProjId = getQueryVariable('id');
 
         if (theProjId != false) {
             HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {
                 var theJson = JSON.parse(response);
                 console.log(theJson);
                 document.getElementById('projectName').setAttribute('value', theJson.projectName);
-                document.getElementById('projectDescription').innerText =  theJson.projectDescription;
+                document.getElementById('projectDescription').innerText = theJson.projectDescription;
             }, function () {
                 ;
             });
         }
 
         var form = layui.form;
-        form.on('submit(formDemo)', function(data){
+        form.on('submit(formDemo)', function (data) {
             var theData = data.field;
 
             if (theProjId != false) {
@@ -85,9 +87,9 @@
 
             return false;
         });
-
-
     });
+
+
 
 </script>
 
