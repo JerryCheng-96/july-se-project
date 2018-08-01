@@ -149,12 +149,12 @@ function popup_layer_engineer_edit(theEngineer, whenDone) {
         form.on('submit(formDemo)', function (data) {
             var result = '';
             if (buttonText == '更改') {
-                HttpPost('/manage/engineer/update', data, whenDone, function (msg) {
+                HttpPost('/manage/engineer/update', data.field, whenDone, function (msg) {
                     layer.alert(msg);
                 });
             }
             else  {
-                HttpPost('/manage/engineer/new', data, whenDone, function (msg) {
+                HttpPost('/manage/engineer/new', data.field, whenDone, function (msg) {
                     layer.alert(msg);
                 });
             }

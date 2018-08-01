@@ -45,12 +45,12 @@ public class ProjectController {
         es.getProjectByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/project/new",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/project/new",method = RequestMethod.POST)
     public void insertProjectByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertProjectByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/project/update",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/project/update",method = RequestMethod.POST)
     public void updateProjectByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateProjectByInstance(req,res);
     }

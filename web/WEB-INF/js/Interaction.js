@@ -25,9 +25,9 @@ function HttpPost(url, data, whenDone, whenErr) {
             }
         }
     };
-    xhr.send((JSON.stringify(data.field)));
-    console.log((JSON.stringify(data.field)));
-    console.log(encodeURI(JSON.stringify(data.field)));
+    xhr.send(JSON.stringify(data));
+    console.log(data);
+    console.log(encodeURI(JSON.stringify(data)));
 }
 
 function HttpGet(url, whenDone, whenErr) {

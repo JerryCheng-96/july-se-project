@@ -34,7 +34,7 @@
                             <div class="layui-btn-group">
                                 <a href="javascript:approveProj();" id="projectApproved" class="layui-btn layui-btn-normal">审批通过项目</a>
                                 <a id="editBtn" class="layui-btn">编辑</a>
-                                <button class="layui-btn layui-btn-danger">删除</button>
+                                <a href="javascript:deleteProj();" class="layui-btn layui-btn-danger">删除</a>
                             </div>
                         </td>
                     </tr>
@@ -93,6 +93,20 @@
                     layer.alert('项目审批已经通过。');
                 });
             })
+        });
+    }
+
+    function deleteProj() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            console.log('/manage/project/delete?ID=' + theProjId);
+            layer.confirm('真的要删除该项目吗？', function (index) {
+                HttpGet('/manage/project/delete?ID=' + theProjId, function () {
+                    history.go(-1);
+                }, function (msg) {
+                    layer.alert(msg);
+                });
+            });
         });
     }
 
