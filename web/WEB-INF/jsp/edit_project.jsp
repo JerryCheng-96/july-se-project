@@ -26,55 +26,68 @@
 
                 <div class="layui-form-item">
                     <div class="layui-input-block" style="margin-left: 3%;">
-                        <input type="text" name="title" required lay-verify="required" placeholder="项目标题"
+                        <input type="text" id="projectName" name="projectName" required lay-verify="required" placeholder="项目标题"
                                autocomplete="off" class="layui-input">
                     </div>
                 </div>
 
                 <div class="layui-form-item layui-form-text">
                     <div class="layui-input-block" style="margin-left: 3%;">
-                        <textarea name="desc" placeholder="项目描述" class="layui-textarea"></textarea>
+                        <textarea id="projectDescription" name="projectDescription" placeholder="项目描述" class="layui-textarea"></textarea>
                     </div>
                 </div>
-
             </form>
         </div>
-
     </div>
 
 </div>
 <script src="/res/layui/layui.js"></script>
+<script src="/js/Interaction.js"></script>
 <script>
-    layui.use('element', function () {
+    layui.use(['element', 'form'], function () {
         var element = layui.element;
         //一些事件监听
         element.on('tab(demo)', function (data) {
             console.log(data);
         });
-    });
 
-    layui.use('form', function(){
+                var theProjId = getQueryVariable('id');
+
+        if (theProjId != false) {
+            HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {
+                var theJson = JSON.parse(response);
+                console.log(theJson);
+                document.getElementById('projectName').setAttribute('value', theJson.projectName);
+                document.getElementById('projectDescription').innerText =  theJson.projectDescription;
+            }, function () {
+                ;
+            });
+        }
+
         var form = layui.form;
-
-        //监听提交
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+            var theData = data.field;
+
+            if (theProjId != false) {
+                theData.projectApproved = 0;
+                theData.projectId = theProjId;
+
+                layer.msg(JSON.stringify(theData));
+                HttpPost("/manage/project/update", JSON.stringify(theData), function () {
+                    history.go(-1);
+                });
+            }
+            else {
+                HttpPost("/manage/project/new", JSON.stringify(theData), function () {
+                    ;
+                });
+            }
+
             return false;
         });
-    });
 
-    var cardHtml = '';
-    for (var i = 0; i < 2; i++) {
-        if (i == 0) {
-            cardHtml += '<div class="layui-row" style="padding: 10px;">'
-        }
-        if (i > 0) {
-            cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
-        }
-        cardHtml += '<div class="layui-card"> <div class="layui-card-header"><b>卡片面板</b></div> <div class="layui-card-body"> 卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 </div> </div>';
-    }
-    cardHtml += '</div>'
-    document.getElementById('theCards').innerHTML = cardHtml;
+
+    });
 
 </script>
 

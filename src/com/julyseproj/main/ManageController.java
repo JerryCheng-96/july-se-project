@@ -12,10 +12,6 @@ public class ManageController {
         return "list_student";
     }
 
-    @RequestMapping(value = "/manage/class", method = RequestMethod.GET)
-    public String class_manage() {
-        return "list_class";
-    }
 
     @RequestMapping(value = "/manage/engineer", method = RequestMethod.GET)
     public String engineer_manage() {
