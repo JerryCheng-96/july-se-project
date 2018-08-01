@@ -10,6 +10,8 @@ public interface LogMapper {
 
     List<Log> selectByGroup(Integer groupID);
 
+    int selectMaxID();
+
     int deleteByPrimaryKey(Integer logId);
 
     int insert(Log record);

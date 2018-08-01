@@ -17,6 +17,9 @@
   <select id="selectByEngineer" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select * from task where task_engineer = #{engineerId,jdbcType=INTEGER};
   </select>
+  <select id="selectMaxID" resultType="java.lang.Integer">
+    select max(task_id) from task;
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

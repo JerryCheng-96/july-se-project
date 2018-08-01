@@ -8,6 +8,8 @@ public interface ProgramMapper {
 
     List<Program> selectByAuthor(Integer engineerId);
 
+    int selectMaxID();
+
     int deleteByPrimaryKey(Integer programId);
 
     int insert(Program record);

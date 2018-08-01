@@ -13,6 +13,9 @@
   <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Program">
     select * from program;
   </select>
+  <select id="selectMaxID" resultType="java.lang.Integer">
+    select max(program_id) from program;
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
