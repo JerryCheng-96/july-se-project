@@ -34,12 +34,12 @@ public class StudentController {
         es.getStudentByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/student/new",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/student/new",method = RequestMethod.POST)
     public void insertStudentByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertStudentByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/student/update",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/student/update",method = RequestMethod.POST)
     public void updateStudentByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateStudentByInstance(req,res);
     }
