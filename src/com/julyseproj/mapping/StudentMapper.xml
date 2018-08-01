@@ -30,14 +30,15 @@
       </if>
   </select>
 
-  <select id="selectByGroup" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByGroup" resultMap="BaseResultMap">
     select * from student where student_group
-    <if test = "_parameter!=null">
-      =#{groupId,jdbcType=INTEGER};
+    <if test = "groupId!=null">
+      =#{groupId,jdbcType=INTEGER}
     </if>
-    <if test = "_parameter==null">
-      is null;
+    <if test = "groupId==null">
+      is null
     </if>
+    and student_class=#{classId,jdbcType=INTEGER}
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

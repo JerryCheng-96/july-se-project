@@ -154,7 +154,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    public void getStudentByGroup(Integer groupID, HttpServletRequest req, HttpServletResponse res){
+    public void getStudentByGroup(Integer classID,Integer groupID, HttpServletRequest req, HttpServletResponse res){
         res.setContentType("text/html;charset=UTF-8");
         StudentListJson response = new StudentListJson();
         response.code=0;
@@ -164,7 +164,7 @@ public class StudentServiceImpl implements StudentService{
         int limit = new Integer(req.getParameter("limit"));
         String fieldName = req.getParameter("field");
 
-        List<Student> allStudent = em.selectByGroup(groupID);
+        List<Student> allStudent = em.selectByGroup(classID,groupID);
 
         if (fieldName!=null) {
             boolean isAsc = new Boolean(req.getParameter("isAsc"));

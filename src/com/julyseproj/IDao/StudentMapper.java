@@ -1,6 +1,8 @@
 package com.julyseproj.IDao;
 
 import com.julyseproj.entity.Student;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface StudentMapper {
@@ -8,7 +10,7 @@ public interface StudentMapper {
 
     List<Student>selectByClass(Integer classId);
 
-    List<Student>selectByGroup(Integer groupId);
+    List<Student>selectByGroup(@Param("classId")Integer classId, @Param("groupId")Integer groupId);
 
     int deleteByPrimaryKey(Integer studentId);
 

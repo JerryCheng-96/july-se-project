@@ -20,6 +20,7 @@ public interface DocumentService {
     public void insertDocumentByInstance(HttpServletRequest req,HttpServletResponse res);
     public void insertDocumentByInstance(Document doc);
     public void updateDocumentByInstance(Document doc);
+    public void evaluateDocumentByInstance(String docName,String docUrl,Float docEval,HttpServletResponse res);
     public void deleteDocumentByInstance(DocumentKey dk,HttpServletResponse res);
     public void deleteDocumentByInstance(DocumentKey dk);
 }

@@ -55,7 +55,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/manage/group/getStudent",method = RequestMethod.GET)
-    public void getStudentByGroupHandler(Integer groupID,HttpServletRequest req,HttpServletResponse res){
-        es.getStudentByClass(groupID, req, res);
+    public void getStudentByGroupHandler(Integer classID, Integer groupID,HttpServletRequest req,HttpServletResponse res){
+        es.getStudentByGroup(classID,groupID, req, res);
     }
 }
