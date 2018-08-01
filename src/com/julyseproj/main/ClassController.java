@@ -29,6 +29,12 @@ public class ClassController {
         return;
     }
 
+    @RequestMapping(value = "/manage/class/moreData",method = RequestMethod.GET)
+    public void getAllClassWithNameHandler(HttpServletRequest req ,HttpServletResponse res){
+        es.getAllClassJsonWithName(req,res);
+        return;
+    }
+
     @RequestMapping(value = "/manage/class/getOne",method = RequestMethod.GET)
     public void getClassByIdHandler(int ID,HttpServletResponse res){
         es.getClassByInstance(ID,res);
