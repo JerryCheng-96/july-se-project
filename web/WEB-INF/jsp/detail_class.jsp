@@ -45,7 +45,7 @@
                         <div class="layui-tab-item">
                             <div class="layui-row" style="padding: 0px;">
                                 <!--在此处添加页面代码-->
-                                <table id="table_class" lay-filter="test"></table>
+                                <table id="tableStudent" lay-filter="tableStudent"></table>
                                 <!--在此处添加页面代码-->
                             </div>
                         </div>
@@ -59,6 +59,8 @@
     <script src="/js/PopUp.js"></script>
     <script src="/js/Table.js"></script>
     <script>
+        var theClassId = getQueryVariable('id');
+
         layui.use(['table', 'element'], function () {
             var element = layui.element;
             var table = layui.table;
@@ -67,12 +69,10 @@
                 console.log(data);
             });
 
-            table_class(table);
-            table_group();
+            table_student(table, function () {
+                ;
+            }, "/manage/class/getStudent?classID=" + theClassId);
         });
-
-
-        var theClassId = getQueryVariable('id');
 
         function refresh() {
             HttpGetResponse('/manage/class/getOne?ID=' + theClassId, function (response) {

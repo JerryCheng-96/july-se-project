@@ -6,12 +6,37 @@ function table_class(table_class, update_table, dataUrl) {
         , page: true //开启分页
         , cols: [[ //表头
             {field: 'classId', title: 'ID', width: 200, sort: true, fixed: 'left'}
-            , { field: 'className', title: '班级', width: 200, sort: true,
-                templet: '<div><a href="class?id={{d.class}}" class="layui-table-link">{{d.class}}</a></div>'
+            , {
+                field: 'className', title: '班级', width: 200, sort: true,
+                templet: '<div><a href="/dashboard/class?id={{d.classId}}" class="layui-table-link">{{d.className}}</a></div>'
             }
-            , {field: 'classManagerName', title: '负责工程师', width: 200, sort: true}
-            , {field: 'classProgramName', title: '适用教学计划', width: 200, sort: true}
+            , {
+                field: 'engineerName', title: '负责工程师', width: 200, sort: true,
+                templet: '<div><a href="javascript:show_popup_layer_engineer({{d.classManager}});" class="layui-table-link">{{d.engineerName}}</a></div>'
+            }
+            , {
+                field: 'programName', title: '适用教学计划', width: 200, sort: true,
+                templet: '<div><a href="/dashboard/class?id={{d.classProgram}}" class="layui-table-link">{{d.programName}}</a></div>'
+            }
         ]]
+    });
+
+    theTable.on('sort(table_class)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        console.log(obj.field); //当前排序的字段名
+        console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+        console.log(this); //当前排序的 th 对象
+        console.log(theTable);
+
+        theTable.reload('table_class', {
+            initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。 layui 2.1.1 新增参数
+            , where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                field: obj.field //排序字段
+                , isAsc: (obj.type == 'asc' ? 'true' : 'false') //排序方式
+            }
+            , page: {
+                curr: 1
+            }
+        });
     });
 }
 
@@ -41,32 +66,54 @@ function table_group() {
     })
 }
 
-function table_student(theTable, update_table) {
-    theTable.render({
-        elem: '#tableStudent'
-        , url: '/manage/student/data'
-        , width: '90%'
-        , page: true //开启分页
-        , cols: [[ //表头
+function table_student(theTable, update_table, dataUrl, showCheckbox) {
+    if (typeof showCheckbox == 'undefined') {
+        var tableCols = [[ //表头
             {field: 'studentId', title: 'ID', width: 100, sort: true, fixed: 'left'}
             , {
-                field: 'studentName',
-                title: '姓名',
-                width: 120,
-                sort: true,
+                field: 'studentName', title: '姓名', width: 120, sort: true,
                 templet: '<div><a href="javascript:show_popup_student({{d.studentId}})" class="layui-table-link">{{d.studentName}}</a></div>'
             }
             , {field: 'studentSex', title: '性别', width: 80, sort: true}
             , {field: 'studentDepartment', title: '学院', width: 150, sort: true}
             , {field: 'studentMajor', title: '专业', width: 150, sort: true}
             , {field: 'studentGrade', title: '年级', width: 150, sort: true}
-            , {field: 'studentClass', title: '班级', width: 150, sort: true,
+            , {
+                field: 'studentClass', title: '班级', width: 150, sort: true,
                 templet: '<div><a href="/dashboard/class?id={{d.studentClass}}" class="layui-table-link">{{(typeof d.studentClass != "undefined") ? d.studentClass : ""}}</a></div>'
-
-                }
+            }
             , {fixed: 'right', width: 120, align: 'center', toolbar: '#studentBar'}
-        ]]
-    });
+        ]];
+    }
+    else if (showCheckbox == 'yes') {
+        var tableCols = [[ //表头
+            {checkbox: true, fixed: 'left'}
+            , {field: 'studentId', title: 'ID', width: 100, sort: true, fixed: 'left'}
+            , {
+                field: 'studentName', title: '姓名', width: 120, sort: true,
+                templet: '<div><a href="javascript:show_popup_student({{d.studentId}})" class="layui-table-link">{{d.studentName}}</a></div>'
+            }
+            , {field: 'studentSex', title: '性别', width: 80, sort: true}
+            , {field: 'studentDepartment', title: '学院', width: 150, sort: true}
+            , {field: 'studentMajor', title: '专业', width: 150, sort: true}
+            , {field: 'studentGrade', title: '年级', width: 150, sort: true}
+            , {
+                field: 'studentClass', title: '班级', width: 150, sort: true,
+                templet: '<div><a href="/dashboard/class?id={{d.studentClass}}" class="layui-table-link">{{(typeof d.studentClass != "undefined") ? d.studentClass : ""}}</a></div>'
+            }
+            , {fixed: 'right', width: 120, align: 'center', toolbar: '#studentBar'}
+        ]];
+    }
+
+    var tableParams = {
+        elem: '#tableStudent'
+        , url: dataUrl
+        , width: '90%'
+        , page: true //开启分页
+        , cols: tableCols
+    };
+
+    theTable.render(tableParams);
 
     theTable.on('tool(tableStudent)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）

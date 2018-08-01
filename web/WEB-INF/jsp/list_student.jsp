@@ -44,7 +44,7 @@
         var table = layui.table;
         table_student(table, function () {
             table.reload('tableStudent')
-        });
+        }, '/manage/student/data');
     });
 </script>
 </body>

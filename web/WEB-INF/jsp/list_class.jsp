@@ -23,13 +23,16 @@
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->
-            <table id="demo" lay-filter="test"></table>
+            <table id="table_class" lay-filter="table_class"></table>
             <!--在此处添加页面代码-->
         </div>
     </div>
 
 </div>
 <script src="/res/layui/layui.js"></script>
+    <script src="/js/Interaction.js"></script>
+    <script src="/js/PopUp.js"></script>
+    <script src="/js/Table.js"></script>
 <script>
     layui.use(['table', 'element'], function () {
         var element = layui.element;
@@ -41,7 +44,7 @@
 
         table_class(table, function () {
             ;
-        }, '/manage/class/data');
+        }, '/manage/class/moreData');
 
     });
 
