@@ -132,8 +132,7 @@ function table_engineer(theTable, update_table) {
                 title: '姓名',
                 width: 120,
                 sort: true,
-                fixed: 'left'
-                ,
+                fixed: 'left',
                 templet: '<div><a href="javascript:show_popup_layer_engineer({{d.engineerId}})" class="layui-table-link">{{d.engineerName}}</a></div>'
             }
             , {field: 'engineerSex', title: '性别', width: 80}

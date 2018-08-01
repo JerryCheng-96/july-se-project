@@ -83,10 +83,11 @@ public class StudentServiceImpl implements StudentService{
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
             Student toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Student.class);
-            em.insert(toInsert);
+            em.insertSelective(toInsert);
         }catch (Exception e){
             e.printStackTrace();
             RequestExceptionResolver.handle(e,res);
+            return;
         }
         res.setStatus(200);
         return;
