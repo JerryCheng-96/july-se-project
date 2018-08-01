@@ -84,11 +84,6 @@ public class StudentServiceImpl implements StudentService{
             String requestContent = req.getReader().readLine();
             Student toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Student.class);
             em.insert(toInsert);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            res.setStatus(500);
-            return;
         }catch (Exception e){
             e.printStackTrace();
             RequestExceptionResolver.handle(e,res);
@@ -112,6 +107,7 @@ public class StudentServiceImpl implements StudentService{
         }catch (Exception e){
             e.printStackTrace();
             RequestExceptionResolver.handle(e,res);
+            return;
         }
         res.setStatus(200);
         return;

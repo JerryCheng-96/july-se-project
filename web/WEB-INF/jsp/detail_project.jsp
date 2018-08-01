@@ -32,7 +32,8 @@
                         <td>
                             <hr>
                             <div class="layui-btn-group">
-                                <a href="javascript:approveProj();" id="projectApproved" class="layui-btn layui-btn-normal">审批通过项目</a>
+                                <a href="javascript:approveProj();" id="projectApproved"
+                                   class="layui-btn layui-btn-normal">审批通过项目</a>
                                 <a id="editBtn" class="layui-btn">编辑</a>
                                 <a href="javascript:deleteProj();" class="layui-btn layui-btn-danger">删除</a>
                             </div>
@@ -110,23 +111,29 @@
         });
     }
 
-    HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {
-        var theJson = JSON.parse(response);
-        console.log(theJson);
-        document.getElementById('projectName').innerHTML = theJson.projectName;
-        document.getElementById('projectDescription').innerHTML = theJson.projectDescription;
-        document.getElementById('editBtn').setAttribute('href', '/manage/project/edit?id=' + theJson.projectId);
-        HttpGetResponse('/manage/engineer/getOne?ID=' + theJson.projectCreator,
-        function (response) {
-            console.log(response);
-            document.getElementById('engineerName').innerHTML = '负责工程师：' + '<a href="javascript:show_popup_layer_engineer(' + theJson.projectCreator + ')">' + JSON.parse(response).engineerName + '</a>';
-        }, undefined);
-        if (theJson.projectApproved == 1) {
-            document.getElementById('projectApproved').setAttribute('class', document.getElementById('projectApproved').getAttribute('class') + ' layui-btn-disabled');
-            document.getElementById('projectApproved').innerHTML = '审批已通过';
-        }
-    }, function () {;});
 
+    function refresh() {
+        HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {
+            var theJson = JSON.parse(response);
+            console.log(theJson);
+            document.getElementById('projectName').innerHTML = theJson.projectName;
+            document.getElementById('projectDescription').innerHTML = theJson.projectDescription;
+            document.getElementById('editBtn').setAttribute('href', '/manage/project/edit?id=' + theJson.projectId);
+            HttpGetResponse('/manage/engineer/getOne?ID=' + theJson.projectCreator,
+                function (response) {
+                    console.log(response);
+                    document.getElementById('engineerName').innerHTML = '负责工程师：' + '<a href="javascript:show_popup_layer_engineer(' + theJson.projectCreator + ')">' + JSON.parse(response).engineerName + '</a>';
+                }, undefined);
+            if (theJson.projectApproved == 1) {
+                document.getElementById('projectApproved').setAttribute('class', document.getElementById('projectApproved').getAttribute('class') + ' layui-btn-disabled');
+                document.getElementById('projectApproved').innerHTML = '审批已通过';
+            }
+        }, function () {
+            ;
+        });
+    }
+
+    refresh();
 </script>
 
 </body>
