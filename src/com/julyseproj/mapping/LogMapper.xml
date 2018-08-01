@@ -16,6 +16,15 @@
   <sql id="Blob_Column_List">
     log_content
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Log">
+    select * from log;
+  </select>
+  <select id="selectByUploader" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from log where log_uploader = #{studentId,jdbcType=INTEGER};
+  </select>
+  <select id="selectByGroup" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from log where log_group = #{groupId,jdbcType=INTEGER};
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />

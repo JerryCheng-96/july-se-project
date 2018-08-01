@@ -20,8 +20,10 @@
         <div class="layui-container">
             <br/>
             <div class="layui-row" style="padding-left: 7px">
-                <h1>[班级名称]</h1>
-                <h3 href="">负责工程师：[姓名]</h3>
+                <h1 id="className">[班级名称]</h1>
+                <h3>负责工程师：<a id="classEngineerName"></a></h3>
+                <h3>适用教学计划：<a id="classProgramName"></a></h3>
+                <h3 id="classDescription" style="color: gray;padding-top: 10px;">班级描述</h3>
                 <hr>
                 <div class="layui-btn-group">
                     <button class="layui-btn layui-btn-normal">添加学生</button>
@@ -43,7 +45,7 @@
                         <div class="layui-tab-item">
                             <div class="layui-row" style="padding: 0px;">
                                 <!--在此处添加页面代码-->
-                                <table id="table_class" lay-filter="test"></table>
+                                <table id="tableStudent" lay-filter="tableStudent"></table>
                                 <!--在此处添加页面代码-->
                             </div>
                         </div>
@@ -53,18 +55,44 @@
         </div>
     </div>
     <script src="/res/layui/layui.js"></script>
+    <script src="/js/Interaction.js"></script>
+    <script src="/js/PopUp.js"></script>
     <script src="/js/Table.js"></script>
     <script>
-        layui.use('element', function () {
+        var theClassId = getQueryVariable('id');
+
+        layui.use(['table', 'element'], function () {
             var element = layui.element;
+            var table = layui.table;
             //一些事件监听
             element.on('tab(demo)', function (data) {
                 console.log(data);
             });
+
+            table_student(table, function () {
+                ;
+            }, "/manage/class/getStudent?classID=" + theClassId);
         });
 
-        table_class();
-        table_group();
+        function refresh() {
+            HttpGetResponse('/manage/class/getOne?ID=' + theClassId, function (response) {
+                var theJson = JSON.parse(response);
+                console.log(theJson);
+                document.getElementById('className').innerHTML = theJson.className;
+                document.getElementById('classDescription').innerHTML = theJson.classDescription;
+                HttpGetResponse('/manage/engineer/getOne?ID=' + theJson.classManager,
+                    function (response) {
+                        document.getElementById('classEngineerName').innerHTML = JSON.parse(response).engineerName;
+                        document.getElementById('classEngineerName').setAttribute('href', "javascript:show_popup_layer_engineer(" + theJson.classManager + ");");
+                    }, undefined);
+                // document.getElementById('editBtn').setAttribute('href', '/manage/project/edit?id=' + theJson.projectId);
+            }, function () {
+                ;
+            });
+        }
+
+        refresh();
+
     </script>
 </body>
 

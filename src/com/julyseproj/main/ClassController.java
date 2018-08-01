@@ -23,6 +23,7 @@ public class ClassController {
     @Resource(name = "classService")
     private ClassService es;
 
+
     @RequestMapping(value = "/manage/class/data",method = RequestMethod.GET)
     public void getAllClassHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllClassJson(req,res);

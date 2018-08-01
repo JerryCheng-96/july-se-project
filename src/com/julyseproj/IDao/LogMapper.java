@@ -1,8 +1,15 @@
 package com.julyseproj.IDao;
 
 import com.julyseproj.entity.Log;
+import java.util.*;
 
 public interface LogMapper {
+    List<Log> selectAll();
+
+    List<Log> selectByUploader(Integer studentID);
+
+    List<Log> selectByGroup(Integer groupID);
+
     int deleteByPrimaryKey(Integer logId);
 
     int insert(Log record);
