@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface ClassService {
     public List<Class> getAllClass();
     public String getAllClassJson(HttpServletRequest req, HttpServletResponse res);
+    public String getAllClassJsonWithName(HttpServletRequest req, HttpServletResponse res);
     public List<Class> getByManager(int engineerID);
     public String getByManagerJson(int engineerID, HttpServletRequest req, HttpServletResponse res);
     public List<Class> getByProgram(int programID);

@@ -1,10 +1,14 @@
 package com.julyseproj.IDao;
 
 import com.julyseproj.entity.Class;
+import com.julyseproj.entity.view.ClassWithName;
+
 import java.util.*;
 
 public interface ClassMapper {
     List<Class> selectAll();
+
+    List<ClassWithName> selectAllWithName();
 
     List<Class> selectByManager(Integer engineerId);
 

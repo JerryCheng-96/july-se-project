@@ -1,5 +1,7 @@
 package com.julyseproj.service.impl;
 
+import com.julyseproj.entity.view.ClassWithName;
+import com.julyseproj.utils.RequestExceptionResolver;
 import com.mysql.jdbc.MysqlDataTruncation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -53,7 +55,41 @@ public class ClassServiceImpl implements ClassService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
+        }
+        return responseJson;
+    }
+
+    @Override
+    public String getAllClassJsonWithName(HttpServletRequest req, HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        ClassListJsonWithName response = new ClassListJsonWithName();
+        response.code=0;
+        response.msg="";
+
+        int page = new Integer(req.getParameter("page"));
+        int limit = new Integer(req.getParameter("limit"));
+        String fieldName = req.getParameter("field");
+
+        List<ClassWithName> allClass = em.selectAllWithName();
+
+        if (fieldName!=null) {
+            boolean isAsc = new Boolean(req.getParameter("isAsc"));
+            ListSorter.sort(allClass, isAsc, fieldName);
+        }
+        response.count = allClass.size();
+        response.data = allClass.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -88,7 +124,9 @@ public class ClassServiceImpl implements ClassService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -123,7 +161,9 @@ public class ClassServiceImpl implements ClassService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -138,9 +178,8 @@ public class ClassServiceImpl implements ClassService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
             e.printStackTrace();
-            res.setStatus(500);
+            RequestExceptionResolver.handle(e,res);
             return "";
         }
         return responseJson;
@@ -158,11 +197,9 @@ public class ClassServiceImpl implements ClassService{
             e.printStackTrace();
             res.setStatus(500);
             return;
-        }catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -181,25 +218,22 @@ public class ClassServiceImpl implements ClassService{
             e.printStackTrace();
             res.setStatus(500);
             return;
-        }catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
         return;
     }
 
+    @Override
     public void deleteClassByInstance(int ID,HttpServletResponse res){
         try {
             em.deleteByPrimaryKey(ID);
-        } catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -211,5 +245,12 @@ public class ClassServiceImpl implements ClassService{
         String msg;
         int count;
         List<Class> data;
+    }
+
+    private class ClassListJsonWithName{
+        int code;
+        String msg;
+        int count;
+        List<ClassWithName> data;
     }
 }
