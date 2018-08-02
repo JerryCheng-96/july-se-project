@@ -11,6 +11,8 @@ public interface ProjectMapper {
 
     List<Project> selectByCreator(Integer engineerId);
 
+    int selectMaxID();
+
     void setApprovedByID(@Param("projectID")Integer projectID, @Param("projectApproved")Byte projectApproved);
 
     int deleteByPrimaryKey(Integer projectId);

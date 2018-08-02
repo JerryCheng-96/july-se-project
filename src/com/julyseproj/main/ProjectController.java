@@ -23,7 +23,7 @@ public class ProjectController {
     @Resource(name = "projectService")
     private ProjectService es;
 
-    @RequestMapping(value = "/manage/project/data",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/project/data",method = RequestMethod.GET)
     public void getAllProjectHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllProjectJson(req,res);
     }
@@ -45,12 +45,12 @@ public class ProjectController {
         es.getProjectByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/project/new",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/project/new",method = RequestMethod.POST)
     public void insertProjectByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertProjectByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/project/update",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/project/update",method = RequestMethod.POST)
     public void updateProjectByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateProjectByInstance(req,res);
     }
@@ -60,7 +60,7 @@ public class ProjectController {
         es.deleteProjectByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/engineer/project",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/engineer/getProject",method = RequestMethod.GET)
     public void getByCreatorHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
         es.getByCreatorJson(engineerID,req,res);
     }

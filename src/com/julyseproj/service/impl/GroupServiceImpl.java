@@ -1,5 +1,6 @@
 package com.julyseproj.service.impl;
 
+import com.julyseproj.entity.view.GroupWithProject;
 import com.mysql.jdbc.MysqlDataTruncation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -205,10 +206,47 @@ public class GroupServiceImpl implements GroupService{
         }
     }
 
+    @Override
+    public void getGroupByProjectWithName(int projectID, HttpServletRequest req, HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        GroupListJsonWithProject response = new GroupListJsonWithProject();
+        response.code=0;
+        response.msg="";
+
+        int page = new Integer(req.getParameter("page"));
+        int limit = new Integer(req.getParameter("limit"));
+        String fieldName = req.getParameter("field");
+
+        List<GroupWithProject> allGroup = em.selectByProjectWithName(projectID);
+
+        if (fieldName!=null) {
+            boolean isAsc = new Boolean(req.getParameter("isAsc"));
+            ListSorter.sort(allGroup, isAsc, fieldName);
+        }
+        response.count = allGroup.size();
+        response.data = allGroup.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+        }
+    }
+
     private class GroupListJson{
         int code;
         String msg;
         int count;
         List<Group> data;
+    }
+
+    private class GroupListJsonWithProject{
+        int code;
+        String msg;
+        int count;
+        List<GroupWithProject> data;
     }
 }

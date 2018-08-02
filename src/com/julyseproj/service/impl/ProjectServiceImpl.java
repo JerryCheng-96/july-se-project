@@ -1,6 +1,7 @@
 package com.julyseproj.service.impl;
 
 import com.mysql.jdbc.MysqlDataTruncation;
+import com.sun.prism.shader.Solid_TextureYV12_AlphaTest_Loader;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -119,7 +120,9 @@ public class ProjectServiceImpl implements ProjectService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -147,6 +150,8 @@ public class ProjectServiceImpl implements ProjectService{
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
             Project toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Project.class);
+            int currMaxId = em.selectMaxID();
+            toInsert.setProjectId(currMaxId+1);
             em.insert(toInsert);
         }catch (Exception e) {
             e.printStackTrace();
@@ -162,8 +167,9 @@ public class ProjectServiceImpl implements ProjectService{
         try {
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
+            System.out.println("UPDATING - " + new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"));
             Project toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Project.class);
-            em.updateByPrimaryKey(toUpdate);
+            em.updateByPrimaryKeyWithBLOBs(toUpdate);
         }catch (Exception e) {
             e.printStackTrace();
             RequestExceptionResolver.handle(e,res);

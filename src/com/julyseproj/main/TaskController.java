@@ -55,7 +55,7 @@ public class TaskController {
         es.deleteTaskByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/engineer/task",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/engineer/getTask",method = RequestMethod.GET)
     public void getByEngineerHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
         es.getByEngineerJson(engineerID,req,res);
     }

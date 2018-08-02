@@ -1,5 +1,7 @@
 package com.julyseproj.service.impl;
 
+import com.julyseproj.entity.view.ProgramWithAuthor;
+import com.julyseproj.utils.RequestExceptionResolver;
 import com.mysql.jdbc.MysqlDataTruncation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -53,7 +55,41 @@ public class ProgramServiceImpl implements ProgramService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
+        }
+        return responseJson;
+    }
+
+    @Override
+    public String getAllProgramJsonWithAuthor(HttpServletRequest req,HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        ProgramListJsonWithAuthor response = new ProgramListJsonWithAuthor();
+        response.code=0;
+        response.msg="";
+
+        int page = new Integer(req.getParameter("page"));
+        int limit = new Integer(req.getParameter("limit"));
+        String fieldName = req.getParameter("field");
+
+        List<ProgramWithAuthor> allProgram = em.selectAllWithAuthor();
+
+        if (fieldName!=null) {
+            boolean isAsc = new Boolean(req.getParameter("isAsc"));
+            ListSorter.sort(allProgram, isAsc, fieldName);
+        }
+        response.count = allProgram.size();
+        response.data = allProgram.subList((page-1)*limit,(page*limit)<response.count?page*limit:response.count);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -88,7 +124,9 @@ public class ProgramServiceImpl implements ProgramService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -104,9 +142,8 @@ public class ProgramServiceImpl implements ProgramService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
             e.printStackTrace();
-            res.setStatus(500);
+            RequestExceptionResolver.handle(e,res);
             return "";
         }
         return responseJson;
@@ -118,17 +155,12 @@ public class ProgramServiceImpl implements ProgramService{
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
             Program toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Program.class);
+            int currMaxId = em.selectMaxID();
+            toInsert.setProgramId(currMaxId+1);
             em.insert(toInsert);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            res.setStatus(500);
-            return;
-        }catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -142,16 +174,9 @@ public class ProgramServiceImpl implements ProgramService{
             String requestContent = req.getReader().readLine();
             Program toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Program.class);
             em.updateByPrimaryKey(toUpdate);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            res.setStatus(500);
-            return;
-        }catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -161,11 +186,9 @@ public class ProgramServiceImpl implements ProgramService{
     public void deleteProgramByInstance(int ID,HttpServletResponse res){
         try {
             em.deleteByPrimaryKey(ID);
-        } catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -177,5 +200,12 @@ public class ProgramServiceImpl implements ProgramService{
         String msg;
         int count;
         List<Program> data;
+    }
+
+    private class ProgramListJsonWithAuthor{
+        int code;
+        String msg;
+        int count;
+        List<ProgramWithAuthor> data;
     }
 }

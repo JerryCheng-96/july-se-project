@@ -1,8 +1,11 @@
 package com.julyseproj.IDao;
 
+import com.julyseproj.entity.Student;
 import com.julyseproj.entity.StudentAccount;
 
 public interface StudentAccountMapper {
+    StudentAccount selectByOwner(Integer studentID);
+
     int deleteByPrimaryKey(Integer accountSId);
 
     int insert(StudentAccount record);

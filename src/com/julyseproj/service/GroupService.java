@@ -17,4 +17,5 @@ public interface GroupService {
     public void deleteGroupByInstance(int ID,HttpServletResponse res);
     public void getGroupByClass(int classID, HttpServletRequest req, HttpServletResponse res);
     public void getGroupByProject(int projectID, HttpServletRequest req, HttpServletResponse res);
+    public void getGroupByProjectWithName(int projectID, HttpServletRequest req, HttpServletResponse res);
 }

@@ -16,7 +16,7 @@ function HttpPost(url, data, whenDone, whenErr) {
                 console.log('POST failed!!! Server Internal Error');
                 whenErr('server_internal_err');
             }
-            else if (xhr.status != 418) {
+            else if (xhr.status == 418) {
                 console.log('POST failed!!! Data Format Error');
                 whenErr('data_format_err');
             }
@@ -25,9 +25,9 @@ function HttpPost(url, data, whenDone, whenErr) {
             }
         }
     };
-    xhr.send((JSON.stringify(data.field)));
-    console.log((JSON.stringify(data.field)));
-    console.log(encodeURI(JSON.stringify(data.field)));
+    xhr.send(JSON.stringify(data));
+    console.log(data);
+    console.log(encodeURI(JSON.stringify(data)));
 }
 
 function HttpGet(url, whenDone, whenErr) {

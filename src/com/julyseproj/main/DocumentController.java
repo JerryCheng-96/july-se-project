@@ -47,12 +47,12 @@ public class DocumentController {
         return;
     }
 
-    @RequestMapping(value = "/manage/student/document",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/student/getDocument",method = RequestMethod.GET)
     public void getByUploaderHandler(int studentID,HttpServletRequest req,HttpServletResponse res){
         es.getByUploaderJson(studentID,req,res);
     }
 
-    @RequestMapping(value = "/manage/group/document",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/group/getDocument",method = RequestMethod.GET)
     public void getByGroupHandler(int groupID,HttpServletRequest req,HttpServletResponse res){
         es.getByGroupJson(groupID,req,res);
     }
@@ -72,21 +72,17 @@ public class DocumentController {
 
 
     @RequestMapping(value = "/manage/document/upload",method = RequestMethod.GET)
-    public String documentListHandler(){
+    public String documentUploadHandler(){
         return "testupload";
     }
 
     @RequestMapping(value = "/manage/document/doUpload", method = RequestMethod.POST)
-    public void doUploadHandler(@RequestParam MultipartFile file,@RequestParam(value = "teamID") Integer teamID, HttpServletRequest req, HttpServletResponse res) throws Exception{
+    public void doUploadHandler(@RequestParam MultipartFile file,@RequestParam(value = "entry") String entryJson, HttpServletRequest req, HttpServletResponse res) throws Exception{
         Gson gson = new Gson();
-        String requestContent = req.getReader().readLine();
-        Document doc = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Document.class);
-        DocumentKey dk = new DocumentKey();
-        dk.setDocUrl(doc.getDocUrl());
-        dk.setDocName(doc.getDocName());
+        Document doc = gson.fromJson(new String(entryJson.getBytes("ISO-8859-1"),"UTF-8"),Document.class);
         try {
             //todo
-            if(es.getDocumentByInstance(dk)!=null){
+            if(es.getDocumentByInstance(doc)!=null){
                 es.updateDocumentByInstance(doc);
             }else {
                 es.insertDocumentByInstance(doc);
@@ -94,13 +90,14 @@ public class DocumentController {
         }catch (Exception e){
             e.printStackTrace();
             RequestExceptionResolver.handle(e,res);
+            return;
         }
         try {
             if (!file.isEmpty()) {
                 String realRootPath = req.getSession().getServletContext().getRealPath("/");
                 System.out.println(realRootPath);
                 String fileName = file.getOriginalFilename();
-                File f = new File(realRootPath + "/docs/" + teamID.toString() + "/", fileName);
+                File f = new File(realRootPath + "/docs/" + doc.getDocGroup().toString() + "/", fileName);
                 if (!f.exists()) {
                     f.mkdirs();
                 }
@@ -111,7 +108,7 @@ public class DocumentController {
             }
         }catch (Exception e){
             e.printStackTrace();
-            es.deleteDocumentByInstance(dk);
+            es.deleteDocumentByInstance(doc);
             RequestExceptionResolver.handle(e,res);
         }
 
@@ -156,5 +153,10 @@ public class DocumentController {
         if(f.exists()&&f.isFile()){
             f.delete();
         }
+    }
+
+    @RequestMapping(value = "/manage/document/evaluate",method = RequestMethod.GET)
+    public void evaluateDocumentHandler(String docName,String docUrl,Float docEval,HttpServletResponse res){
+        es.evaluateDocumentByInstance(docName, docUrl, docEval, res);
     }
 }

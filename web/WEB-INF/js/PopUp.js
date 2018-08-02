@@ -5,6 +5,42 @@ function show_popup_layer_engineer(engineerId) {
         }, undefined);
 }
 
+function show_popup_student(studentId) {
+    HttpGetResponse('/manage/student/getOne?ID=' + studentId,
+        function (response) {
+            popup_student(JSON.parse(response));
+        }, undefined);
+}
+
+function show_student_edit(studentId, whenDone) {
+    HttpGetResponse('/manage/student/getOne?ID=' + studentId,
+        function (response) {
+            popup_student_edit(JSON.parse(response), whenDone);
+        }, undefined);
+}
+
+function show_class_edit(classId, whenDone) {
+    HttpGetResponse('/manage/class/getOne?ID=' + classId,
+        function (response) {
+            popup_class_edit(JSON.parse(response), whenDone);
+        }, undefined);
+}
+
+function show_program_edit(programId, whenDone) {
+    console.log('in program edit');
+    HttpGetResponse('/manage/program/getOne?ID=' + programId,
+        function (response) {
+            popup_program_edit(JSON.parse(response), whenDone);
+        }, undefined);
+}
+
+function show_group_edit(groupId, whenDone) {
+    HttpGetResponse('/manage/group/getOne?ID=' + groupId,
+        function (response) {
+            popup_group_edit(JSON.parse(response), whenDone);
+        }, undefined);
+}
+
 function show_popup_layer_engineer_edit(engineerId, whenDone) {
     HttpGetResponse('/manage/engineer/getOne?ID=' + engineerId,
         function (response) {
@@ -46,7 +82,7 @@ function popup_layer_engineer(theEngineer) {
                 '<tr>' +
                 '<td></td>' +
                 '<td><span style="margin-left:10px; font-size: 17px"><b>部门</b></span></td>' +
-                '<td><span style="margin-left:30px; font-size: 17px">'+ theEngineer.engineerDepartment +'</span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theEngineer.engineerDepartment + '</span></td>' +
                 '</tr>' +
                 '<tr>' +
                 '<td></td>' +
@@ -92,7 +128,7 @@ function popup_layer_engineer_edit(theEngineer, whenDone) {
                 "  <div class=\"layui-form-item\" style='padding-top:20px'>" +
                 "    <label class=\"layui-form-label\"'>工号</label>" +
                 "    <div class=\"layui-input-block\" >" +
-                "      <input type=\"text\" name=\"engineerId\" value='" + theEngineer.engineerId + "' " +  (theEngineer.engineerId != '' ? 'disabled="disabled"' : '')  + " required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "      <input type=\"text\" name=\"engineerId\" value='" + theEngineer.engineerId + "' " + (theEngineer.engineerId != '' ? 'disabled="disabled"' : '') + " required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
                 "    </div>" +
                 "  </div>" +
 
@@ -149,12 +185,12 @@ function popup_layer_engineer_edit(theEngineer, whenDone) {
         form.on('submit(formDemo)', function (data) {
             var result = '';
             if (buttonText == '更改') {
-                HttpPost('/manage/engineer/update', data, whenDone, function (msg) {
+                HttpPost('/manage/engineer/update', data.field, whenDone, function (msg) {
                     layer.alert(msg);
                 });
             }
-            else  {
-                HttpPost('/manage/engineer/new', data, whenDone, function (msg) {
+            else {
+                HttpPost('/manage/engineer/new', data.field, whenDone, function (msg) {
                     layer.alert(msg);
                 });
             }
@@ -163,7 +199,311 @@ function popup_layer_engineer_edit(theEngineer, whenDone) {
     });
 }
 
+function popup_student_edit(theStudent, whenDone) {
+    console.log(theStudent);
+    var buttonText = '更改';
+    if (typeof theStudent == "undefined") {
+        theStudent = {
+            "studentId": '',
+            "studentName": "",
+            "studentSex": "",
+            "studentGrade": "",
+            "studentDepartment": "",
+            "studentMajor": ""
+        };
+        buttonText = '添加';
+    }
 
-function POSTJson (theObj) {
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
 
+        layer.open({
+            type: 1,
+            title: '',
+            content: "<div style='width: 90%; margin-right: 30px';>" +
+                "<form class=\"layui-form\" action=\"\"'>" +
+                "  <div class=\"layui-form-item\" style='padding-top:20px'>" +
+                "    <label class=\"layui-form-label\"'>学号</label>" +
+                "    <div class=\"layui-input-block\" >" +
+                "      <input type=\"text\" name=\"studentId\" value='" + theStudent.studentId + "' " + (theStudent.studentId != '' ? 'disabled="disabled"' : '') + " required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>姓名</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"studentName\" value='" + theStudent.studentName + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\">" +
+                "    <label class=\"layui-form-label\">性别</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"radio\" name=\"studentSex\" value=\"男\" title=\"男\"" + (theStudent.studentSex == "男" || theStudent.studentSex == "" ? "checked" : "") + ">" +
+                "      <input type=\"radio\" name=\"studentSex\" value=\"女\" title=\"女\"" + (theStudent.studentSex == "女" ? "checked" : "") + ">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\">" +
+                "    <label class=\"layui-form-label\">年级</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"studentGrade\" value='" + theStudent.studentGrade + "' placeholder=\"选填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\">" +
+                "    <label class=\"layui-form-label\">学院</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"studentDepartment\" value='" + theStudent.studentDepartment + "' placeholder=\"选填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\">" +
+                "    <label class=\"layui-form-label\">专业</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"studentMajor\" value='" + theStudent.studentMajor + "' placeholder=\"选填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\">" +
+                "    <div class=\"layui-input-block\">" +
+                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">" + buttonText + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
+                "    </div>" +
+                "  </div>" +
+                "</form>" +
+                "</div>",
+            area: '450px',
+        });
+
+        form.render();
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            var result = '';
+            if (buttonText == '更改') {
+                HttpPost('/manage/student/update', data.field, whenDone, function (msg) {
+                    layer.alert(msg);
+                });
+            }
+            else {
+                HttpPost('/manage/student/new', data.field, whenDone, function (msg) {
+                    layer.alert(msg);
+                });
+            }
+            return false;
+        });
+    });
+}
+
+function popup_student(theStudent) {
+    console.log(theStudent);
+    layui.use('layer', function () {
+        var layer = layui.layer;
+        layer.open({
+            type: 1,
+            title: '人员信息',
+            content: "" +
+                '<div style="width: 90%">' +
+                '<table border="0" style="margin:3%">' +
+                '<tr>' +
+                '<td>' +
+                '<img src="/res/icon/5.png" style="width:80px;height:80px;border-radius:80px;margin:10px;">' +
+                '</td>' +
+                '<td colspan=2><span style="font-size:30px; margin-left:10px;">' + theStudent.studentName + '</span></td>' +
+                '</tr>' +
+                '<tr">' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>性别</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentSex + '</span></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>学号</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentId + '</span></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>年级</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentGrade + '</span></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>学院</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentDepartment + '</span></td>' +
+                '</tr>' +
+                '<tr>' +
+                '<td></td>' +
+                '<td><span style="margin-left:10px; font-size: 17px"><b>专业</b></span></td>' +
+                '<td><span style="margin-left:30px; font-size: 17px">' + theStudent.studentMajor + '</span></td>' +
+                '</tr>' +
+                '<tr/>' +
+                '</table>' +
+                '<br/>' +
+                '' +
+                '' +
+                '' +
+                "</div>",
+            area: '400px'
+        });
+    });
+}
+
+function popup_class_edit(theClass, whenDone) {
+    console.log(theClass);
+    var buttonText = '更改';
+
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+
+        layer.open({
+            type: 1,
+            title: '',
+            content: "<div style='width: 90%; margin-right: 30px';>" +
+                "<form class=\"layui-form\" action=\"\"'>" +
+                "  <div class=\"layui-form-item\" style='padding-top:20px'>" +
+                "    <label class=\"layui-form-label\"'>班级编号</label>" +
+                "    <div class=\"layui-input-block\" >" +
+                "      <input type=\"text\" name=\"classId\" value='" + theClass.classId + "' " + (theClass.classId != '' ? 'disabled="disabled"' : '') + " required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>班级名称</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"className\" value='" + theClass.className + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>班级描述</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"classDescription\" value='" + theClass.classDescription + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\">" +
+                "    <div class=\"layui-input-block\">" +
+                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">" + buttonText + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
+                "    </div>" +
+                "  </div>" +
+                "</form>" +
+                "</div>",
+            area: '450px',
+        });
+
+        form.render();
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            theClass.className = data.field.className;
+            theClass.classDescription = data.field.classDescription;
+
+            HttpPost('/manage/class/update', theClass, whenDone, function (msg) {
+                layer.alert(msg);
+            });
+            return false;
+        });
+    });
+}
+
+function popup_program_edit(theProgram, whenDone) {
+    console.log(theProgram);
+    var buttonText = '更改';
+
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+
+        layer.open({
+            type: 1,
+            title: '',
+            content: "<div style='width: 90%; margin-right: 30px; margin-top: 30px';>" +
+                "<form class=\"layui-form\" action=\"\"'>" +
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>计划名称</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"programName\" value='" + theProgram.programName + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>计划描述</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"programDescription\" value='" + theProgram.programDescription + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\">" +
+                "    <div class=\"layui-input-block\">" +
+                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">" + buttonText + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
+                "    </div>" +
+                "  </div>" +
+                "</form>" +
+                "</div>",
+            area: '450px',
+        });
+
+        form.render();
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            theProgram.programName = data.field.programName;
+            theProgram.programDescription = data.field.programDescription;
+
+            HttpPost('/manage/program/update', theProgram, whenDone, function (msg) {
+                layer.alert(msg);
+            });
+            return false;
+        });
+    });
+}
+
+function popup_group_edit(theGroup, whenDone) {
+    console.log(theGroup);
+    var buttonText = '更改';
+
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+
+        layer.open({
+            type: 1,
+            title: '',
+            content: "<div style='width: 90%; margin-right: 30px; margin-top: 30px';>" +
+                "<form class=\"layui-form\" action=\"\"'>" +
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>小组名称</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"groupName\" value='" + theGroup.groupName + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\">" +
+                "    <div class=\"layui-input-block\">" +
+                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">" + buttonText + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
+                "    </div>" +
+                "  </div>" +
+                "</form>" +
+                "</div>",
+            area: '450px',
+        });
+
+        form.render();
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            theGroup.groupName = data.field.groupName;
+
+            HttpPost('/manage/group/update', theGroup, whenDone, function (msg) {
+                layer.alert(msg);
+            });
+            return false;
+        });
+    });
 }

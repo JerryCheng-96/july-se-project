@@ -32,9 +32,10 @@
                         <td>
                             <hr>
                             <div class="layui-btn-group">
-                                <a href="javascript:approveProj();" id="projectApproved" class="layui-btn layui-btn-normal">审批通过项目</a>
+                                <a href="javascript:approveProj();" id="projectApproved"
+                                   class="layui-btn layui-btn-normal">审批通过项目</a>
                                 <a id="editBtn" class="layui-btn">编辑</a>
-                                <button class="layui-btn layui-btn-danger">删除</button>
+                                <a href="javascript:deleteProj();" class="layui-btn layui-btn-danger">删除</a>
                             </div>
                         </td>
                     </tr>
@@ -42,7 +43,7 @@
                 <hr>
             </div>
         </div>
-        <div class="layui-row" style="padding-left:20px;padding-right:20px;">
+        <div id="theCards" class="layui-row" style="padding-left:20px;padding-right:20px;">
             <div class="layui-col-md8" style="padding:10px;">
                 <div class="layui-card" style="background-color: #F7F7F7">
                     <div class="layui-card-header"><b>项目描述</b></div>
@@ -54,14 +55,17 @@
                 <div class="layui-card" style="background-color: #F7F7F7">
                     <div class="layui-card-header"><b>小组</b></div>
                     <div class="layui-card-body">
-                        <p>小组 1</p>
-                        <p>小组 2</p>
-                        <p>小组 3</p>
-                        <p>小组 4</p>
+                        <span id="teamList"></span>
                         <br/>
-                        <span style="color:blue;">查看更多...</span>
+                        <span style="color:blue;"><a href="javascript:showTable();">查看更多...</a></span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="theList" class="layui-row" style="display:none;">
+            <div style="padding: 10px;">
+                <table id="table_group" lay-filter="table_group"></table>
+                <a style="margin-top: 10px" href="javascript:hideTable();" class="layui-btn">完成</a>
             </div>
         </div>
     </div>
@@ -70,18 +74,38 @@
 <script src="/res/layui/layui.js"></script>
 <script src="/js/Interaction.js"></script>
 <script src="/js/PopUp.js"></script>
+<script src="/js/Table.js"></script>
 
 <script>
-    layui.use('element', function () {
+    var theProjId = getQueryVariable('id');
+
+    layui.use(['element', 'table'], function () {
         var element = layui.element;
+        var table = layui.table;
         //一些事件监听
         element.on('tab(demo)', function (data) {
             console.log(data);
         });
+
+        table_group(table, function () {
+            ;
+        }, '/manage/project/getGroup?projectID=' + theProjId)
+
     });
 
-
-    var theProjId = getQueryVariable('id');
+    var theTeamsJson = {};
+    var theTeamListHtml = '';
+    HttpGetResponse('/manage/project/getGroup?page=1&limit=5&projectID=' + theProjId, function (response) {
+        theTeamsJson = JSON.parse(response);
+        console.log('theTeamsJson');
+        console.log(theTeamsJson);
+        for (var i = 0; i < theTeamsJson.data.length; i++) {
+            theTeamListHtml += '<p><a href="/dashboard/group?id=' + theTeamsJson.data[i].groupId + '">' + theTeamsJson.data[i].groupName + '</a></p>'
+            console.log(theTeamListHtml);
+        }
+        console.log(theTeamListHtml);
+        document.getElementById('teamList').innerHTML = theTeamListHtml;
+    });
 
     function approveProj() {
         layui.use('layer', function () {
@@ -90,28 +114,58 @@
                 HttpGet('/manage/project/approve?ID=' + theProjId, function () {
                     document.getElementById('projectApproved').setAttribute('class', document.getElementById('projectApproved').getAttribute('class') + ' layui-btn-disabled');
                     document.getElementById('projectApproved').innerHTML = '审批已通过';
-                    layer.alert('项目审批已经通过。');
+                    layer.close(index);
                 });
             })
         });
     }
 
-    HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {
-        var theJson = JSON.parse(response);
-        console.log(theJson);
-        document.getElementById('projectName').innerHTML = theJson.projectName;
-        document.getElementById('projectDescription').innerHTML = theJson.projectDescription;
-        document.getElementById('editBtn').setAttribute('href', '/manage/project/edit?id=' + theJson.projectId);
-        HttpGetResponse('/manage/engineer/getOne?ID=' + theJson.projectCreator,
-        function (response) {
-            console.log(response);
-            document.getElementById('engineerName').innerHTML = '负责工程师：' + '<a href="javascript:show_popup_layer_engineer(' + theJson.projectCreator + ')">' + JSON.parse(response).engineerName + '</a>';
-        }, undefined);
-        if (theJson.projectApproved == 1) {
-            document.getElementById('projectApproved').setAttribute('class', document.getElementById('projectApproved').getAttribute('class') + ' layui-btn-disabled');
-            document.getElementById('projectApproved').innerHTML = '审批已通过';
-        }
-    }, function () {;});
+    function deleteProj() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            console.log('/manage/project/delete?ID=' + theProjId);
+            layer.confirm('真的要删除该项目吗？', function (index) {
+                HttpGet('/manage/project/delete?ID=' + theProjId, function () {
+                    history.go(-1);
+                }, function (msg) {
+                    layer.alert(msg);
+                });
+            });
+        });
+    }
+
+    function showTable() {
+        document.getElementById('theList').setAttribute('style', 'padding-left:20px;padding-right:20px;');
+        document.getElementById('theCards').setAttribute('style', 'display:none;');
+    }
+
+    function hideTable() {
+        document.getElementById('theCards').setAttribute('style', 'padding-left:20px;padding-right:20px;');
+        document.getElementById('theList').setAttribute('style', 'display:none;');
+    }
+
+    function refresh() {
+        HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {
+            var theJson = JSON.parse(response);
+            console.log(theJson);
+            document.getElementById('projectName').innerHTML = theJson.projectName;
+            document.getElementById('projectDescription').innerHTML = theJson.projectDescription;
+            document.getElementById('editBtn').setAttribute('href', '/manage/project/edit?id=' + theJson.projectId);
+            HttpGetResponse('/manage/engineer/getOne?ID=' + theJson.projectCreator,
+                function (response) {
+                    console.log(response);
+                    document.getElementById('engineerName').innerHTML = '负责工程师：' + '<a href="javascript:show_popup_layer_engineer(' + theJson.projectCreator + ')">' + JSON.parse(response).engineerName + '</a>';
+                }, undefined);
+            if (theJson.projectApproved == 1) {
+                document.getElementById('projectApproved').setAttribute('class', document.getElementById('projectApproved').getAttribute('class') + ' layui-btn-disabled');
+                document.getElementById('projectApproved').innerHTML = '审批已通过';
+            }
+        }, function () {
+            ;
+        });
+    }
+
+    refresh();
 
 </script>
 

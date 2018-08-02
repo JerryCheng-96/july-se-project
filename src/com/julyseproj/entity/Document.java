@@ -7,6 +7,8 @@ public class Document extends DocumentKey {
 
     private Integer docGroup;
 
+    private Float docEval;
+
     public String getDocDescription() {
         return docDescription;
     }
@@ -29,5 +31,13 @@ public class Document extends DocumentKey {
 
     public void setDocGroup(Integer docGroup) {
         this.docGroup = docGroup;
+    }
+
+    public Float getDocEval() {
+        return docEval;
+    }
+
+    public void setDocEval(Float docEval) {
+        this.docEval = docEval;
     }
 }

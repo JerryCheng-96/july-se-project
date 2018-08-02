@@ -34,7 +34,7 @@ public class EngineerController {
 //    }
 
 
-    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/engineer/data",method = RequestMethod.GET)
     public void getAllEngineerHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllEngineerJson(req,res);
     }
@@ -51,12 +51,12 @@ public class EngineerController {
         es.getEngineerByInstance(ID,res);
     }
 
-    @RequestMapping(value = "/manage/engineer/new",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/engineer/new",method = RequestMethod.POST)
     public void insertEngineerByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.insertEngineerByInstance(req,res);
     }
 
-    @RequestMapping(value = "/manage/engineer/update",method = RequestMethod.GET)
+    @RequestMapping(value = "/manage/engineer/update",method = RequestMethod.POST)
     public void updateEngineerByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateEngineerByInstance(req,res);
     }
