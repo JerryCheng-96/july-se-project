@@ -32,7 +32,7 @@
                 <a class="" href="/manage/project">项目库</a>
             </li>
             <li id="docs" class="layui-nav-item">
-                <a class="" href="/manage/docs">文档库</a>
+                <a class="" href="/manage/document">文档库</a>
             </li>
             <li id="manage_person" class="layui-nav-item">
                 <a href="javascript:;">
