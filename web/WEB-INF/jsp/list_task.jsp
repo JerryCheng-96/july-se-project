@@ -19,7 +19,7 @@
             <br/>
             <div>
                 <div style="float: left"><span style="padding-left: 15px;"><a
-                        <%--href="javascript:popup_program_edit(undefined, function() { lay.table.reload('table_program'); })"--%>
+                        href="javascript:popup_task_edit(undefined, function() { lay.table.reload('table_task'); })"
                         class="layui-btn">添加教学任务</a></span>
                 </div>
                 <div style="float: right; margin-right: 15px;">
@@ -36,8 +36,7 @@
     </div>
 
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">完成并删除</a>
     </script>
 
     <script src="/res/layui/layui.js"></script>
@@ -58,7 +57,7 @@
             }
             HttpGetResponse('/getCurrentUser',function (response) {
                 var theUserJson = JSON.parse(response);
-                table_task(theTable, update_table, '/manage/engineer/getTask?engineerID=' + theUserJson.username);
+                table_task(theTable, update_table, '/manage/engineer/getTask?engineerID=' + theUserJson.username, undefined, '#barDemo');
             });
         });
     </script>

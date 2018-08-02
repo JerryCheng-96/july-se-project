@@ -61,7 +61,7 @@
                         <a href="/manage/program">教学计划</a>
                     </dd>
                     <dd id="teach_task">
-                        <a href="javascript:;">教学任务</a>
+                        <a href="/manage/tasks">教学任务</a>
                     </dd>
                 </dl>
             </li>

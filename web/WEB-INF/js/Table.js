@@ -241,7 +241,8 @@ function table_program(table_program, update_table, dataUrl, showEngineer, toolb
     if (typeof showEngineer == 'undefined') {
         var theCols = [[ //表头
             {field: 'programId', title: 'ID', width: 200, sort: true, fixed: 'left'}
-            , {field: 'programName', title: '计划名称', width: 200, sort: true,
+            , {
+                field: 'programName', title: '计划名称', width: 200, sort: true,
                 templet: '<div><a href="/dashboard/program?id={{d.programId}}" class="layui-table-link">{{d.programName}}</a></div>'
             }
             , {
@@ -339,7 +340,8 @@ function table_task(table_task, update_table, dataUrl, showEngineer, toolbar_nam
     if (typeof showEngineer == 'undefined') {
         var theCols = [[ //表头
             {field: 'taskId', title: 'ID', width: 200, sort: true, fixed: 'left'}
-            , {field: 'taskName', title: '任务名称', width: 200, sort: true
+            , {
+                field: 'taskName', title: '任务名称', width: 200, sort: true
                 // , templet: '<div><a href="/dashboard/program?id={{d.programId}}" class="layui-table-link">{{d.programName}}</a></div>'
             }
             , {
@@ -371,8 +373,10 @@ function table_task(table_task, update_table, dataUrl, showEngineer, toolbar_nam
     table_task.on('tool(table_task)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
 
-        if (layEvent === 'select') {
-            update_table(obj.data.programId);
+        if (layEvent === 'del') {
+            HttpGet('/manage/task/delete?ID=' + obj.data.taskId, update_table, function (msg) {
+                layer.alert(msg);
+            });
         }
     });
 
