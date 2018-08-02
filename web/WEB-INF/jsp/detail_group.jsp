@@ -29,7 +29,7 @@
                     <a href="javascript:delGroup();" class="layui-btn layui-btn-danger">删除</a>
                 </div>
                 <div class="layui-btn-group">
-                    <a href="javascript:add_student();" id="btn_add_log" class="layui-btn layui-btn-primary">添加日志</a>
+                    <a href="javascript:popup_log_edit(undefined, function () { location.reload() }, theGroupId, theStudentId);" id="btn_add_log" class="layui-btn layui-btn-primary">添加日志</a>
                     <a href="javascript:show_group_edit(theGroupId, refresh)" class="layui-btn layui-btn-primary">添加文档</a>
                 </div>
             </div>
@@ -68,7 +68,22 @@
     <script src="/js/PopUp.js"></script>
     <script>
         var theGroupId = getQueryVariable('id');
+        var theStudentId = undefined;
         var theClassId = '';
+
+        HttpGetResponse('/getCurrentUser', function (resp) {
+            theStudentId = JSON.parse(resp).username;
+        });
+
+        function delete_log(logId, whenDone) {
+            layui.use('layer', function () {
+                var layer = layui.layer;
+                layer.confirm('确定删除这条日志吗？', function () {
+                    HttpGet('/manage/log/delete?ID=' + logId, whenDone);
+                })
+
+            })
+        }
 
         function update_log(log_json) {
             console.log('log_json');
@@ -84,7 +99,7 @@
                 logHtml += '<li class="layui-timeline-item">' +
                     '            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>' +
                     '            <div class="layui-timeline-content layui-text">' +
-                    '                <h3 class="layui-timeline-title">' + currLog.logTime + '</h3>' +
+                    '                <h3 class="layui-timeline-title"><a href="javascript:delete_log('+ currLog.logId + ", function () {location.reload();});\">" + currLog.logTime + '</a></h3>' +
                     '                <p>' +
                     currLog.logContent +
                     '                </p>' +

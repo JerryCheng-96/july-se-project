@@ -29,7 +29,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <span style="padding-left:30px; font-size: 17px">班级：<a id="className"></a>  >  小组：<a id="groupName"></a></span>
+                            <span style="padding-left:30px; font-size: 17px">班级：<a id="className"></a>  >  小组：<a
+                                    id="groupName"></a></span>
                         </td>
                     </tr>
                 </table>
@@ -66,6 +67,15 @@
 <script>
     var theStudentId = getQueryVariable('id');
 
+    function delete_log(logId, whenDone) {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.confirm('确定删除这条日志吗？', function () {
+                HttpGet('/manage/log/delete?ID=' + logId, whenDone);
+            })
+        })
+    }
+
     function update_log(log_json) {
         console.log('log_json');
         console.log(log_json);
@@ -80,7 +90,7 @@
             logHtml += '<li class="layui-timeline-item">' +
                 '            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>' +
                 '            <div class="layui-timeline-content layui-text">' +
-                '                <h3 class="layui-timeline-title">' + currLog.logTime + '</h3>' +
+                '                <h3 class="layui-timeline-title"><a href="javascript:delete_log('+ currLog.logId + ", function () {location.reload();});\">" + currLog.logTime + '</a></h3>' +
                 '                <p>' +
                 currLog.logContent +
                 '                </p>' +
