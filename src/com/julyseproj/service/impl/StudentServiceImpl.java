@@ -3,6 +3,10 @@ package com.julyseproj.service.impl;
 import com.julyseproj.entity.view.StudentWithName;
 import com.julyseproj.utils.RequestExceptionResolver;
 import com.mysql.jdbc.MysqlDataTruncation;
+import org.apache.felix.ipojo.transaction.Transactional;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -13,6 +17,8 @@ import com.julyseproj.IDao.StudentMapper;
 import com.julyseproj.utils.ListSorter;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -20,6 +26,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service("studentService")
 public class StudentServiceImpl implements StudentService{
@@ -136,6 +143,38 @@ public class StudentServiceImpl implements StudentService{
         }
         res.setStatus(200);
         return;
+    }
+
+    @Override
+    @Transactional
+    public void importStudentByXlsx(MultipartFile file, HttpServletRequest req, HttpServletResponse res)throws Exception{
+        if (!file.isEmpty()) {
+            String realRootPath = req.getSession().getServletContext().getRealPath("/");
+            System.out.println(realRootPath);
+            String fileName = file.getOriginalFilename();
+            File f = new File(realRootPath, fileName);
+            if (!f.exists()) {
+                f.mkdirs();
+            }
+            file.transferTo(f);
+
+            FileInputStream fis = new FileInputStream(f);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet studentSheet = workbook.getSheetAt(0);
+            int startIdx = studentSheet.getFirstRowNum();
+            int endIdx = studentSheet.getLastRowNum();
+            for (int i=startIdx;i<=endIdx;i++){
+                XSSFRow currRow = studentSheet.getRow(i);
+                Student toInsert = new Student();
+                toInsert.setStudentId(new Integer(currRow.getCell(0).getStringCellValue()));
+                toInsert.setStudentName(currRow.getCell(1).getStringCellValue());
+                toInsert.setStudentSex(currRow.getCell(2).getStringCellValue());
+                toInsert.setStudentGrade(new Integer(currRow.getCell(3).getStringCellValue()));
+                toInsert.setStudentDepartment(currRow.getCell(4).getStringCellValue());
+                toInsert.setStudentMajor(currRow.getCell(5).getStringCellValue());
+                em.insert(toInsert);
+            }
+        }
     }
 
     @Override

@@ -90,6 +90,7 @@ public class DocumentController {
         }catch (Exception e){
             e.printStackTrace();
             RequestExceptionResolver.handle(e,res);
+            return;
         }
         try {
             if (!file.isEmpty()) {

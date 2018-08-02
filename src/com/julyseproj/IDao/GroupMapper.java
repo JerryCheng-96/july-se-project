@@ -1,6 +1,7 @@
 package com.julyseproj.IDao;
 
 import com.julyseproj.entity.Group;
+import com.julyseproj.entity.view.GroupWithProject;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public interface GroupMapper {
     List<Group> selectByClass(Integer classId);
 
     List<Group> selectByProject(Integer projectId);
+
+    List<GroupWithProject> selectByProjectWithName(Integer projectId);
 
     int deleteByPrimaryKey(Integer groupId);
 

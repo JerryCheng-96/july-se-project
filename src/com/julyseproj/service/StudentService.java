@@ -1,6 +1,7 @@
 package com.julyseproj.service;
 
 import com.julyseproj.entity.Student;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ public interface StudentService {
     public String getStudentByInstance(int ID,HttpServletResponse res);
     public void updateStudentByInstance(HttpServletRequest req,HttpServletResponse res);
     public void insertStudentByInstance(HttpServletRequest req,HttpServletResponse res);
+    public void importStudentByXlsx(MultipartFile file, HttpServletRequest req, HttpServletResponse res) throws Exception;
     public void deleteStudentByInstance(int ID,HttpServletResponse res);
     public void getStudentByClass(Integer classID, HttpServletRequest req, HttpServletResponse res);
     public void getStudentByGroup(Integer classID,Integer groupID, HttpServletRequest req, HttpServletResponse res);

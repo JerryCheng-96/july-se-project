@@ -177,7 +177,7 @@ public class LogServiceImpl implements LogService{
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
             Log toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Log.class);
-            em.updateByPrimaryKey(toUpdate);
+            em.updateByPrimaryKeyWithBLOBs(toUpdate);
         }catch (Exception e){
             e.printStackTrace();
             RequestExceptionResolver.handle(e,res);
