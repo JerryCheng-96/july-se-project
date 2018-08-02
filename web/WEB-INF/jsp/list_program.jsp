@@ -11,8 +11,8 @@
 <body class="layui-layout-body">
 <div class="">
     <jsp:include page="frame.jsp">
-        <jsp:param name="cat" value="manage_person"/>
-        <jsp:param name="func" value="man_engineer"/>
+        <jsp:param name="cat" value="man_teach"/>
+        <jsp:param name="func" value="teach_plan"/>
     </jsp:include>
     <div class="layui-body">
         <div class="layui-row">
@@ -20,23 +20,14 @@
             <div>
                 <div style="float: left"><span style="padding-left: 15px;"><a
                         href="javascript:popup_layer_engineer_edit(undefined, function() { lay.table.reload('table_engineer'); })"
-                        class="layui-btn">添加工程师</a></span>
+                        class="layui-btn">添加教学计划</a></span>
                 </div>
                 <div style="float: right; margin-right: 15px;">
-                    <div>
-                        </div>
-                        <div class="layui-input-block" style="float: left;">
-                            <input type="text" name="title" required lay-verify="required" placeholder="查询..."
-                                   autocomplete="off" class="layui-input">
-                        </div>
-                        <div style="float: right; margin-top: 1%"><span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-sm">
-                            <i class="layui-icon layui-icon-search"></i></a></span></div>
 
-                    </div>
                 </div>
                 <div class="layui-row" style="padding: 15px;">
                     <!--在此处添加页面代码-->
-                    <table id="table_engineer" lay-filter="table_engineer"></table>
+                    <table id="table_program" lay-filter="table_program"></table>
                     <!--在此处添加页面代码-->
                 </div>
             </div>
@@ -65,7 +56,7 @@
             var update_table = function () {
                 theTable.reload('table_engineer');
             }
-            table_engineer(theTable, update_table);
+            table_program(theTable, update_table, '/manage/program/data');
         });
     </script>
 </body>

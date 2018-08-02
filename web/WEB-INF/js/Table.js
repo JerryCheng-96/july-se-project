@@ -21,13 +21,13 @@ function table_class(table_class, update_table, dataUrl) {
         ]]
     });
 
-    theTable.on('sort(table_class)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+    table_class.on('sort(table_class)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
         console.log(obj.field); //当前排序的字段名
         console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
         console.log(this); //当前排序的 th 对象
         console.log(theTable);
 
-        theTable.reload('table_class', {
+        table_class.reload('table_class', {
             initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。 layui 2.1.1 新增参数
             , where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
                 field: obj.field //排序字段
@@ -66,8 +66,12 @@ function table_group() {
     })
 }
 
-function table_student(theTable, update_table, dataUrl, showCheckbox) {
-    if (typeof showCheckbox == 'undefined') {
+function table_student(theTable, update_table, dataUrl, showClass, toolbar_name) {
+    if (typeof toolbar_name == 'undefined') {
+        toolbar_name = '#barDemo';
+    }
+
+    if (typeof showClass == 'undefined') {
         var tableCols = [[ //表头
             {field: 'studentId', title: 'ID', width: 100, sort: true, fixed: 'left'}
             , {
@@ -82,13 +86,12 @@ function table_student(theTable, update_table, dataUrl, showCheckbox) {
                 field: 'studentClass', title: '班级', width: 150, sort: true,
                 templet: '<div><a href="/dashboard/class?id={{d.studentClass}}" class="layui-table-link">{{(typeof d.studentClass != "undefined") ? d.studentClass : ""}}</a></div>'
             }
-            , {fixed: 'right', width: 120, align: 'center', toolbar: '#studentBar'}
+            , {fixed: 'right', width: 120, align: 'center', toolbar: toolbar_name}
         ]];
     }
-    else if (showCheckbox == 'yes') {
+    else if (showClass == 'no') {
         var tableCols = [[ //表头
-            {checkbox: true, fixed: 'left'}
-            , {field: 'studentId', title: 'ID', width: 100, sort: true, fixed: 'left'}
+            {field: 'studentId', title: 'ID', width: 100, sort: true, fixed: 'left'}
             , {
                 field: 'studentName', title: '姓名', width: 120, sort: true,
                 templet: '<div><a href="javascript:show_popup_student({{d.studentId}})" class="layui-table-link">{{d.studentName}}</a></div>'
@@ -97,11 +100,7 @@ function table_student(theTable, update_table, dataUrl, showCheckbox) {
             , {field: 'studentDepartment', title: '学院', width: 150, sort: true}
             , {field: 'studentMajor', title: '专业', width: 150, sort: true}
             , {field: 'studentGrade', title: '年级', width: 150, sort: true}
-            , {
-                field: 'studentClass', title: '班级', width: 150, sort: true,
-                templet: '<div><a href="/dashboard/class?id={{d.studentClass}}" class="layui-table-link">{{(typeof d.studentClass != "undefined") ? d.studentClass : ""}}</a></div>'
-            }
-            , {fixed: 'right', width: 120, align: 'center', toolbar: '#studentBar'}
+            , {fixed: 'right', width: 120, align: 'center', toolbar: toolbar_name}
         ]];
     }
 
@@ -131,6 +130,10 @@ function table_student(theTable, update_table, dataUrl, showCheckbox) {
             //do something
             console.log(obj.data)
             show_student_edit(obj.data.studentId, update_table);
+        } else if (layEvent === 'addToClass') {
+            update_table(obj.data.studentId);
+        } else if (layEvent === 'removeFromClass') {
+            update_table(obj.data.studentId);
         }
     });
 
@@ -221,4 +224,58 @@ function table_engineer(theTable, update_table, toolbar_name) {
         });
     });
 
+}
+
+function table_program(table_program, update_table, dataUrl, showEngineer, toolbar_name) {
+    if (typeof showEngineer == 'undefined') {
+        var theCols = [[ //表头
+            {field: 'programId', title: 'ID', width: 200, sort: true, fixed: 'left'}
+            , {field: 'programName', title: '计划名称', width: 200, sort: true}
+            , {
+                field: 'programAuthor', title: '工程师', width: 200, sort: true,
+                templet: '<div><a href="javascript:show_popup_layer_engineer({{d.programAuthor}});" class="layui-table-link">{{d.programAuthor}}</a></div>'
+            }
+            , {fixed: 'right', width: 120, align: 'center', toolbar: toolbar_name}
+        ]];
+    } else if (showEngineer == 'no') {
+        var theCols = [[ //表头
+            {field: 'programId', title: 'ID', width: 200, sort: true, fixed: 'left'}
+            , {field: 'programName', title: '计划名称', width: 200, sort: true}
+            , {fixed: 'right', width: 120, align: 'center', toolbar: toolbar_name}
+        ]];
+    }
+
+    table_program.render({
+        elem: '#table_program'
+        , url: dataUrl
+        , width: '90%'
+        , page: true //开启分页
+        , cols: theCols
+    });
+
+    table_program.on('tool(table_program)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+
+        if (layEvent === 'select') {
+            update_table(obj.data.programId);
+        }
+    });
+
+    table_program.on('sort(table_program)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+        console.log(obj.field); //当前排序的字段名
+        console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+        console.log(this); //当前排序的 th 对象
+        console.log(theTable);
+
+        table_program.reload('table_class', {
+            initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。 layui 2.1.1 新增参数
+            , where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                field: obj.field //排序字段
+                , isAsc: (obj.type == 'asc' ? 'true' : 'false') //排序方式
+            }
+            , page: {
+                curr: 1
+            }
+        });
+    });
 }

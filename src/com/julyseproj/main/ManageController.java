@@ -32,6 +32,11 @@ public class ManageController {
         return "list_project";
     }
 
+    @RequestMapping(value = "/manage/program", method = RequestMethod.GET)
+    public String program_manage() {
+        return "list_program";
+    }
+
     @RequestMapping(value = "/manage/project/edit", method = RequestMethod.GET)
     public String project_edit() {
         return "edit_project";

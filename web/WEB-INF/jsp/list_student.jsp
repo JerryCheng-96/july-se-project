@@ -18,7 +18,7 @@
     <div class="layui-body">
         <div class="layui-row">
             <br/>
-            <span style="padding-left: 15px;"><a href="" class="layui-btn">添加学生</a></span>
+            <span style="padding-left: 15px;"><a href="javascript:popup_student_edit(undefined, function() { lay.table.reload('tableStudent'); })" class="layui-btn">添加学生</a></span>
             <span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-primary">批量导入</a></span>
         </div>
         <div class="layui-row" style="padding: 15px;">
@@ -29,12 +29,16 @@
     </div>
 
 </div>
+<script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
 <script src="/res/layui/layui.js"></script>
 <script src="/js/Interaction.js"></script>
 <script src="/js/Table.js"></script>
 <script src="/js/PopUp.js"></script>
 <script>
-    layui.use(['element', 'table'], function () {
+    var lay = layui.use(['element', 'table'], function () {
         var element = layui.element;
         //一些事件监听
         element.on('tab(demo)', function (data) {

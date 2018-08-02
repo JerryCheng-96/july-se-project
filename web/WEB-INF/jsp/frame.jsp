@@ -51,16 +51,16 @@
             <li id="class_team" class="layui-nav-item">
                 <a class="" href="/manage/class">班组管理</a>
             </li>
-            <li class="layui-nav-item">
+            <li id="man_teach" class="layui-nav-item">
                 <a class="" href="javascript:;">
                     教学管理
                     <span class="layui-nav-more"></span>
                 </a>
                 <dl class="layui-nav-child">
-                    <dd>
-                        <a href="javascript:;">教学计划</a>
+                    <dd id="teach_plan">
+                        <a href="/manage/program">教学计划</a>
                     </dd>
-                    <dd>
+                    <dd id="teach_task">
                         <a href="javascript:;">教学任务</a>
                     </dd>
                 </dl>
