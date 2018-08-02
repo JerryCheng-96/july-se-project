@@ -28,6 +28,10 @@
                     <a href="javascript:show_group_edit(theGroupId, refresh)" class="layui-btn">编辑</a>
                     <a href="javascript:delGroup();" class="layui-btn layui-btn-danger">删除</a>
                 </div>
+                <div class="layui-btn-group">
+                    <a href="javascript:add_student();" id="btn_add_log" class="layui-btn layui-btn-primary">添加日志</a>
+                    <a href="javascript:show_group_edit(theGroupId, refresh)" class="layui-btn layui-btn-primary">添加文档</a>
+                </div>
             </div>
             <div class="layui-row" style="margin-left: 7px">
                 <div class="layui-tab layui-tab-card" style="width: 90%;">
@@ -41,50 +45,7 @@
                             <table id="tableStudent" lay-filter="tableStudent"></table>
                         </div>
                         <div class="layui-tab-item">
-
-                            <ul class="layui-timeline" style="padding-top: 10px">
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <h3 class="layui-timeline-title">8月18日</h3>
-                                        <p>
-                                            layui 2.0 的一切准备工作似乎都已到位。发布之弦，一触即发。
-                                            <br>不枉近百个日日夜夜与之为伴。因小而大，因弱而强。
-                                            <br>无论它能走多远，抑或如何支撑？至少我曾倾注全心，无怨无悔 <i class="layui-icon"></i>
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <h3 class="layui-timeline-title">8月16日</h3>
-                                        <p>杜甫的思想核心是儒家的仁政思想，他有“<em>致君尧舜上，再使风俗淳</em>”的宏伟抱负。个人最爱的名篇有：</p>
-                                        <ul>
-                                            <li>《登高》</li>
-                                            <li>《茅屋为秋风所破歌》</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <h3 class="layui-timeline-title">8月15日</h3>
-                                        <p>
-                                            中国人民抗日战争胜利72周年
-                                            <br>常常在想，尽管对这个国家有这样那样的抱怨，但我们的确生在了最好的时代
-                                            <br>铭记、感恩
-                                            <br>所有为中华民族浴血奋战的英雄将士
-                                            <br>永垂不朽
-                                        </p>
-                                    </div>
-                                </li>
-                                <li class="layui-timeline-item">
-                                    <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
-                                    <div class="layui-timeline-content layui-text">
-                                        <div class="layui-timeline-title">过去</div>
-                                    </div>
-                                </li>
-                            </ul>
+                            <span id="theLogs"></span>
 
                         </div>
                         <div class="layui-tab-item">
@@ -108,15 +69,40 @@
         var theGroupId = getQueryVariable('id');
         var theClassId = '';
 
-        layui.use(['table', 'element'], function () {
+        function update_log(log_json) {
+            console.log('log_json');
+            console.log(log_json);
+
+            var logHtml = '<p style="color: #CCCCCC;margin: 20px; text-align: center">当前无日志记录</p>';
+            for (var i = 0; i < log_json.length; i++) {
+                var currLog = log_json[i];
+
+                if (i == 0) {
+                    logHtml = '<ul class="layui-timeline" style="padding-top: 10px">'
+                }
+                logHtml += '<li class="layui-timeline-item">' +
+                    '            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>' +
+                    '            <div class="layui-timeline-content layui-text">' +
+                    '                <h3 class="layui-timeline-title">' + currLog.logTime + '</h3>' +
+                    '                <p>' +
+                    currLog.logContent +
+                    '                </p>' +
+                    '            </div>' +
+                    '        </li>'
+            }
+            logHtml += '</ul>'
+            document.getElementById('theLogs').innerHTML = logHtml;
+        }
+
+        layui.use(['table', 'element', 'laypage'], function () {
             var element = layui.element;
             //一些事件监听
             element.on('tab(demo)', function (data) {
                 console.log(data);
             });
 
+            var laypage = layui.laypage;
             var table = layui.table;
-
             HttpGetResponse('/manage/group/getOne?ID=' + theGroupId, function (response) {
                 var theGroupJson = JSON.parse(response);
                 document.getElementById('groupName').innerText = theGroupJson.groupName;
@@ -163,8 +149,35 @@
                     document.getElementById('projectName').setAttribute('href', '/dashboard/project?id=' + theProjectJson.projectId);
                 })
             }, function () {
+            });
 
+            HttpGetResponse('/manage/group/log?page=1&limit=5&groupID=' + theGroupId, function (response) {
+                var theJson = JSON.parse(response);
+                var logCount = theJson.count;
+                update_log(theJson.data);
+
+                console.log('projectCnt');
+                console.log(logCount);
+
+                laypage.render({
+                    elem: 'demo0'
+                    , count: logCount //数据总数
+                    , limit: 5
+                    , jump: function (obj, first) {
+                        console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                        console.log(obj.limit); //得到每页显示的条数
+                        if (!first) {
+                            var url = '/manage/group/log?groupID=' + theGroupId + '&page=' + obj.curr + '&limit=' + obj.limit;
+                            HttpGetResponse(url, function (response) {
+                                update_cards(JSON.parse(response).data);
+                            }, function () {
+                                ;
+                            })
+                        }
+                    }
+                });
             })
+
         });
 
         function add_student() {
@@ -190,6 +203,7 @@
             })
         }
 
+
         var cardHtml = '';
         for (var i = 0; i < 10; i++) {
             if (i == 0) {
@@ -202,8 +216,6 @@
         }
         cardHtml += '</div>'
         document.getElementById('theCards').innerHTML = cardHtml;
-
-
     </script>
 </body>
 
