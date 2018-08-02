@@ -30,6 +30,11 @@ public class ClassController {
         return;
     }
 
+    @RequestMapping(value = "/manage/class/add_student",method = RequestMethod.GET)
+    public String addStudentToClass(){
+        return "add_student";
+    }
+
     @RequestMapping(value = "/manage/class/moreData",method = RequestMethod.GET)
     public void getAllClassWithNameHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllClassJsonWithName(req,res);

@@ -20,54 +20,38 @@
         <div class="layui-row">
             <form class="layui-form" action="">
                 <div style="margin-top: 2%;margin-right: 3%;">
-                    <h1 style="padding-left: 32px"><u>创建班级</u></h1>
+                    <h1 style="padding-left: 32px"><u>在班级 <span id="className"></span> 中创建小组</u></h1>
                     <br/>
 
-                    <h2 style="padding-left: 32px">第 1 步：输入班级编号、名称及描述</h2>
+                    <h2 style="padding-left: 32px">第 1 步：输入小组编号及名称</h2>
                     <br/>
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="margin-left: 3%;">
-                            <input type="text" id="classId" name="classId" required lay-verify="required"
-                                   placeholder="班级编号"
+                            <input type="text" id="groupId" name="groupId" required lay-verify="required"
+                                   placeholder="小组编号"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="layui-input-block" style="margin-left: 3%;">
-                            <input type="text" id="className" name="className" required lay-verify="required"
-                                   placeholder="班级名称"
+                            <input type="text" id="groupName" name="groupName" required lay-verify="required"
+                                   placeholder="小组名称"
                                    autocomplete="off" class="layui-input">
                         </div>
                     </div>
 
-                    <div class="layui-form-item layui-form-text">
-                        <div class="layui-input-block" style="margin-left: 3%;">
-                        <textarea id="classDescription" name="classDescription" placeholder="班级描述"
-                                  class="layui-textarea"></textarea>
-                        </div>
-                    </div>
-
                     <br/>
                     <br/>
-                    <h2 style="padding-left: 32px">第 2 步：选择负责工程师</h2>
+                    <h2 style="padding-left: 32px">第 2 步：选择项目</h2>
                     <div style="padding-left: 32px">
-                        <table id="table_engineer" lay-filter="table_engineer"></table>
-                    </div>
-
-                    <br/>
-                    <br/>
-                    <div id="stepThree" style="display: none;">
-                        <h2 style="padding-left: 32px">第 3 步：选择适用教学计划</h2>
-                        <div style="padding-left: 32px">
-                            <table id="table_program" lay-filter="table_program"></table>
-                        </div>
+                        <table id="table_project" lay-filter="table_project"></table>
                     </div>
 
                     <br/>
                     <div class="layui-form-item">
                         <div class="layui-form-item" id="submitButton" style="display: none;">
                             <div class="layui-input-block" style="margin-left: 32px;">
-                                <button class="layui-btn" lay-submit lay-filter="formDemo">创建班级</button>
+                                <button class="layui-btn" lay-submit lay-filter="formDemo">创建小组</button>
                             </div>
                         </div>
                     </div>
@@ -87,12 +71,13 @@
 <script src="/js/PopUp.js"></script>
 <script src="/js/Table.js"></script>
 <script>
-    var selectedEngineerId = '';
-    var selectedProgramId = '';
+    var theClassId = getQueryVariable('classId');
+    var selectedProjectId = '';
 
     layui.use(['element', 'table', 'form'], function () {
         var element = layui.element;
         var table = layui.table;
+        var form = layui.form;
         //一些事件监听
         element.on('tab(demo)', function (data) {
             console.log(data);
@@ -103,28 +88,29 @@
             selectedProgramId = programId;
         }
 
-        var showEngineerProgram = function (engineerId) {
-            selectedProgramId = '';
-            document.getElementById('stepThree').setAttribute('style', '');
-            table_program(table, showSubmitBtn, '/manage/engineer/getProgram?engineerID=' + engineerId, 'no', '#selectEngineer');
-            selectedEngineerId = engineerId;
-        }
+        HttpGetResponse('/manage/class/getOne?ID=' + theClassId, function (response) {
+            var theClassJson = JSON.parse(response);
+            document.getElementById('className').innerText = theClassJson.className;
+            table_project(table, function (projectId) {
+                selectedProjectId = projectId;
+                showSubmitBtn();
+            }, '/manage/engineer/getProject?engineerID=' + theClassJson.classManager, '#selectEngineer');
 
-        table_engineer(table, showEngineerProgram, '#selectEngineer');
-
-        var form = layui.form;
-        form.on('submit(formDemo)', function (data) {
-            var theJson = data.field;
-            theJson.classManager = selectedEngineerId;
-            theJson.classProgram = selectedProgramId;
-            console.log((theJson));
-            HttpPost("/manage/class/new", theJson, function () {
-                window.location.href = '/manage/class';
-            }, function () {
-                ;
+            form.on('submit(formDemo)', function (data) {
+                var theJson = data.field;
+                theJson.groupOnproject = selectedProjectId;
+                theJson.groupFromclass = theClassId;
+                console.log((theJson));
+                HttpPost("/manage/group/new", theJson, function () {
+                    window.location.href = '/dashboard/class?id=' + theClassId;
+                }, function () {
+                    ;
+                });
+                return false;
             });
-            return false;
-        });
+        })
+
+
     });
 
 </script>

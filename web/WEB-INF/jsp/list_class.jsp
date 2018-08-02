@@ -19,7 +19,7 @@
     <div class="layui-body">
         <div class="layui-row">
             <br/>
-            <span style="padding-left: 15px;"><a href="" class="layui-btn">添加班级</a></span>
+            <span style="padding-left: 15px;"><a href="/manage/class/new" class="layui-btn">添加班级</a></span>
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->

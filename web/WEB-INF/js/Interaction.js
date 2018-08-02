@@ -16,7 +16,7 @@ function HttpPost(url, data, whenDone, whenErr) {
                 console.log('POST failed!!! Server Internal Error');
                 whenErr('server_internal_err');
             }
-            else if (xhr.status != 418) {
+            else if (xhr.status == 418) {
                 console.log('POST failed!!! Data Format Error');
                 whenErr('data_format_err');
             }
