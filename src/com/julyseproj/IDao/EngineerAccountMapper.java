@@ -3,6 +3,8 @@ package com.julyseproj.IDao;
 import com.julyseproj.entity.EngineerAccount;
 
 public interface EngineerAccountMapper {
+    EngineerAccount selectByOwner(Integer engineerID);
+
     int deleteByPrimaryKey(Integer accountEId);
 
     int insert(EngineerAccount record);

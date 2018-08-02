@@ -24,28 +24,27 @@
                                  style="width:120px;height:120px;border-radius:120px;margin:0 auto;padding:5px;">
                         </th>
                         <td height="60%">
-                            <span style="font-size:30px; margin:0 auto; padding-left: 30px;">张三</span>
+                            <span id="engineerName" style="font-size:30px; margin:0 auto; padding-left: 30px;"></span>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <span style="padding-left:30px; font-size: 17px">[公司], [部门], [职务]</span>
+                            <span style="padding-left:30px; font-size: 17px"><span id="engineerCompany"></span>, <span
+                                    id="engineerDepartment"></span>, <span id="engineerJob"></span> </span>
                         </td>
                     </tr>
                 </table>
                 <hr>
             </div>
         </div>
-        <div class="layui-row" style="padding-left:20px;padding-right:20px;">
+        <div id="theCards" class="layui-row" style="padding-left:20px;padding-right:20px;">
             <div class="layui-col-md4" style="padding:10px;">
                 <div class="layui-card" style="background-color: #F7F7F7;">
                     <div class="layui-card-header"><b>项目</b></div>
                     <div class="layui-card-body">
-                        <p>项目 1</p>
-                        <p>项目 2</p>
-                        <p>项目 3</p>
+                        <span id="projList"></span>
                         <br/>
-                        <a href="" style="color: blue">查看更多...</a>
+                        <a href="javascript:showTable('listProject');" style="color: blue">查看更多...</a>
                     </div>
                 </div>
             </div>
@@ -53,9 +52,9 @@
                 <div class="layui-card" style="background-color: #F7F7F7">
                     <div class="layui-card-header"><b>教学计划</b></div>
                     <div class="layui-card-body">
-                        <p>教学计划 A</p>
+                        <span id="programList"></span>
                         <br/>
-                        <a href="" style="color: blue">查看更多...</a>
+                        <a href="javascript:showTable('listProgram');" style="color: blue">查看更多...</a>
                     </div>
                 </div>
                 <div class="layui-card" style="background-color: #F7F7F7">
@@ -69,38 +68,125 @@
                 <div class="layui-card" style="background-color: #F7F7F7">
                     <div class="layui-card-header"><b>负责班级</b></div>
                     <div class="layui-card-body">
-                        <p>班级 1</p>
-                        <p>班级 2</p>
+                        <span id="classList"></span>
                         <br/>
-                        <a href="" style="color: blue">查看更多...</a>
+                        <a href="javascript:showTable('listClass');" style="color: blue">查看更多...</a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="listProject" class="layui-row" style="display: none;">
+            <table id="table_project" lay-filter="table_group"></table>
+            <a style="margin-top: 10px" href="javascript:hideTable('listProject');" class="layui-btn">完成</a>
+            <br/>
+            <br/>
+        </div>
+
+        <div id="listProgram" class="layui-row" style="display: none;">
+            <table id="table_program" lay-filter="table_group"></table>
+            <a style="margin-top: 10px" href="javascript:hideTable('listProgram');" class="layui-btn">完成</a>
+            <br/>
+            <br/>
+        </div>
+
+        <div id="listClass" class="layui-row" style="display: none;">
+            <table id="table_class" lay-filter="table_group"></table>
+            <a style="margin-top: 10px" href="javascript:hideTable('listClass');" class="layui-btn">完成</a>
+            <br/>
+            <br/>
+        </div>
+
     </div>
 </div>
 <script src="/res/layui/layui.js"></script>
+<script src="/js/Interaction.js"></script>
+<script src="/js/PopUp.js"></script>
+<script src="/js/Table.js"></script>
 <script>
-    layui.use('element', function () {
+    var theEngineerId = getQueryVariable('id');
+
+    layui.use(['table', 'element'], function () {
         var element = layui.element;
+        var table = layui.table;
         //一些事件监听
         element.on('tab(demo)', function (data) {
             console.log(data);
         });
+
+        HttpGetResponse('/manage/engineer/getOne?ID=' + theEngineerId, function (response) {
+            var theEngineerJson = JSON.parse(response);
+            document.getElementById('engineerName').innerText = theEngineerJson.engineerName;
+            document.getElementById('engineerCompany').innerText = theEngineerJson.engineerCompany;
+            document.getElementById('engineerDepartment').innerText = theEngineerJson.engineerDepartment;
+            document.getElementById('engineerJob').innerText = theEngineerJson.engineerJob;
+        }, function () {
+            ;
+        })
+
+        var theProjectsJson = {};
+        var theProjListHtml = '';
+        HttpGetResponse('/manage/engineer/getProject?page=1&limit=3&engineerID=' + theEngineerId, function (response) {
+            theProjectsJson = JSON.parse(response);
+            console.log('theProjJson');
+            console.log(theProjectsJson);
+            for (var i = 0; i < theProjectsJson.data.length; i++) {
+                theProjListHtml += '<p><a href="/dashboard/project?id=' + theProjectsJson.data[i].projectId + '">' + theProjectsJson.data[i].projectName + '</a></p>'
+                console.log(theProjListHtml);
+            }
+            console.log(theProjListHtml);
+            document.getElementById('projList').innerHTML = theProjListHtml;
+            table_project(table, function () {
+                ;
+            }, '/manage/engineer/getProject?engineerID=' + theEngineerId, '');
+        });
+
+        var theProgramsJson = {};
+        var theProgramListHtml = '';
+        HttpGetResponse('/manage/engineer/getProgram?page=1&limit=3&engineerID=' + theEngineerId, function (response) {
+            theProgramsJson = JSON.parse(response);
+            console.log('theProgramsJson');
+            console.log(theProgramsJson);
+            for (var i = 0; i < theProgramsJson.data.length; i++) {
+                theProgramListHtml += '<p><a href="/dashboard/program?id=' + theProgramsJson.data[i].programId + '">' + theProgramsJson.data[i].programName + '</a></p>'
+                console.log(theProgramListHtml);
+            }
+            console.log(theProgramListHtml);
+            document.getElementById('programList').innerHTML = theProgramListHtml;
+            table_program(table, function () {
+                ;
+            }, '/manage/engineer/getProgram?engineerID=' + theEngineerId, 'no', '');
+        });
+
+        var theClassesJson = {};
+        var theClassListHtml = '';
+        HttpGetResponse('/manage/engineer/getClass?page=1&limit=3&engineerID=' + theEngineerId, function (response) {
+            theClassesJson = JSON.parse(response);
+            console.log('theClassesJson');
+            console.log(theClassesJson);
+            for (var i = 0; i < theClassesJson.data.length; i++) {
+                theClassListHtml += '<p><a href="/dashboard/class?id=' + theClassesJson.data[i].classId + '">' + theClassesJson.data[i].className + '</a></p>'
+                console.log(theClassListHtml);
+            }
+            console.log(theClassListHtml);
+            document.getElementById('classList').innerHTML = theClassListHtml;
+            table_class(table, function () {
+                ;
+            }, '/manage/engineer/getClass?engineerID=' + theEngineerId);
+        });
+
     });
 
-    var cardHtml = '';
-    for (var i = 0; i < 3; i++) {
-        if (i == 0) {
-            cardHtml += '<div class="layui-row" style="padding: 10px;">'
-        }
-        if (i > 0) {
-            cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
-        }
-        cardHtml += '<div class="layui-card"> <div class="layui-card-header"><b>卡片面板</b></div> <div class="layui-card-body"> 卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 </div> </div>';
+    function showTable(id) {
+        document.getElementById(id).setAttribute('style', 'padding-left:30px;padding-right:30px;');
+        document.getElementById('theCards').setAttribute('style', 'display:none;');
     }
-    cardHtml += '</div>'
-    document.getElementById('theCards').innerHTML = cardHtml;
+
+    function hideTable(id) {
+        document.getElementById('theCards').setAttribute('style', 'padding-left:20px;padding-right:20px;');
+        document.getElementById(id).setAttribute('style', 'display:none;');
+    }
+
 
 </script>
 

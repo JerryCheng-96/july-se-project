@@ -8,11 +8,26 @@
     <result column="class_manager" jdbcType="INTEGER" property="classManager" />
     <result column="class_program" jdbcType="INTEGER" property="classProgram" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithName" type="com.julyseproj.entity.view.ClassWithName">
+    <result column="engineer_name" jdbcType="VARCHAR" property="engineerName" />
+    <result column="program_name" jdbcType="VARCHAR" property="programName" />
+  </resultMap>
   <sql id="Base_Column_List">
     class_id, class_name, class_description, class_manager, class_program
   </sql>
+
+  <select id = "selectAllWithName" resultMap="ResultMapWithName">
+    select class_id,class_name,class_description,class_manager,class_program,engineer_name,program_name from class,engineer,program where (class_manager=engineer_id and class_program=program_id)
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Class">
     select * from class;
+  </select>
+  <select id="selectByManager" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from class where class_manager = #{engineerId,jdbcType=INTEGER};
+  </select>
+  <select id="selectByProgram" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select * from class where class_program = #{programId,jdbcType=INTEGER};
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

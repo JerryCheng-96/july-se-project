@@ -18,97 +18,38 @@
     <div class="layui-body">
         <div class="layui-row">
             <br/>
-            <span style="padding-left: 15px;"><a href="" class="layui-btn">添加学生</a></span>
+            <span style="padding-left: 15px;"><a href="javascript:popup_student_edit(undefined, function() { lay.table.reload('tableStudent'); })" class="layui-btn">添加学生</a></span>
             <span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-primary">批量导入</a></span>
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->
-            <table id="demo" lay-filter="test"></table>
+            <table id="tableStudent" lay-filter="tableStudent"></table>
             <!--在此处添加页面代码-->
         </div>
     </div>
 
 </div>
+<script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
 <script src="/res/layui/layui.js"></script>
+<script src="/js/Interaction.js"></script>
+<script src="/js/Table.js"></script>
+<script src="/js/PopUp.js"></script>
 <script>
-    layui.use('element', function () {
+    var lay = layui.use(['element', 'table'], function () {
         var element = layui.element;
         //一些事件监听
         element.on('tab(demo)', function (data) {
             console.log(data);
         });
-    });
 
-    layui.use('table', function () {
         var table = layui.table;
-
-        //第一个实例
-        table.render({
-            elem: '#demo'
-            //,url: '/demo/table/user/' //数据接口
-            ,
-            width: '90%'
-            ,
-            page: true //开启分页
-            ,
-            cols: [[ //表头
-                {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
-                , {field: 'name', title: '姓名', width: 200, sort: true}
-                , {field: 'gender', title: '性别', width: 200, sort: true}
-                , {field: 'colleage', title: '学院', width: 200, sort: true}
-                , {field: 'majority', title: '专业', width: 200, sort: true}
-                , {field: 'grade', title: '年级', width: 200, sort: true}
-                , {
-                    field: 'class',
-                    title: '班级',
-                    width: 200,
-                    sort: true,
-                    templet: '<div><a href="class/{{d.class}}.html" class="layui-table-link">{{d.class}}</a></div>'
-                }
-            ]]
-            ,
-            data: [{
-                'id': 10,
-                'name': 'Zhang',
-                'gender': 'male',
-                'colleage': 'Software',
-                'majority': 'SE',
-                'grade': '2016',
-                'class': 'A210'
-            },
-                {
-                    'id': 11,
-                    'name': 'Deng',
-                    'gender': 'male',
-                    'colleage': 'Software',
-                    'majority': 'SE',
-                    'grade': '2016',
-                    'class': 'A210'
-                },
-                {
-                    'id': 5,
-                    'name': 'Wang',
-                    'gender': 'male',
-                    'colleage': 'Software',
-                    'majority': 'SE',
-                    'grade': '2016',
-                    'class': 'A211'
-                },
-                {
-                    'id': 6,
-                    'name': 'Li',
-                    'gender': 'female',
-                    'colleage': 'Software',
-                    'majority': 'SE',
-                    'grade': '2016',
-                    'class': 'A211'
-                }]
-
-        });
-
-
+        table_student(table, function () {
+            table.reload('tableStudent')
+        }, '/manage/student/moreData');
     });
 </script>
-
 </body>
 </html>

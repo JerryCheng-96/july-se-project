@@ -12,9 +12,19 @@ public class ManageController {
         return "list_student";
     }
 
-    @RequestMapping(value = "/manage/class", method = RequestMethod.GET)
-    public String class_manage() {
+    @RequestMapping(value = "/manage/class",method = RequestMethod.GET)
+    public String class_manage(){
         return "list_class";
+    }
+
+    @RequestMapping(value = "/manage/class/new",method = RequestMethod.GET)
+    public String class_create(){
+        return "create_class";
+    }
+
+    @RequestMapping(value = "/manage/group/new",method = RequestMethod.GET)
+    public String group_create(){
+        return "create_group";
     }
 
     @RequestMapping(value = "/manage/engineer", method = RequestMethod.GET)
@@ -25,6 +35,11 @@ public class ManageController {
     @RequestMapping(value = "/manage/project", method = RequestMethod.GET)
     public String project_manage() {
         return "list_project";
+    }
+
+    @RequestMapping(value = "/manage/program", method = RequestMethod.GET)
+    public String program_manage() {
+        return "list_program";
     }
 
     @RequestMapping(value = "/manage/project/edit", method = RequestMethod.GET)

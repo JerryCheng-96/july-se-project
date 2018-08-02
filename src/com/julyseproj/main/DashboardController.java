@@ -36,14 +36,19 @@ public class DashboardController {
         return "dashboard_person";
     }
 
-    @RequestMapping(value = "/dashboard/team", method = RequestMethod.GET)
+    @RequestMapping(value = "/dashboard/group", method = RequestMethod.GET)
     public String dash_team() {
-        return "detail_team";
+        return "detail_group";
     }
 
     @RequestMapping(value = "/dashboard/project", method = RequestMethod.GET)
     public String dash_project() {
         return "detail_project";
+    }
+
+    @RequestMapping(value = "/dashboard/program", method = RequestMethod.GET)
+    public String dash_program() {
+        return "detail_program";
     }
 
     @RequestMapping(value = "/dashboard/doc", method = RequestMethod.GET)

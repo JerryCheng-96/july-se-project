@@ -7,27 +7,52 @@
     <result column="group_fromclass" jdbcType="INTEGER" property="groupFromclass" />
     <result column="group_onproject" jdbcType="INTEGER" property="groupOnproject" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithProject" type="com.julyseproj.entity.view.GroupWithProject">
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+  </resultMap>
   <sql id="Base_Column_List">
     group_id, group_name, group_fromclass, group_onproject
   </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from `group`;
+  </select>
+
+  <select id="selectByClass" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from `group`
+    where group_fromclass = #{classId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByProject" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from `group`
+    where group_onproject = #{projectId,jdbcType=INTEGER};
+  </select>
+
+  <select id="selectByProjectWithName" parameterType="java.lang.Integer" resultMap="ResultMapWithProject">
+    select group_id, group_name, group_fromclass, group_onproject,project_name from `group`,project
+    where (group_onproject = #{projectId,jdbcType=INTEGER} and group_onproject = project_id)
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from group
+    from `group`
     where group_id = #{groupId,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from group
+    delete from `group`
     where group_id = #{groupId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.julyseproj.entity.Group">
-    insert into group (group_id, group_name, group_fromclass, 
+    insert into `group` (group_id, group_name, group_fromclass,
       group_onproject)
     values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{groupFromclass,jdbcType=INTEGER}, 
       #{groupOnproject,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.julyseproj.entity.Group">
-    insert into group
+    insert into `group`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="groupId != null">
         group_id,
@@ -58,7 +83,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.julyseproj.entity.Group">
-    update group
+    update `group`
     <set>
       <if test="groupName != null">
         group_name = #{groupName,jdbcType=VARCHAR},
@@ -73,7 +98,7 @@
     where group_id = #{groupId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.julyseproj.entity.Group">
-    update group
+    update `group`
     set group_name = #{groupName,jdbcType=VARCHAR},
       group_fromclass = #{groupFromclass,jdbcType=INTEGER},
       group_onproject = #{groupOnproject,jdbcType=INTEGER}

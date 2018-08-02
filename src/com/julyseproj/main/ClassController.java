@@ -23,19 +23,21 @@ public class ClassController {
     @Resource(name = "classService")
     private ClassService es;
 
-    @RequestMapping(value = "/class",method = RequestMethod.GET)
-    public ModelAndView getAll(){
-        ModelAndView mnv = new ModelAndView();
-        List<Class> allClasss = es.getAllClass();
-        System.out.println(allClasss.iterator().next().getClassName());
-        mnv.addObject("classs",allClasss);
-        mnv.setViewName("allClasss");
-        return mnv;
-    }
 
     @RequestMapping(value = "/manage/class/data",method = RequestMethod.GET)
     public void getAllClassHandler(HttpServletRequest req ,HttpServletResponse res){
         es.getAllClassJson(req,res);
+        return;
+    }
+
+    @RequestMapping(value = "/manage/class/add_student",method = RequestMethod.GET)
+    public String addStudentToClass(){
+        return "add_student";
+    }
+
+    @RequestMapping(value = "/manage/class/moreData",method = RequestMethod.GET)
+    public void getAllClassWithNameHandler(HttpServletRequest req ,HttpServletResponse res){
+        es.getAllClassJsonWithName(req,res);
         return;
     }
 
@@ -57,5 +59,15 @@ public class ClassController {
     @RequestMapping(value = "/manage/class/delete",method = RequestMethod.GET)
     public void deleteClassByIdHandler(int ID,HttpServletResponse res){
         es.deleteClassByInstance(ID,res);
+    }
+
+    @RequestMapping(value = "/manage/engineer/getClass",method = RequestMethod.GET)
+    public void getByManagerHandler(int engineerID,HttpServletRequest req,HttpServletResponse res){
+        es.getByManagerJson(engineerID,req,res);
+    }
+
+    @RequestMapping(value = "/manage/program/getClass",method = RequestMethod.GET)
+    public void getByProgramHandler(int programID,HttpServletRequest req,HttpServletResponse res){
+        es.getByProgramJson(programID,req,res);
     }
 }

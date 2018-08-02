@@ -7,6 +7,8 @@ public class StudentAccount {
 
     private Integer accountSOwner;
 
+    private String accountSSession;
+
     public Integer getAccountSId() {
         return accountSId;
     }
@@ -29,5 +31,13 @@ public class StudentAccount {
 
     public void setAccountSOwner(Integer accountSOwner) {
         this.accountSOwner = accountSOwner;
+    }
+
+    public String getAccountSSession() {
+        return accountSSession;
+    }
+
+    public void setAccountSSession(String accountSSession) {
+        this.accountSSession = accountSSession == null ? null : accountSSession.trim();
     }
 }
