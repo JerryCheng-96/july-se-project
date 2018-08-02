@@ -413,6 +413,13 @@ function popup_class_edit(theClass, whenDone) {
 function popup_program_edit(theProgram, whenDone) {
     console.log(theProgram);
     var buttonText = '更改';
+    if (typeof theProgram == 'undefined') {
+        buttonText = '添加';
+        theProgram = {
+            programName: '',
+            programDescription: ''
+        };
+    }
 
     layui.use(['layer', 'form'], function () {
         var layer = layui.layer;
@@ -455,9 +462,20 @@ function popup_program_edit(theProgram, whenDone) {
             theProgram.programName = data.field.programName;
             theProgram.programDescription = data.field.programDescription;
 
-            HttpPost('/manage/program/update', theProgram, whenDone, function (msg) {
-                layer.alert(msg);
-            });
+            if (buttonText == '更改') {
+                HttpPost('/manage/program/update', theProgram, whenDone, function (msg) {
+                    layer.alert(msg);
+                });
+            }
+            else if (buttonText == '添加') {
+                HttpGetResponse('/getCurrentUser', function (response) {
+                    var theUserJson = JSON.parse(response);
+                    theProgram.programAuthor = theUserJson.username;
+                    HttpPost('/manage/program/new', theProgram, whenDone, function (msg) {
+                        layer.alert(msg);
+                    });
+                })
+            }
             return false;
         });
     });
@@ -507,3 +525,4 @@ function popup_group_edit(theGroup, whenDone) {
         });
     });
 }
+

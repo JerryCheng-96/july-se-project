@@ -78,16 +78,25 @@
                 HttpPost("/manage/project/update", theJson, function () {
                     window.location.href = '/dashboard/project?id=' + theJson.projectId;
                 }, function () {
-                   ;
+                    ;
                 });
             }
             else {
-                console.log((theJson));
-                HttpPost("/manage/project/new", theJson, function () {
-                    window.location.href = '/manage/project';
-                }, function () {
-                    ;
-                });
+                HttpGetResponse('/getCurrentUser', function (response) {
+                    var theUserJson = JSON.parse(response);
+
+                    theJson.projectApproved = 0;
+                    theJson.projectName = data.field.projectName;
+                    theJson.projectDescription = data.field.projectDescription;
+                    theJson.projectCreator = theUserJson.username;
+
+                    console.log((theJson));
+                    HttpPost("/manage/project/new", theJson, function () {
+                        window.location.href = '/manage/project';
+                    }, function () {
+                        ;
+                    });
+                })
             }
 
             return false;

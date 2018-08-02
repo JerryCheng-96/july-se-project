@@ -52,4 +52,9 @@ public class ManageController {
         return "list_docs";
     }
 
+    @RequestMapping(value = "/manage/tasks", method = RequestMethod.GET)
+    public String task_manage() {
+        return "list_task";
+    }
+
 }

@@ -42,7 +42,8 @@
     <mvc:interceptors>
         <!-- 多个拦截器，顺序执行 -->
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/dashboard/**"/>
+            <mvc:mapping path="/manage/**"/>
             <bean class="com.julyseproj.LoginInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

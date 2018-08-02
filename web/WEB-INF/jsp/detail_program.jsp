@@ -112,7 +112,7 @@
             console.log('/manage/program/delete?ID=' + theProgramId);
             layer.confirm('真的要删除该教学计划吗？', function (index) {
                 HttpGet('/manage/program/delete?ID=' + theProgramId, function () {
-                    history.go(-1);
+                    window.location.href = '/manage/program';
                 }, function (msg) {
                     layer.alert(msg);
                 });

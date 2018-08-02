@@ -12,22 +12,22 @@
 <div class="">
     <jsp:include page="frame.jsp">
         <jsp:param name="cat" value="man_teach"/>
-        <jsp:param name="func" value="teach_plan"/>
+        <jsp:param name="func" value="teach_task"/>
     </jsp:include>
     <div class="layui-body">
         <div class="layui-row">
             <br/>
             <div>
                 <div style="float: left"><span style="padding-left: 15px;"><a
-                        href="javascript:popup_program_edit(undefined, function() { lay.table.reload('table_program'); })"
-                        class="layui-btn">添加教学计划</a></span>
+                        <%--href="javascript:popup_program_edit(undefined, function() { lay.table.reload('table_program'); })"--%>
+                        class="layui-btn">添加教学任务</a></span>
                 </div>
                 <div style="float: right; margin-right: 15px;">
 
                 </div>
                 <div class="layui-row" style="padding: 15px;">
                     <!--在此处添加页面代码-->
-                    <table id="table_program" lay-filter="table_program"></table>
+                    <table id="table_task" lay-filter="table_task"></table>
                     <!--在此处添加页面代码-->
                 </div>
             </div>
@@ -54,9 +54,12 @@
 
             var theTable = layui.table;
             var update_table = function () {
-                theTable.reload('table_engineer');
+                theTable.reload('table_task');
             }
-            table_program(theTable, update_table, '/manage/program/moreData');
+            HttpGetResponse('/getCurrentUser',function (response) {
+                var theUserJson = JSON.parse(response);
+                table_task(theTable, update_table, '/manage/engineer/getTask?engineerID=' + theUserJson.username);
+            });
         });
     </script>
 </body>

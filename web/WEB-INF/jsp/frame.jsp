@@ -20,7 +20,7 @@
 <div class="layui-side" style="background-color: #0C0C0C">
     <div style="text-align: center">
         <img src="/res/icon/A.jpg" style="width:80px;height:80px;border-radius:80px;margin-top:10%;"/>
-        <a href="/logout"><h2 style="margin-top: 5%; margin-bottom: 10%; color: #F0F0F0">张三</h2></a>
+        <a href="javascript:confirmLogout();"><h2 style="margin-top: 5%; margin-bottom: 10%; color: #F0F0F0">张三</h2></a>
     </div>
     <div class="">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -71,6 +71,7 @@
     </div>
 </div>
 
+<script src="/res/layui/layui.js"></script>
 <script>
     var catId = '<%=(String)request.getParameter("cat")%>';
     var funcId = '<%=(String)request.getParameter("func")%>';
@@ -78,4 +79,12 @@
     var funcObj = document.getElementById(funcId);
     catObj.setAttribute('class', catObj.getAttribute('class') + ' layui-nav-itemed')
     funcObj.setAttribute('class', funcObj.getAttribute('class') + ' layui-this')
+
+    function confirmLogout() {
+        layui.use('layer', function () {
+            layer.confirm('确认退出登录吗？', function () {
+                window.location.href = '/logout';
+            })
+        });
+    }
 </script>

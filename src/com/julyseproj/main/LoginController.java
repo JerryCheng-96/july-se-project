@@ -1,9 +1,7 @@
 package com.julyseproj.main;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.ui.ModelMap;
 
@@ -24,15 +22,28 @@ public class LoginController {
      *
      * @param session  HttpSession
      * @param username 用户名
-     * @param password 密码
      * @return
      */
-    @RequestMapping(value = "/login")
-    public String login(HttpSession session, String username, String password) throws Exception {
+    @RequestMapping(value = "/login.do")
+    public String login_do(HttpSession session, String username, String userType) throws Exception {
         //在Session里保存信息
         session.setAttribute("username", username);
+        session.setAttribute("userType", userType);
         //重定向
+
+        System.out.println("userType: " + userType);
+
+        if (userType.equals("student")) {
+            return "redirect:/dashboard/student?id=" + username;
+        } else if (userType.equals("engineer")) {
+            return "redirect:/dashboard/engineer?id=" + username;
+        }
+
         return "redirect:dashboard";
+    }
+
+    public String login() throws Exception {
+        return "login";
     }
 
     /**
@@ -47,7 +58,17 @@ public class LoginController {
         //清除Session
         session.invalidate();
 
-        return "redirect:login";
+        return "redirect:dashboard";
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
+    public String getCurrUser(HttpSession session) throws Exception {
+        return "{" +
+                "\"username\":" + session.getAttribute("username") + "," +
+                "\"userType\":\"" + session.getAttribute("userType") + "\"" +
+                "}";
     }
 
 

@@ -19,8 +19,7 @@
     <div class="layui-body">
         <div class="layui-row">
             <div>
-                <div style="float: left; padding-top: 10px"><span style="padding-left: 35px;"><a href=""
-                                                                                                 class="layui-btn">添加项目</a></span>
+                <div style="float: left; padding-top: 10px"><span style="padding-left: 35px;"><a href="/manage/project/edit" class="layui-btn">添加项目</a></span>
                 </div>
                 <div style="float: right; margin-right: 25px; margin-top: 5px " id="demo0"></div>
             </div>

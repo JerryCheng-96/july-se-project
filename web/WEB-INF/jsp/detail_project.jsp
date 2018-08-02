@@ -126,7 +126,7 @@
             console.log('/manage/project/delete?ID=' + theProjId);
             layer.confirm('真的要删除该项目吗？', function (index) {
                 HttpGet('/manage/project/delete?ID=' + theProjId, function () {
-                    history.go(-1);
+                    window.location.href = '/manage/project';
                 }, function (msg) {
                     layer.alert(msg);
                 });
