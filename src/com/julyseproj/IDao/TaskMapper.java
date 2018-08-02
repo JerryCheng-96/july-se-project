@@ -8,6 +8,8 @@ public interface TaskMapper {
 
     List<Task> selectByEngineer(Integer engineerId);
 
+    int selectMaxID();
+
     int deleteByPrimaryKey(Integer taskId);
 
     int insert(Task record);

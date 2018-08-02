@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface ProgramService {
     public List<Program> getAllProgram();
     public String getAllProgramJson(HttpServletRequest req, HttpServletResponse res);
+    public String getAllProgramJsonWithAuthor(HttpServletRequest req,HttpServletResponse res);
     public List<Program> getByAuthor(int engineerID);
     public String getByAuthorJson(int engineerID, HttpServletRequest req, HttpServletResponse res);
     public String getProgramByInstance(int ID,HttpServletResponse res);

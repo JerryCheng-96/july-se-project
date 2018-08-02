@@ -29,6 +29,12 @@ public class StudentController {
         return;
     }
 
+    @RequestMapping(value = "/manage/student/moreData",method = RequestMethod.GET)
+    public void getAllStudentWithNameHandler(HttpServletRequest req ,HttpServletResponse res){
+        es.getAllStudentJsonWithName(req,res);
+        return;
+    }
+
     @RequestMapping(value = "/manage/student/getOne",method = RequestMethod.GET)
     public void getStudentByIdHandler(int ID,HttpServletResponse res){
         es.getStudentByInstance(ID,res);
@@ -55,7 +61,7 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/manage/group/getStudent",method = RequestMethod.GET)
-    public void getStudentByGroupHandler(Integer groupID,HttpServletRequest req,HttpServletResponse res){
-        es.getStudentByClass(groupID, req, res);
+    public void getStudentByGroupHandler(Integer classID, Integer groupID,HttpServletRequest req,HttpServletResponse res){
+        es.getStudentByGroup(classID,groupID, req, res);
     }
 }

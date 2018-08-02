@@ -44,62 +44,63 @@ public class EngineerAccountServiceImpl implements EngineerAccountService{
         return responseJson;
     }
 
-        @Override
-        public String getEngineerAccountByInstance(int ID,HttpServletResponse res){
-                res.setContentType("text/html;charset=UTF-8");
-                EngineerAccount response = em.selectByPrimaryKey(ID);
-                Gson gson = new Gson();
-                String responseJson = gson.toJson(response);
-                System.out.println(responseJson);
-                try {
-                        res.getWriter().write(responseJson);
-                }catch (Exception e){
-                        e.printStackTrace();
-                        RequestExceptionResolver.handle(e,res);
-                        return "";
-                }
-                return responseJson;
+    @Override
+    public String getEngineerAccountByInstance(int ID,HttpServletResponse res){
+        res.setContentType("text/html;charset=UTF-8");
+        EngineerAccount response = em.selectByPrimaryKey(ID);
+        Gson gson = new Gson();
+        String responseJson = gson.toJson(response);
+        System.out.println(responseJson);
+        try {
+            res.getWriter().write(responseJson);
+        }catch (Exception e){
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
+        return responseJson;
+    }
     
-@Override
-public void insertEngineerAccountByInstance(HttpServletRequest req, HttpServletResponse res) {
+    @Override
+    public void insertEngineerAccountByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
-        Gson gson = new Gson();
-        String requestContent = req.getReader().readLine();
-        EngineerAccount toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),EngineerAccount.class);
-        em.insert(toInsert);
+            Gson gson = new Gson();
+            String requestContent = req.getReader().readLine();
+            EngineerAccount toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),EngineerAccount.class);
+            em.insert(toInsert);
         }catch (Exception e) {
-        e.printStackTrace();
-        RequestExceptionResolver.handle(e,res);
-        return;
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return;
         }
         res.setStatus(200);
         return;
         }
 
-@Override
-public void updateEngineerAccountByInstance(HttpServletRequest req, HttpServletResponse res) {
+    @Override
+    public void updateEngineerAccountByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
-        Gson gson = new Gson();
-        String requestContent = req.getReader().readLine();
-        EngineerAccount toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),EngineerAccount.class);
-        em.updateByPrimaryKey(toUpdate);
+            Gson gson = new Gson();
+            String requestContent = req.getReader().readLine();
+            EngineerAccount toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),EngineerAccount.class);
+            em.updateByPrimaryKey(toUpdate);
         }catch (Exception e) {
-        e.printStackTrace();
-        RequestExceptionResolver.handle(e,res);
-        return;
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return;
         }
         res.setStatus(200);
         return;
-        }
+    }
 
-public void deleteEngineerAccountByInstance(int ID,HttpServletResponse res){
+    @Override
+    public void deleteEngineerAccountByInstance(int ID,HttpServletResponse res){
         try {
-        em.deleteByPrimaryKey(ID);
+            em.deleteByPrimaryKey(ID);
         } catch (Exception e){
-        e.printStackTrace();
-        RequestExceptionResolver.handle(e,res);
-        return;
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return;
         }
         res.setStatus(200);
         return;

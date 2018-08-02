@@ -120,7 +120,9 @@ public class ProjectServiceImpl implements ProjectService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }

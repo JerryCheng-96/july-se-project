@@ -7,36 +7,41 @@
     <result column="doc_description" jdbcType="VARCHAR" property="docDescription" />
     <result column="doc_uploader" jdbcType="INTEGER" property="docUploader" />
     <result column="doc_group" jdbcType="INTEGER" property="docGroup" />
+    <result column="doc_eval" jdbcType="REAL" property="docEval" />
   </resultMap>
   <sql id="Base_Column_List">
-    doc_name, doc_url, doc_description, doc_uploader, doc_group
+    doc_name, doc_url, doc_description, doc_uploader, doc_group, doc_eval
   </sql>
+
   <select id="selectAll" resultMap="BaseResultMap" resultType="com.julyseproj.entity.Document">
     select * from document;
   </select>
   <select id="selectByUploader" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select * from document where document_uploader = #{studentId,jdbcType=INTEGER};
+    select * from document where doc_uploader = #{studentId,jdbcType=INTEGER};
   </select>
   <select id="selectByGroup" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select * from document where document_group = #{groupId,jdbcType=INTEGER};
+    select * from document where doc_group = #{groupId,jdbcType=INTEGER};
   </select>
+
   <select id="selectByPrimaryKey" parameterType="com.julyseproj.entity.DocumentKey" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from document
     where doc_name = #{docName,jdbcType=VARCHAR}
-      and doc_url = #{docUrl,jdbcType=VARCHAR}
+    and doc_url = #{docUrl,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.julyseproj.entity.DocumentKey">
     delete from document
     where doc_name = #{docName,jdbcType=VARCHAR}
-      and doc_url = #{docUrl,jdbcType=VARCHAR}
+          and doc_url = #{docUrl,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.julyseproj.entity.Document">
-    insert into document (doc_name, doc_url, doc_description, 
-      doc_uploader, doc_group)
-    values (#{docName,jdbcType=VARCHAR}, #{docUrl,jdbcType=VARCHAR}, #{docDescription,jdbcType=VARCHAR}, 
-      #{docUploader,jdbcType=INTEGER}, #{docGroup,jdbcType=INTEGER})
+    insert into document (doc_name, doc_url, doc_description,
+                          doc_uploader, doc_group, doc_eval
+    )
+    values (#{docName,jdbcType=VARCHAR}, #{docUrl,jdbcType=VARCHAR}, #{docDescription,jdbcType=VARCHAR},
+            #{docUploader,jdbcType=INTEGER}, #{docGroup,jdbcType=INTEGER}, #{docEval,jdbcType=REAL}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.julyseproj.entity.Document">
     insert into document
@@ -56,6 +61,9 @@
       <if test="docGroup != null">
         doc_group,
       </if>
+      <if test="docEval != null">
+        doc_eval,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="docName != null">
@@ -73,6 +81,9 @@
       <if test="docGroup != null">
         #{docGroup,jdbcType=INTEGER},
       </if>
+      <if test="docEval != null">
+        #{docEval,jdbcType=REAL},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.julyseproj.entity.Document">
@@ -87,16 +98,20 @@
       <if test="docGroup != null">
         doc_group = #{docGroup,jdbcType=INTEGER},
       </if>
+      <if test="docEval != null">
+        doc_eval = #{docEval,jdbcType=REAL},
+      </if>
     </set>
     where doc_name = #{docName,jdbcType=VARCHAR}
-      and doc_url = #{docUrl,jdbcType=VARCHAR}
+    and doc_url = #{docUrl,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.julyseproj.entity.Document">
     update document
     set doc_description = #{docDescription,jdbcType=VARCHAR},
       doc_uploader = #{docUploader,jdbcType=INTEGER},
-      doc_group = #{docGroup,jdbcType=INTEGER}
+      doc_group = #{docGroup,jdbcType=INTEGER},
+      doc_eval = #{docEval,jdbcType=REAL}
     where doc_name = #{docName,jdbcType=VARCHAR}
-      and doc_url = #{docUrl,jdbcType=VARCHAR}
+          and doc_url = #{docUrl,jdbcType=VARCHAR}
   </update>
 </mapper>

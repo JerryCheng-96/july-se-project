@@ -25,6 +25,9 @@
   <select id="selectByGroup" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select * from log where log_group = #{groupId,jdbcType=INTEGER};
   </select>
+  <select id="selectMaxID" resultType="java.lang.Integer">
+    select max(log_id) from log;
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />

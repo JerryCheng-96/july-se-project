@@ -159,6 +159,23 @@ public class DocumentServiceImpl implements DocumentService{
     }
 
     @Override
+    public void evaluateDocumentByInstance(String docName,String docUrl,Float docEval,HttpServletResponse res){
+        try {
+            Document doc = new Document();
+            doc.setDocName(docName);
+            doc.setDocUrl(docUrl);
+            doc.setDocEval(docEval);
+            em.updateByPrimaryKeySelective(doc);
+        }catch (Exception e){
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return;
+        }
+        res.setStatus(200);
+        return;
+    }
+
+    @Override
     public void insertDocumentByInstance(HttpServletRequest req, HttpServletResponse res) {
         try {
             Gson gson = new Gson();

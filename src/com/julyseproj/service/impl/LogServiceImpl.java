@@ -1,5 +1,6 @@
 package com.julyseproj.service.impl;
 
+import com.julyseproj.utils.RequestExceptionResolver;
 import com.mysql.jdbc.MysqlDataTruncation;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -53,7 +54,9 @@ public class LogServiceImpl implements LogService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -88,7 +91,9 @@ public class LogServiceImpl implements LogService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -123,7 +128,9 @@ public class LogServiceImpl implements LogService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return "";
         }
         return responseJson;
     }
@@ -139,9 +146,8 @@ public class LogServiceImpl implements LogService{
         try {
             res.getWriter().write(responseJson);
         }catch (Exception e){
-            System.out.println(e.getMessage());
             e.printStackTrace();
-            res.setStatus(500);
+            RequestExceptionResolver.handle(e,res);
             return "";
         }
         return responseJson;
@@ -153,17 +159,12 @@ public class LogServiceImpl implements LogService{
             Gson gson = new Gson();
             String requestContent = req.getReader().readLine();
             Log toInsert = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Log.class);
+            int currMaxId = em.selectMaxID();
+            toInsert.setLogId(currMaxId+1);
             em.insert(toInsert);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            res.setStatus(500);
-            return;
-        }catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -177,16 +178,9 @@ public class LogServiceImpl implements LogService{
             String requestContent = req.getReader().readLine();
             Log toUpdate = gson.fromJson(new String(requestContent.getBytes("ISO-8859-1"),"UTF-8"),Log.class);
             em.updateByPrimaryKey(toUpdate);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            res.setStatus(500);
-            return;
-        }catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
@@ -196,11 +190,9 @@ public class LogServiceImpl implements LogService{
     public void deleteLogByInstance(int ID,HttpServletResponse res){
         try {
             em.deleteByPrimaryKey(ID);
-        } catch (DataIntegrityViolationException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
-            //Throwable cause = e.getCause();
-            res.setStatus(148);
+            RequestExceptionResolver.handle(e,res);
             return;
         }
         res.setStatus(200);
