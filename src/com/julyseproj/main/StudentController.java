@@ -62,15 +62,30 @@ public class StudentController {
         return "testimport";
     }
     @RequestMapping(value = "/manage/student/doImport",method = RequestMethod.POST)
-    public void doImportStudentHandler(@RequestParam MultipartFile file, HttpServletRequest req, HttpServletResponse res){
-        try {
-            es.importStudentByXlsx(file, req, res);
-        }catch (Exception e){
-            e.printStackTrace();
-            RequestExceptionResolver.handle(e,res);
+    public void doImportStudentHandler(@RequestParam MultipartFile file, HttpServletRequest req, HttpServletResponse res)throws Exception{
+        if(file.isEmpty()){
+            res.setStatus(400);
             return;
+        }else {
+            String realRootPath = req.getSession().getServletContext().getRealPath("/cache");
+            System.out.println(realRootPath);
+            String fileName = file.getOriginalFilename();
+            File f = new File(realRootPath, fileName);
+            try {
+                if (!f.exists()) {
+                    f.mkdirs();
+                }
+                file.transferTo(f);
+                es.importStudentByXlsx(f, req, res);
+            }catch (Exception e){
+                e.printStackTrace();
+                RequestExceptionResolver.handle(e,res);
+                if(f.exists()&&f.isFile()) {
+                    f.delete();
+                }
+                throw e;
+            }
         }
-        res.setStatus(200);
     }
 
     @RequestMapping(value = "/manage/student/delete",method = RequestMethod.GET)

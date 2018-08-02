@@ -3,12 +3,15 @@ package com.julyseproj.service.impl;
 import com.julyseproj.entity.view.StudentWithName;
 import com.julyseproj.utils.RequestExceptionResolver;
 import com.mysql.jdbc.MysqlDataTruncation;
+import org.apache.catalina.core.ApplicationContext;
 import org.apache.felix.ipojo.transaction.Transactional;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.stereotype.Service;
 import com.julyseproj.entity.Student;
@@ -26,6 +29,11 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import com.google.gson.Gson;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service("studentService")
@@ -146,24 +154,19 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Override
-    @Transactional
-    public void importStudentByXlsx(MultipartFile file, HttpServletRequest req, HttpServletResponse res)throws Exception{
-        if (!file.isEmpty()) {
-            String realRootPath = req.getSession().getServletContext().getRealPath("/");
-            System.out.println(realRootPath);
-            String fileName = file.getOriginalFilename();
-            File f = new File(realRootPath, fileName);
-            if (!f.exists()) {
-                f.mkdirs();
-            }
-            file.transferTo(f);
-
+    public void importStudentByXlsx(File f, HttpServletRequest req, HttpServletResponse res)throws Exception{
+        WebApplicationContext wctx = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext());
+        DataSourceTransactionManager transactionManager = (DataSourceTransactionManager) wctx.getBean("transactionManager");
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW); // 事物隔离级别，开启新事务，这样会比较安全些。
+        TransactionStatus status = transactionManager.getTransaction(def); // 获得事务状态
+        try {
             FileInputStream fis = new FileInputStream(f);
             XSSFWorkbook workbook = new XSSFWorkbook(fis);
             XSSFSheet studentSheet = workbook.getSheetAt(0);
             int startIdx = studentSheet.getFirstRowNum();
             int endIdx = studentSheet.getLastRowNum();
-            for (int i=startIdx;i<=endIdx;i++){
+            for (int i = startIdx; i <= endIdx; i++) {
                 XSSFRow currRow = studentSheet.getRow(i);
                 Student toInsert = new Student();
                 toInsert.setStudentId(new Integer(currRow.getCell(0).getStringCellValue()));
@@ -174,6 +177,15 @@ public class StudentServiceImpl implements StudentService{
                 toInsert.setStudentMajor(currRow.getCell(5).getStringCellValue());
                 em.insert(toInsert);
             }
+            fis.close();
+            if (f.exists() && f.isFile()) {
+                f.delete();
+            }
+            res.getWriter().write("{\"status\":\"done\"}");
+            transactionManager.commit(status);
+        }catch (Exception e){
+            transactionManager.rollback(status);
+            throw e;
         }
     }
 
