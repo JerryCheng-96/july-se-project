@@ -19,7 +19,7 @@
         <div class="layui-row">
             <br/>
             <span style="padding-left: 15px;"><a href="javascript:popup_student_edit(undefined, function() { lay.table.reload('tableStudent'); })" class="layui-btn">添加学生</a></span>
-            <span style="padding-left: 15px;"><a href="" class="layui-btn layui-btn-primary">批量导入</a></span>
+            <span style="padding-left: 15px;"><a class="layui-btn layui-btn-primary" id="importStudent"><i class="layui-icon">&#xe67c;</i>批量导入</a></span>
         </div>
         <div class="layui-row" style="padding: 15px;">
             <!--在此处添加页面代码-->
@@ -38,7 +38,7 @@
 <script src="/js/Table.js"></script>
 <script src="/js/PopUp.js"></script>
 <script>
-    var lay = layui.use(['element', 'table'], function () {
+    var lay = layui.use(['element', 'table', 'upload'], function () {
         var element = layui.element;
         //一些事件监听
         element.on('tab(demo)', function (data) {
@@ -49,6 +49,21 @@
         table_student(table, function () {
             table.reload('tableStudent')
         }, '/manage/student/moreData');
+
+        var upload = layui.upload;
+        var uploadInst = upload.render({
+            elem: '#importStudent' //绑定元素
+            ,url: '/manage/student/doImport' //上传接口
+            ,accept:'file'
+            //,data:{ teamID:1 }  //require a document json
+            ,done: function(res){
+                //上传完毕回调
+                console.log(res);
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
     });
 </script>
 </body>

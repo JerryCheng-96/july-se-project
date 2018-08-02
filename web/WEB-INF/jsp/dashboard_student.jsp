@@ -115,11 +115,12 @@
             HttpGetResponse('/manage/class/getOne?ID=' + theStudentJson.studentClass, function (response) {
                 var theClassJson = JSON.parse(response);
                 document.getElementById('className').innerText = theClassJson.className;
+                document.getElementById('className').setAttribute('href', '/dashboard/class?id=' + theClassJson.classId);
             });
             HttpGetResponse('/manage/group/getOne?ID=' + theStudentJson.studentGroup, function (response) {
                 var theGroupJson = JSON.parse(response);
                 document.getElementById('groupName').innerText = theGroupJson.groupName;
-
+                document.getElementById('groupName').setAttribute('href', '/dashboard/group?id=' + theGroupJson.groupId);
             });
         });
 

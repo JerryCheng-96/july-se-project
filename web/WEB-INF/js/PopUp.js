@@ -526,3 +526,185 @@ function popup_group_edit(theGroup, whenDone) {
     });
 }
 
+function popup_task_edit(theTask, whenDone) {
+    console.log(theTask);
+    var buttonText = '更改';
+    if (typeof theTask == 'undefined') {
+        buttonText = '添加';
+        theTask = {
+            taskName: '',
+            taskDescription: ''
+        };
+    }
+
+    layui.use(['layer', 'form', 'laydate'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+        var laydate = layui.laydate;
+
+        var selDate = '';
+
+        layer.open({
+            type: 1,
+            title: '',
+            content: "<div style='width: 90%; margin-right: 30px; margin-top: 30px';>" +
+                "<form class=\"layui-form\" action=\"\"'>" +
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>任务名称</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"taskName\" value='" + theTask.taskName + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>任务描述</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"taskDescription\" value='" + theTask.taskDescription + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>截止时间</label>" +
+                "    <div class=\"layui-input-block\">" +
+                '       <input type="text" name="taskTime" class="layui-input" id="dateTimePicker"> ' +
+                "    </div>" +
+                "  </div>" +
+
+
+                "  <div class=\"layui-form-item\">" +
+                "    <div class=\"layui-input-block\">" +
+                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">" + buttonText + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
+                "    </div>" +
+                "  </div>" +
+                "</form>" +
+                "</div>",
+            area: '450px',
+        });
+
+        form.render();
+
+        laydate.render({
+            elem: '#dateTimePicker',
+            type: 'datetime',
+            done: function (value) {
+                selDate = value;
+                console.log(typeof selDate);
+                console.log(selDate);
+            }
+        });
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            theTask.taskName = data.field.taskName;
+            theTask.taskDescription = data.field.taskDescription;
+            theTask.taskTime = selDate;
+
+            if (buttonText == '更改') {
+                HttpPost('/manage/task/update', theTask, whenDone, function (msg) {
+                    layer.alert(msg);
+                });
+            }
+            else if (buttonText == '添加') {
+                HttpGetResponse('/getCurrentUser', function (response) {
+                    var theUserJson = JSON.parse(response);
+                    theTask.taskEngineer = theUserJson.username;
+                    HttpPost('/manage/task/new', theTask, whenDone, function (msg) {
+                        layer.alert(msg);
+                    });
+                })
+            }
+            return false;
+        });
+
+
+    });
+}
+
+function popup_log_edit(theLog, whenDone, groupId, studentId) {
+    console.log(theLog);
+    var buttonText = '更改';
+    if (typeof theLog == 'undefined') {
+        buttonText = '添加';
+        theLog = {
+            logContent: '',
+            logTime: '',
+            logUploader: studentId,
+            logGroup: groupId
+        };
+    }
+
+    layui.use(['layer', 'form', 'laydate'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+        var laydate = layui.laydate;
+
+        var selDate;
+
+        layer.open({
+            type: 1,
+            title: '',
+            content: "<div style='width: 90%; margin-right: 30px; margin-top: 30px';>" +
+                "<form class=\"layui-form\" action=\"\"'>" +
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>日志内容</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"logContent\" value='" + theLog.logContent + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>时间</label>" +
+                "    <div class=\"layui-input-block\">" +
+                '       <input type="text" name="logTime" class="layui-input" id="dateTimePicker"> ' +
+                "    </div>" +
+                "  </div>" +
+
+
+                "  <div class=\"layui-form-item\">" +
+                "    <div class=\"layui-input-block\">" +
+                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">" + buttonText + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
+                "    </div>" +
+                "  </div>" +
+                "</form>" +
+                "</div>",
+            area: '450px',
+        });
+
+        form.render();
+
+        laydate.render({
+            elem: '#dateTimePicker',
+            type: 'datetime',
+            done: function (value) {
+                selDate = value;
+                console.log(typeof selDate);
+                console.log(selDate);
+            }
+        });
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            console.log('Submitting log!')
+            theLog.logContent = data.field.logContent;
+            theLog.logTime = selDate;
+
+            if (buttonText == '更改') {
+                HttpPost('/manage/log/update', theLog, whenDone, function (msg) {
+                    layer.alert(msg);
+                });
+            }
+            else if (buttonText == '添加') {
+                console.log('theLog');
+                console.log(theLog);
+                HttpPost('/manage/log/new', theLog, whenDone, function (msg) {
+                    layer.alert(msg);
+                });
+            }
+            return false;
+        });
+
+
+    });
+}
