@@ -30,7 +30,7 @@
                 </div>
                 <div class="layui-btn-group">
                     <a href="javascript:popup_log_edit(undefined, function () { location.reload() }, theGroupId, theStudentId);" id="btn_add_log" class="layui-btn layui-btn-primary">添加日志</a>
-                    <a href="javascript:show_group_edit(theGroupId, refresh)" class="layui-btn layui-btn-primary">添加文档</a>
+                    <a href="javascript:popup_file_upload(theGroupId, theStudentId);" class="layui-btn layui-btn-primary">添加文档</a>
                 </div>
             </div>
             <div class="layui-row" style="margin-left: 7px">

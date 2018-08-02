@@ -47,9 +47,9 @@ public class ManageController {
         return "edit_project";
     }
 
-    @RequestMapping(value = "/manage/docs", method = RequestMethod.GET)
-    public String docs_manage() {
-        return "list_docs";
+    @RequestMapping(value = "/manage/document", method = RequestMethod.GET)
+    public String document_manage() {
+        return "list_document";
     }
 
     @RequestMapping(value = "/manage/tasks", method = RequestMethod.GET)
