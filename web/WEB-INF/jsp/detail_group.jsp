@@ -46,6 +46,7 @@
                         </div>
                         <div class="layui-tab-item">
                             <span id="theLogs"></span>
+                            <div style="margin-right: 25px; margin-top: 5px" id="demo0"></div>
 
                         </div>
                         <div class="layui-tab-item">
@@ -90,7 +91,7 @@
                     '            </div>' +
                     '        </li>'
             }
-            logHtml += '</ul>'
+            logHtml += '</ul>';
             document.getElementById('theLogs').innerHTML = logHtml;
         }
 
@@ -169,14 +170,14 @@
                         if (!first) {
                             var url = '/manage/group/log?groupID=' + theGroupId + '&page=' + obj.curr + '&limit=' + obj.limit;
                             HttpGetResponse(url, function (response) {
-                                update_cards(JSON.parse(response).data);
+                                update_log(JSON.parse(response).data);
                             }, function () {
                                 ;
                             })
                         }
                     }
                 });
-            })
+            });
 
         });
 
