@@ -25,7 +25,7 @@
             elem: '#test1' //绑定元素
             ,url: '/manage/document/doUpload' //上传接口
             ,accept:'file'
-            //,data:{ teamID:1 }  //require a document json
+            ,data:{ groupID:1,uploaderID:999,description:"description" }  //require a document json
             ,done: function(res){
                 //上传完毕回调
                 console.log(res);
