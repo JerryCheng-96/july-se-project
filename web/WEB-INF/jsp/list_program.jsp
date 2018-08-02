@@ -56,7 +56,7 @@
             var update_table = function () {
                 theTable.reload('table_engineer');
             }
-            table_program(theTable, update_table, '/manage/program/data');
+            table_program(theTable, update_table, '/manage/program/moreData');
         });
     </script>
 </body>

@@ -42,6 +42,7 @@
 <script src="/js/Table.js"></script>
 <script>
     var theClassId = getQueryVariable('classId');
+    var theGroupId = getQueryVariable('groupId');
 
     layui.use(['element', 'table'], function () {
         var element = layui.element;
@@ -51,31 +52,58 @@
             console.log(data);
         });
 
-        HttpGetResponse('/manage/class/getOne?ID=' + theClassId, function (response) {
-            var theJson = JSON.parse(response);
-            document.getElementById('title').innerHTML = '向 ' + theJson.className + ' 添加学生';
-        }, function () {
-            ;
-        });
+        if (theClassId != false && theGroupId == false) {
+            HttpGetResponse('/manage/class/getOne?ID=' + theClassId, function (response) {
+                var theJson = JSON.parse(response);
+                document.getElementById('title').innerHTML = '向班级 ' + theJson.className + ' 添加学生';
+            }, function () {
+                ;
+            });
 
-        table_student(table, function (studentId) {
-            HttpGetResponse('/manage/student/getOne?ID=' + studentId,
-                function (response) {
-                    var theJson = JSON.parse(response);
-                    theJson.studentClass = theClassId;
-                    HttpPost('/manage/student/update', theJson, function () {
-                        table.reload('tableStudent');
-                    }, function (msg) {
-                        layer.alert(msg);
-                    });
-                }, undefined);
-        }, '/manage/class/getStudent', 'no', '#addStudent');
+            table_student(table, function (studentId) {
+                HttpGetResponse('/manage/student/getOne?ID=' + studentId,
+                    function (response) {
+                        var theJson = JSON.parse(response);
+                        theJson.studentClass = theClassId;
+                        HttpPost('/manage/student/update', theJson, function () {
+                            table.reload('tableStudent');
+                        }, function (msg) {
+                            layer.alert(msg);
+                        });
+                    }, undefined);
+            }, '/manage/class/getStudent', 'no', '#addStudent');
+        }
+        else if (theClassId != false && theGroupId != false) {
+            HttpGetResponse('/manage/group/getOne?ID=' + theGroupId, function (response) {
+                var theJson = JSON.parse(response);
+                document.getElementById('title').innerHTML = '向小组 ' + theJson.groupName + ' 添加学生';
+            }, function () {
+                ;
+            });
 
-
+            table_student(table, function (studentId) {
+                HttpGetResponse('/manage/student/getOne?ID=' + studentId,
+                    function (response) {
+                        var theJson = JSON.parse(response);
+                        theJson.studentClass = theClassId;
+                        theJson.studentGroup = theGroupId
+                        HttpPost('/manage/student/update', theJson, function () {
+                            table.reload('tableStudent');
+                        }, function (msg) {
+                            layer.alert(msg);
+                        });
+                    }, undefined);
+            }, '/manage/group/getStudent?classID=' + theClassId, 'no', '#addStudent');
+        }
     });
 
     function done() {
-        window.location.href = '/dashboard/class?id=' + theClassId;
+        if (theGroupId == false) {
+            window.location.href = '/dashboard/class?id=' + theClassId;
+        }
+        else {
+            window.location.href = '/dashboard/group?id=' + theGroupId;
+        }
     }
 </script>
 

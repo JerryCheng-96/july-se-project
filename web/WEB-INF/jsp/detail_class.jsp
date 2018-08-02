@@ -27,8 +27,8 @@
                 <hr>
                 <div class="layui-btn-group">
                     <a href="javascript:add_student();" class="layui-btn layui-btn-normal">添加学生</a>
-                    <button class="layui-btn layui-btn-normal">添加小组</button>
-                    <button class="layui-btn">编辑</button>
+                    <a href="javascript:add_group();" class="layui-btn layui-btn-normal">添加小组</a>
+                    <a href="javascript:show_class_edit(theClassId, function() { refresh() });" class="layui-btn">编辑</a>
                     <a href="javascript:delClass();" class="layui-btn layui-btn-danger">删除</a>
                 </div>
             </div>
@@ -97,10 +97,19 @@
                     }, undefined);
                 ;
             }, "/manage/class/getStudent?classID=" + theClassId, 'no', '#removeStudent');
+
+            table_group(table, function () {
+                ;
+            }, '/manage/class/getGroup?classID=' + theClassId);
+
         });
 
         function add_student() {
             window.location.href = '/manage/class/add_student?classId=' + theClassId;
+        }
+
+        function add_group() {
+            window.location.href = '/manage/group/new?classId=' + theClassId;
         }
 
         function delClass() {
@@ -124,6 +133,10 @@
                         document.getElementById('classEngineerName').innerHTML = JSON.parse(response).engineerName;
                         document.getElementById('classEngineerName').setAttribute('href', "javascript:show_popup_layer_engineer(" + theJson.classManager + ");");
                     }, undefined);
+                HttpGetResponse('/manage/program/getOne?ID=' + theJson.classProgram, function (response) {
+                    document.getElementById('classProgramName').innerHTML = JSON.parse(response).programName;
+                    document.getElementById('classProgramName').setAttribute('href', "/dashboard/program?id=" + theJson.classProgram);
+                })
                 // document.getElementById('editBtn').setAttribute('href', '/manage/project/edit?id=' + theJson.projectId);
             }, function () {
                 ;

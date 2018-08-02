@@ -19,13 +19,14 @@
         <div class="layui-container">
             <br/>
             <div class="layui-row" style="padding-left: 7px">
-                <h1>[班级名称] - [小组名称]</h1>
-                <h3 href="">负责工程师：[姓名]&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;小组组长：[姓名]</h3>
+                <h1><a id="className">[班级名称]</a> - <a id="groupName">[小组名称]</a></h1>
+                <h3 href="">负责工程师：<a id="engineerName">[姓名]</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;进行项目：<a
+                        id="projectName">[姓名]</a></h3>
                 <hr>
                 <div class="layui-btn-group">
-                    <button class="layui-btn layui-btn-normal">添加学生</button>
-                    <button class="layui-btn">编辑</button>
-                    <button class="layui-btn layui-btn-danger">删除</button>
+                    <a href="javascript:add_student();" id="btn_add" class="layui-btn layui-btn-normal">添加学生</a>
+                    <a href="javascript:show_group_edit(theGroupId, refresh)" class="layui-btn">编辑</a>
+                    <a href="javascript:delGroup();" class="layui-btn layui-btn-danger">删除</a>
                 </div>
             </div>
             <div class="layui-row" style="margin-left: 7px">
@@ -37,7 +38,7 @@
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
-                            <table id="demo" lay-filter="test"></table>
+                            <table id="tableStudent" lay-filter="tableStudent"></table>
                         </div>
                         <div class="layui-tab-item">
 
@@ -94,8 +95,101 @@
             </div>
         </div>
     </div>
+
+    <script type="text/html" id="removeStudent">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="removeFromClass">从小组移除</a>
+    </script>
+
     <script src="/res/layui/layui.js"></script>
+    <script src="/js/Interaction.js"></script>
+    <script src="/js/Table.js"></script>
+    <script src="/js/PopUp.js"></script>
     <script>
+        var theGroupId = getQueryVariable('id');
+        var theClassId = '';
+
+        layui.use(['table', 'element'], function () {
+            var element = layui.element;
+            //一些事件监听
+            element.on('tab(demo)', function (data) {
+                console.log(data);
+            });
+
+            var table = layui.table;
+
+            HttpGetResponse('/manage/group/getOne?ID=' + theGroupId, function (response) {
+                var theGroupJson = JSON.parse(response);
+                document.getElementById('groupName').innerText = theGroupJson.groupName;
+                HttpGetResponse('/manage/class/getOne?ID=' + theGroupJson.groupFromclass, function (classResp) {
+                    var theClassJson = JSON.parse(classResp);
+                    document.getElementById('className').innerText = theClassJson.className;
+                    document.getElementById('className').setAttribute('href', '/dashboard/class?id=' + theClassJson.classId);
+                    theClassId = theClassJson.classId;
+                    table_student(table, function (studentId) {
+                        HttpGetResponse('/manage/student/getOne?ID=' + studentId,
+                            function (response) {
+                                var theJson = JSON.parse(response);
+                                var newJson = {
+                                    studentDepartment: theJson.studentDepartment,
+                                    studentGrade: theJson.studentGrade,
+                                    studentId: theJson.studentId,
+                                    studentMajor: theJson.studentMajor,
+                                    studentName: theJson.studentName,
+                                    studentSex: theJson.studentSex,
+                                    studentClass: theJson.studentClass,
+                                };
+
+                                HttpPost('/manage/student/update', newJson, function () {
+                                    table.reload('tableStudent');
+                                }, function (msg) {
+                                    layer.alert(msg);
+                                });
+                            }, undefined);
+                        ;
+                    }, "/manage/group/getStudent?groupID=" + theGroupId + "&classID=" + theClassId, 'no', '#removeStudent');
+                    HttpGetResponse('/manage/engineer/getOne?ID=' + theClassJson.classManager, function (engineerResp) {
+                        var theEngineerJson = JSON.parse(engineerResp);
+                        document.getElementById('engineerName').innerText = theEngineerJson.engineerName;
+                        document.getElementById('engineerName').setAttribute('href', 'javascript:show_popup_layer_engineer(' + theEngineerJson.engineerId + ');');
+                    }, function () {
+                        ;
+                    })
+                }, function () {
+                    ;
+                })
+                HttpGetResponse('/manage/project/getOne?ID=' + theGroupJson.groupOnproject, function (projectResp) {
+                    var theProjectJson = JSON.parse(projectResp);
+                    document.getElementById('projectName').innerText = theProjectJson.projectName;
+                    document.getElementById('projectName').setAttribute('href', '/dashboard/project?id=' + theProjectJson.projectId);
+                })
+            }, function () {
+
+            })
+        });
+
+        function add_student() {
+            window.location.href = '/manage/class/add_student?classId=' + theClassId + '&groupId=' + theGroupId;
+        }
+
+        function delGroup() {
+            layui.use('layer', function () {
+                layer.confirm("确定删除这个小组吗？", function () {
+                    HttpGet('/manage/group/delete?ID=' + theGroupId, function () {
+                        window.location.href = '/dashboard/class?id=' + theClassId;
+                    });
+                });
+            });
+        }
+
+        function refresh() {
+            HttpGetResponse('/manage/group/getOne?ID=' + theGroupId, function (response) {
+                var theGroupJson = JSON.parse(response);
+                document.getElementById('groupName').innerText = theGroupJson.groupName;
+            }, function () {
+                ;
+            })
+        }
+
         var cardHtml = '';
         for (var i = 0; i < 10; i++) {
             if (i == 0) {
@@ -108,83 +202,6 @@
         }
         cardHtml += '</div>'
         document.getElementById('theCards').innerHTML = cardHtml;
-
-        layui.use('element', function () {
-            var element = layui.element;
-            //一些事件监听
-            element.on('tab(demo)', function (data) {
-                console.log(data);
-            });
-        });
-
-
-        layui.use('table', function () {
-            var table = layui.table;
-
-            //第一个实例
-            table.render({
-                elem: '#demo'
-                //,url: '/demo/table/user/' //数据接口
-                ,
-                width: '90%'
-                ,
-                page: true //开启分页
-                ,
-                cols: [[ //表头
-                    {field: 'id', title: 'ID', width: 200, sort: true, fixed: 'left'}
-                    , {field: 'name', title: '姓名', width: 200, sort: true}
-                    , {field: 'gender', title: '性别', width: 200, sort: true}
-                    , {field: 'colleage', title: '学院', width: 200, sort: true}
-                    , {field: 'majority', title: '专业', width: 200, sort: true}
-                    , {field: 'grade', title: '年级', width: 200, sort: true}
-                    , {
-                        field: 'class',
-                        title: '班级',
-                        width: 200,
-                        sort: true,
-                        templet: '<div><a href="class/{{d.class}}.html" class="layui-table-link">{{d.class}}</a></div>'
-                    }
-                ]]
-                ,
-                data: [{
-                    'id': 10,
-                    'name': 'Zhang',
-                    'gender': 'male',
-                    'colleage': 'Software',
-                    'majority': 'SE',
-                    'grade': '2016',
-                    'class': 'A210'
-                },
-                    {
-                        'id': 11,
-                        'name': 'Deng',
-                        'gender': 'male',
-                        'colleage': 'Software',
-                        'majority': 'SE',
-                        'grade': '2016',
-                        'class': 'A210'
-                    },
-                    {
-                        'id': 5,
-                        'name': 'Wang',
-                        'gender': 'male',
-                        'colleage': 'Software',
-                        'majority': 'SE',
-                        'grade': '2016',
-                        'class': 'A211'
-                    },
-                    {
-                        'id': 6,
-                        'name': 'Li',
-                        'gender': 'female',
-                        'colleage': 'Software',
-                        'majority': 'SE',
-                        'grade': '2016',
-                        'class': 'A211'
-                    }]
-
-            });
-        });
 
 
     </script>

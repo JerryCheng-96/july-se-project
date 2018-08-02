@@ -43,7 +43,7 @@
                 <hr>
             </div>
         </div>
-        <div class="layui-row" style="padding-left:20px;padding-right:20px;">
+        <div id="theCards" class="layui-row" style="padding-left:20px;padding-right:20px;">
             <div class="layui-col-md8" style="padding:10px;">
                 <div class="layui-card" style="background-color: #F7F7F7">
                     <div class="layui-card-header"><b>项目描述</b></div>
@@ -55,14 +55,17 @@
                 <div class="layui-card" style="background-color: #F7F7F7">
                     <div class="layui-card-header"><b>小组</b></div>
                     <div class="layui-card-body">
-                        <p>小组 1</p>
-                        <p>小组 2</p>
-                        <p>小组 3</p>
-                        <p>小组 4</p>
+                        <span id="teamList"></span>
                         <br/>
-                        <span style="color:blue;">查看更多...</span>
+                        <span style="color:blue;"><a href="javascript:showTable();">查看更多...</a></span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="theList" class="layui-row" style="display:none;">
+            <div style="padding: 10px;">
+                <table id="table_group" lay-filter="table_group"></table>
+                <a style="margin-top: 10px" href="javascript:hideTable();" class="layui-btn">完成</a>
             </div>
         </div>
     </div>
@@ -71,17 +74,38 @@
 <script src="/res/layui/layui.js"></script>
 <script src="/js/Interaction.js"></script>
 <script src="/js/PopUp.js"></script>
+<script src="/js/Table.js"></script>
 
 <script>
-    layui.use('element', function () {
+    var theProjId = getQueryVariable('id');
+
+    layui.use(['element', 'table'], function () {
         var element = layui.element;
+        var table = layui.table;
         //一些事件监听
         element.on('tab(demo)', function (data) {
             console.log(data);
         });
+
+        table_group(table, function () {
+            ;
+        }, '/manage/project/getGroup?projectID=' + theProjId)
+
     });
 
-    var theProjId = getQueryVariable('id');
+    var theTeamsJson = {};
+    var theTeamListHtml = '';
+    HttpGetResponse('/manage/project/getGroup?page=1&limit=5&projectID=' + theProjId, function (response) {
+        theTeamsJson = JSON.parse(response);
+        console.log('theTeamsJson');
+        console.log(theTeamsJson);
+        for (var i = 0; i < theTeamsJson.data.length; i++) {
+            theTeamListHtml += '<p><a href="/dashboard/group?id=' + theTeamsJson.data[i].groupId + '">' + theTeamsJson.data[i].groupName + '</a></p>'
+            console.log(theTeamListHtml);
+        }
+        console.log(theTeamListHtml);
+        document.getElementById('teamList').innerHTML = theTeamListHtml;
+    });
 
     function approveProj() {
         layui.use('layer', function () {
@@ -110,6 +134,15 @@
         });
     }
 
+    function showTable() {
+        document.getElementById('theList').setAttribute('style', 'padding-left:20px;padding-right:20px;');
+        document.getElementById('theCards').setAttribute('style', 'display:none;');
+    }
+
+    function hideTable() {
+        document.getElementById('theCards').setAttribute('style', 'padding-left:20px;padding-right:20px;');
+        document.getElementById('theList').setAttribute('style', 'display:none;');
+    }
 
     function refresh() {
         HttpGetResponse('/manage/project/getOne?ID=' + theProjId, function (response) {

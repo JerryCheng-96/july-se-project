@@ -22,6 +22,11 @@ public class ManageController {
         return "create_class";
     }
 
+    @RequestMapping(value = "/manage/group/new",method = RequestMethod.GET)
+    public String group_create(){
+        return "create_group";
+    }
+
     @RequestMapping(value = "/manage/engineer", method = RequestMethod.GET)
     public String engineer_manage() {
         return "list_engineer";
