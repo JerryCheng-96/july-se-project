@@ -71,8 +71,13 @@ public class GroupController {
         es.getGroupByClass(classID,req,res);
     }
 
+//    @RequestMapping(value = "/manage/project/getGroup",method = RequestMethod.GET)
+//    public void getGroupByProjectHandler(int projectID, HttpServletRequest req, HttpServletResponse res){
+//        es.getGroupByProject(projectID,req,res);
+//    }
+
     @RequestMapping(value = "/manage/project/getGroup",method = RequestMethod.GET)
-    public void getGroupByProjectHandler(int projectID, HttpServletRequest req, HttpServletResponse res){
-        es.getGroupByProject(projectID,req,res);
+    public void getGroupByProjectWithNameHandler(int projectID, HttpServletRequest req, HttpServletResponse res){
+        es.getGroupByProjectWithName(projectID,req,res);
     }
 }

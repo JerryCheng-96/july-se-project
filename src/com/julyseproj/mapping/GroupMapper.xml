@@ -7,6 +7,9 @@
     <result column="group_fromclass" jdbcType="INTEGER" property="groupFromclass" />
     <result column="group_onproject" jdbcType="INTEGER" property="groupOnproject" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithProject" type="com.julyseproj.entity.view.GroupWithProject">
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+  </resultMap>
   <sql id="Base_Column_List">
     group_id, group_name, group_fromclass, group_onproject
   </sql>
@@ -23,6 +26,11 @@
   <select id="selectByProject" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select * from `group`
     where group_onproject = #{projectId,jdbcType=INTEGER};
+  </select>
+
+  <select id="selectByProjectWithName" parameterType="java.lang.Integer" resultMap="ResultMapWithProject">
+    select group_id, group_name, group_fromclass, group_onproject,project_name from `group`,project
+    where (group_onproject = #{projectId,jdbcType=INTEGER} and group_onproject = project_id)
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

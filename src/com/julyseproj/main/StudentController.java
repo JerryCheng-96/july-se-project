@@ -3,10 +3,17 @@ package com.julyseproj.main;
 import com.julyseproj.entity.Student;
 import com.julyseproj.service.StudentService;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.julyseproj.utils.RequestExceptionResolver;
+import org.apache.felix.ipojo.transaction.Transactional;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -48,6 +55,22 @@ public class StudentController {
     @RequestMapping(value = "/manage/student/update",method = RequestMethod.POST)
     public void updateStudentByInstanceHandler(HttpServletRequest req,HttpServletResponse res){
         es.updateStudentByInstance(req,res);
+    }
+
+    @RequestMapping(value = "/manage/student/import",method = RequestMethod.GET)
+    public String importStudentHandler(){
+        return "testimport";
+    }
+    @RequestMapping(value = "/manage/student/doImport",method = RequestMethod.POST)
+    public void doImportStudentHandler(@RequestParam MultipartFile file, HttpServletRequest req, HttpServletResponse res){
+        try {
+            es.importStudentByXlsx(file, req, res);
+        }catch (Exception e){
+            e.printStackTrace();
+            RequestExceptionResolver.handle(e,res);
+            return;
+        }
+        res.setStatus(200);
     }
 
     @RequestMapping(value = "/manage/student/delete",method = RequestMethod.GET)
