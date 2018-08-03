@@ -67,7 +67,7 @@ function popup_layer_engineer(theEngineer) {
                 '<table border="0" style="margin:3%">' +
                 '<tr>' +
                 '<td>' +
-                '<img src="/res/icon/5.png" style="width:80px;height:80px;border-radius:80px;margin:10px;">' +
+                '<img src="/res/icon/8.jpg" style="width:80px;height:80px;border-radius:80px;margin:10px;">' +
                 '</td>' +
                 '<td colspan=2><span style="font-size:30px; margin-left:10px;">' + theEngineer.engineerName + '</span></td>' +
                 '</tr>' +
@@ -316,7 +316,7 @@ function popup_student(theStudent) {
                 '<table border="0" style="margin:3%">' +
                 '<tr>' +
                 '<td>' +
-                '<img src="/res/icon/5.png" style="width:80px;height:80px;border-radius:80px;margin:10px;">' +
+                '<img src="/res/icon/A.jpg" style="width:80px;height:80px;border-radius:80px;margin:10px;">' +
                 '</td>' +
                 '<td colspan=2><span style="font-size:30px; margin-left:10px;">' + theStudent.studentName + '</span></td>' +
                 '</tr>' +

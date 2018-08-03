@@ -17,14 +17,14 @@
     </ul>
 </div>--%>
 
-<div class="layui-side" style="background-color: #0C0C0C">
+<div class="layui-side" style="background-image: url('/res/img/frame_bg.jpg');background-size: cover">
     <div style="text-align: center">
         <img id="icon" src="/res/icon/A.jpg" style="width:80px;height:80px;border-radius:80px;margin-top:10%;"/>
         <a href="javascript:confirmLogout();"><h2 id="name" style="margin-top: 5%; margin-bottom: 10%; color: #F0F0F0"></h2></a>
     </div>
-    <div class="">
+    <div class="" style="">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-        <ul class="layui-nav layui-nav-tree">
+        <ul class="layui-nav layui-nav-tree" >
             <li id="dashboard" class="layui-nav-item">
                 <a class="" href="/dashboard">个人中心</a>
             </li>
@@ -65,8 +65,6 @@
                     </dd>
                 </dl>
             </li>
-
-            <span class="layui-nav-bar" style="top: 317.5px; height: 0px; opacity: 0;"></span>
         </ul>
     </div>
 </div>

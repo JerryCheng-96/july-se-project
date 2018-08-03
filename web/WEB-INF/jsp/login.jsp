@@ -16,7 +16,7 @@
 <div class="layui-container">
     <div class="layui-row">
         <div class="layui-col-md5 layui-col-md-offset7">
-            <div style="background-color: rgba(255,255,255,0.7);margin-top:25%;padding:5%;border-radius: 5%">
+            <div style="background-color: rgba(255,255,255,0.7);margin-top:40%;padding:5%;border-radius: 5%">
                 <h1 style="margin-left: 5%;text-shadow: 2px 2px 2px #F0F0F0">TOSIT 实训管理系统</h1>
                 <form class="layui-form" style="padding-top: 10%; ">
                     <div class="layui-form-item">

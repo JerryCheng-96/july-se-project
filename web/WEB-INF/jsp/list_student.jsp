@@ -59,6 +59,7 @@
             ,done: function(res){
                 //上传完毕回调
                 console.log(res);
+                table.reload('tableStudent');
             }
             ,error: function(){
                 //请求异常回调
