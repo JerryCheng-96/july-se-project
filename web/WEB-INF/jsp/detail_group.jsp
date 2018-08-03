@@ -29,8 +29,10 @@
                     <a href="javascript:delGroup();" class="layui-btn layui-btn-danger">删除</a>
                 </div>
                 <div class="layui-btn-group">
-                    <a href="javascript:popup_log_edit(undefined, function () { location.reload() }, theGroupId, theStudentId);" id="btn_add_log" class="layui-btn layui-btn-primary">添加日志</a>
-                    <a href="javascript:popup_file_upload(theGroupId, theStudentId);" class="layui-btn layui-btn-primary">添加文档</a>
+                    <a href="javascript:popup_log_edit(undefined, function () { location.reload() }, theGroupId, theStudentId);"
+                       id="btn_add_log" class="layui-btn layui-btn-primary">添加日志</a>
+                    <a href="javascript:popup_file_upload(theGroupId, theStudentId);"
+                       class="layui-btn layui-btn-primary">添加文档</a>
                 </div>
             </div>
             <div class="layui-row" style="margin-left: 7px">
@@ -51,6 +53,7 @@
                         </div>
                         <div class="layui-tab-item">
                             <div id="theCards"></div>
+                            <div style="margin-left: 10px;margin-right: 25px; margin-top: 5px" id="demo1"></div>
                         </div>
                     </div>
                 </div>
@@ -99,7 +102,7 @@
                 logHtml += '<li class="layui-timeline-item">' +
                     '            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>' +
                     '            <div class="layui-timeline-content layui-text">' +
-                    '                <h3 class="layui-timeline-title"><a href="javascript:delete_log('+ currLog.logId + ", function () {location.reload();});\">" + currLog.logTime + '</a></h3>' +
+                    '                <h3 class="layui-timeline-title"><a href="javascript:delete_log(' + currLog.logId + ", function () {location.reload();});\">" + currLog.logTime + '</a></h3>' +
                     '                <p>' +
                     currLog.logContent +
                     '                </p>' +
@@ -194,11 +197,68 @@
                 });
             });
 
+            function update_small_cards(card_json, elementName) {
+                console.log(card_json);
+
+                var cardHtml = '';
+                for (var i = 0; i < card_json.length; i++) {
+                    var currDocument = card_json[i];
+
+                    if (i == 0) {
+                        cardHtml += '<div class="layui-row" style="padding-left: 0px; padding-right: 10px">'
+                    }
+                    if (i > 0 && i % 2 == 0) {
+                        cardHtml += '</div><div class="layui-row" style="padding-left: 0px; padding-right: 10px">'
+                    }
+                    cardHtml += '<div class="layui-col-md6" style="padding-left: 10px;padding-bottom: 10px"> ' +
+                        '<div class="layui-card" style="background-color: #F0F0F0"> ' +
+                        "<div class='layui-card-header'><a href=\"javascript:show_document('" + currDocument.docName + "','" + currDocument.docUrl + "',function () { parent.reload(); });\"><b>" + currDocument.docName +
+                        "</b></a></div> " +
+                        '<div class="layui-card-body"> ' +
+                        '<label style="overflow: hidden; text-overflow: ellipsis; display: inline-block; height: 50px; word-break: break-word">' +
+                        card_json[i].docDescription.substr(0, 65) + (currDocument.docDescription.length > 65 ? '...' : '') +
+                        '</label>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+                cardHtml += '</div>'
+                document.getElementById(elementName).innerHTML = cardHtml;
+            }
+
+            HttpGetResponse('/manage/group/getDocument?page=1&limit=4&groupID=' + theGroupId, function (response) {
+                var theJson = JSON.parse(response);
+                var projectCnt = theJson.count;
+                update_small_cards(theJson.data, 'theCards');
+
+                console.log('projectCnt');
+                console.log(projectCnt);
+
+                laypage.render({
+                    elem: 'demo1'
+                    , count: projectCnt //数据总数
+                    , limit: 4
+                    , jump: function (obj, first) {
+                        console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                        console.log(obj.limit); //得到每页显示的条数
+                        if (!first) {
+                            var url = '/manage/group/getDocument?groupID=' + theGroupId + '&page=' + obj.curr + '&limit=' + obj.limit;
+                            HttpGetResponse(url, function (response) {
+                                update_small_cards(JSON.parse(response).data);
+                            }, function () {
+                                ;
+                            })
+                        }
+                    }
+                });
+            })
+
         });
 
         function add_student() {
             window.location.href = '/manage/class/add_student?classId=' + theClassId + '&groupId=' + theGroupId;
         }
+
 
         function delGroup() {
             layui.use('layer', function () {
@@ -220,18 +280,6 @@
         }
 
 
-        var cardHtml = '';
-        for (var i = 0; i < 10; i++) {
-            if (i == 0) {
-                cardHtml += '<div class="layui-row" style="padding: 10px;">'
-            }
-            if (i > 0 && i % 3 == 0) {
-                cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
-            }
-            cardHtml += '<div class="layui-col-md4" style="padding-left: 10px;"> <div class="layui-card" style="background-color: #F7F7F7"> <div class="layui-card-header"><b>卡片面板</b></div> <div class="layui-card-body"> 卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 </div> </div> </div>';
-        }
-        cardHtml += '</div>'
-        document.getElementById('theCards').innerHTML = cardHtml;
     </script>
 </body>
 
