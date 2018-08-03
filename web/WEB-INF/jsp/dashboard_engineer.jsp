@@ -104,8 +104,13 @@
 <script src="/js/PopUp.js"></script>
 <script src="/js/Table.js"></script>
 <script>
-    var theEngineerId = getQueryVariable('id');
+    var theEngineerId = false;
 
+    if (theEngineerId == false) {
+        HttpGetResponse('/getCurrentUser', function (response) {
+            theEngineerId = JSON.parse(response).username;
+        });
+    }
     layui.use(['table', 'element'], function () {
         var element = layui.element;
         var table = layui.table;

@@ -65,7 +65,12 @@
 <script src="/js/Table.js"></script>
 <script src="/js/PopUp.js"></script>
 <script>
-    var theStudentId = getQueryVariable('id');
+    var theStudentId = false;
+    if (theStudentId == false) {
+        HttpGetResponse('/getCurrentUser', function (response) {
+            theStudentId = JSON.parse(response).username;
+        });
+    }
 
     function delete_log(logId, whenDone) {
         layui.use('layer', function () {

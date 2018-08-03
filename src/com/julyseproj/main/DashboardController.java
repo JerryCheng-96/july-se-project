@@ -4,11 +4,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class DashboardController {
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String login() {
-        return "dashboard";
+    public String dashboard(HttpSession session) {
+        String theUsername = session.getAttribute("userType").toString();
+        String theUserType = session.getAttribute("userType").toString();
+
+        System.out.println(theUsername);
+        System.out.println(theUserType);
+
+        if (theUserType.equals("engineer")) {
+            return "redirect:/dashboard/engineer?id=" + theUsername;
+        }
+        return "redirect:/dashboard/student?id=" + theUsername;
     }
 
     @RequestMapping(value = "/pg", method = RequestMethod.GET)
@@ -55,8 +66,6 @@ public class DashboardController {
     public String dash_doc() {
         return "detail_doc";
     }
-
-
 
     @RequestMapping(value = "/edit/project", method = RequestMethod.GET)
     public String edit_project() {

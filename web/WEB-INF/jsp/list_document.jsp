@@ -52,6 +52,7 @@
     layui.use(['element', 'laypage'], function () {
         var element = layui.element;
         var laypage = layui.laypage;
+
         //一些事件监听
         element.on('tab(demo)', function (data) {
             console.log(data);
@@ -72,8 +73,10 @@
                 }
                 cardHtml += '<div class="layui-col-md6" style="padding-left: 10px;padding-bottom: 10px"> ' +
                     '<div class="layui-card" style="background-color: #F7F7F7"> ' +
-                    "<div class='layui-card-header'><a href=\"javascript:show_document('" + currDocument.docName + "','" + currDocument.docUrl + "',function () { parent.reload(); });\"><b>" + currDocument.docName +
-                    "</b></a></div> " +
+                    "<div class='layui-card-header'>" +
+                    "<a href=\"javascript:show_document('" + currDocument.docName + "','" + currDocument.docUrl + "',function () { parent.reload(); });\"><b>" + currDocument.docName +
+                    "</b></a>" +
+                    "</div> " +
                     '<div class="layui-card-body"> ' +
                     '<label style="overflow: hidden; text-overflow: ellipsis; display: inline-block; height: 50px; word-break: break-word">' +
                     card_json[i].docDescription.substr(0, 65) + (currDocument.docDescription.length > 65 ? '...' : '') +
@@ -111,7 +114,11 @@
                     }
                 }
             });
-        })
+        });
+
+        function deleteDocument() {
+            console.log('DELETE!!!');
+        }
 
 
     });

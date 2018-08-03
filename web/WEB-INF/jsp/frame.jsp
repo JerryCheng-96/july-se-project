@@ -19,8 +19,8 @@
 
 <div class="layui-side" style="background-color: #0C0C0C">
     <div style="text-align: center">
-        <img src="/res/icon/A.jpg" style="width:80px;height:80px;border-radius:80px;margin-top:10%;"/>
-        <a href="javascript:confirmLogout();"><h2 style="margin-top: 5%; margin-bottom: 10%; color: #F0F0F0">张三</h2></a>
+        <img id="icon" src="/res/icon/A.jpg" style="width:80px;height:80px;border-radius:80px;margin-top:10%;"/>
+        <a href="javascript:confirmLogout();"><h2 id="name" style="margin-top: 5%; margin-bottom: 10%; color: #F0F0F0"></h2></a>
     </div>
     <div class="">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
@@ -72,7 +72,27 @@
 </div>
 
 <script src="/res/layui/layui.js"></script>
+<script src="/js/Interaction.js"></script>
 <script>
+
+    HttpGetResponse('/getCurrentUser', function (response) {
+        var theJson = JSON.parse(response);
+
+        if (theJson.userType == 'engineer') {
+            HttpGetResponse('/manage/engineer/getOne?ID=' + theJson.username, function (eResp) {
+                document.getElementById('name').innerText = JSON.parse(eResp).engineerName;
+                document.getElementById('icon').setAttribute('src', "/res/icon/8.jpg");
+            });
+        }
+        else if (theJson.userType == 'student') {
+            HttpGetResponse('/manage/student/getOne?ID=' + theJson.username, function (eResp) {
+                document.getElementById('name').innerText = JSON.parse(eResp).studentName;
+                document.getElementById('icon').setAttribute('src', "/res/icon/A.jpg");
+            });
+        }
+
+    });
+
     var catId = '<%=(String)request.getParameter("cat")%>';
     var funcId = '<%=(String)request.getParameter("func")%>';
     var catObj = document.getElementById(catId);
