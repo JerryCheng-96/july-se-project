@@ -77,9 +77,22 @@ public class DocumentController {
     }
 
     @RequestMapping(value = "/manage/document/doUpload", method = RequestMethod.POST)
-    public void doUploadHandler(@RequestParam MultipartFile file,@RequestParam(value = "entry") String entryJson, HttpServletRequest req, HttpServletResponse res) throws Exception{
-        Gson gson = new Gson();
-        Document doc = gson.fromJson(new String(entryJson.getBytes("ISO-8859-1"),"UTF-8"),Document.class);
+    public void doUploadHandler(@RequestParam MultipartFile file,@RequestParam(value = "groupID") Integer groupID,@RequestParam(value = "uploaderID") Integer uploaderID,@RequestParam(value = "description") String description, HttpServletRequest req, HttpServletResponse res) throws Exception{
+        if (file.isEmpty()){
+            res.setStatus(400);
+            return;
+        }
+        String realRootPath = req.getSession().getServletContext().getRealPath("/");
+        System.out.println(realRootPath);
+        String fileName = file.getOriginalFilename();
+
+        Document doc = new Document();
+        doc.setDocName(fileName);
+        doc.setDocUrl(groupID.toString());
+        doc.setDocUploader(uploaderID);
+        doc.setDocGroup(groupID);
+        doc.setDocDescription(description);
+        doc.setDocEval(new Float(-1));
         try {
             //todo
             if(es.getDocumentByInstance(doc)!=null){
@@ -93,11 +106,7 @@ public class DocumentController {
             return;
         }
         try {
-            if (!file.isEmpty()) {
-                String realRootPath = req.getSession().getServletContext().getRealPath("/");
-                System.out.println(realRootPath);
-                String fileName = file.getOriginalFilename();
-                File f = new File(realRootPath + "/docs/" + doc.getDocGroup().toString() + "/", fileName);
+            File f = new File(realRootPath + "docs/" + doc.getDocUrl()+ "/", fileName);
                 if (!f.exists()) {
                     f.mkdirs();
                 }
@@ -105,7 +114,6 @@ public class DocumentController {
 
                 res.getWriter().write("{\"status\":\"done\"}");
                 res.setStatus(200);
-            }
         }catch (Exception e){
             e.printStackTrace();
             es.deleteDocumentByInstance(doc);
@@ -117,7 +125,7 @@ public class DocumentController {
     @RequestMapping(value = "/manage/document/download", method = RequestMethod.GET)
     public void downloadHandler(String docName, String docUrl, HttpServletRequest req, HttpServletResponse res){
         try {
-            String path = req.getSession().getServletContext().getRealPath("/docs/" + docUrl) + "/" + docName;
+            String path = req.getSession().getServletContext().getRealPath("/") + "docs/" +docUrl +"/"+ docName;
             BufferedInputStream bis = new BufferedInputStream(new FileInputStream(new File(path)));
             docName = URLEncoder.encode(docName,"UTF-8");
             res.addHeader("Content-Disposition","attachment;filename="+docName);
@@ -138,9 +146,11 @@ public class DocumentController {
     @RequestMapping(value = "/manage/document/delete",method = RequestMethod.GET)
     public void deleteDocumentByIdHandler(String docName, String docUrl, HttpServletRequest req, HttpServletResponse res) throws Exception{
         try {
+            //docName = new String(docName.getBytes("ISO-8859-1"),"UTF-8");
             DocumentKey dk = new DocumentKey();
             dk.setDocName(docName);
             dk.setDocUrl(docUrl);
+            System.out.println(docName);
             es.deleteDocumentByInstance(dk,res);
         }catch (Exception e){
             e.printStackTrace();
@@ -149,7 +159,7 @@ public class DocumentController {
         }
         String realRootPath = req.getSession().getServletContext().getRealPath("/");
         System.out.println(realRootPath);
-        File f = new File(realRootPath+"/docs/"+docUrl+"/",docName);
+        File f = new File(realRootPath+"docs/"+docUrl+"/",docName);
         if(f.exists()&&f.isFile()){
             f.delete();
         }
