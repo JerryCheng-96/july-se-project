@@ -52,9 +52,9 @@
                     <div class="layui-card-header"><b>最近文档</b></div>
                     <div class="layui-card-body">
                         <div id="theCards"></div>
+                        <div style="margin-left: 10px;margin-right: 25px; margin-top: 5px" id="demo1"></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -149,21 +149,66 @@
                     }
                 }
             });
-        })
-    });
+        });
 
-    var cardHtml = '';
-    for (var i = 0; i < 2; i++) {
-        if (i == 0) {
-            cardHtml += '<div class="layui-row" style="padding: 10px;">'
+        function update_small_cards(card_json, elementName) {
+            console.log(card_json);
+
+            var cardHtml = '';
+            for (var i = 0; i < card_json.length; i++) {
+                var currDocument = card_json[i];
+
+                if (i == 0) {
+                    cardHtml += '<div class="layui-row" style="padding-left: 0px; padding-right: 10px">'
+                }
+                if (i > 0 && i % 2 == 0) {
+                    cardHtml += '</div><div class="layui-row" style="padding-left: 0px; padding-right: 10px">'
+                }
+                cardHtml += '<div class="layui-col-md6" style="padding-left: 10px;padding-bottom: 10px"> ' +
+                    '<div class="layui-card"> ' +
+                    "<div class='layui-card-header'><a href=\"javascript:show_document('" + currDocument.docName + "','" + currDocument.docUrl + "',function () { parent.reload(); });\"><b>" + currDocument.docName +
+                    "</b></a></div> " +
+                    '<div class="layui-card-body"> ' +
+                    '<label style="overflow: hidden; text-overflow: ellipsis; display: inline-block; height: 50px; word-break: break-word">' +
+                    card_json[i].docDescription.substr(0, 65) + (currDocument.docDescription.length > 65 ? '...' : '') +
+                    '</label>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+            }
+            cardHtml += '</div>'
+            document.getElementById(elementName).innerHTML = cardHtml;
         }
-        if (i > 0) {
-            cardHtml += '</div><div class="layui-row" style="padding: 10px;">'
-        }
-        cardHtml += '<div class="layui-card"> <div class="layui-card-header"><b>卡片面板</b></div> <div class="layui-card-body"> 卡片式面板面板通常用于非白色背景色的主体内<br> 从而映衬出边框投影 </div> </div>';
-    }
-    cardHtml += '</div>'
-    document.getElementById('theCards').innerHTML = cardHtml;
+
+        HttpGetResponse('/manage/student/getDocument?page=1&limit=4&studentID=' + theStudentId, function (response) {
+            var theJson = JSON.parse(response);
+            var projectCnt = theJson.count;
+            update_small_cards(theJson.data, 'theCards');
+
+            console.log('projectCnt');
+            console.log(projectCnt);
+
+            laypage.render({
+                elem: 'demo1'
+                , count: projectCnt //数据总数
+                , limit: 4
+                , jump: function (obj, first) {
+                    console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                    console.log(obj.limit); //得到每页显示的条数
+                    if (!first) {
+                        var url = '/manage/student/getDocument?studentID=' + theStudentId + '&page=' + obj.curr + '&limit=' + obj.limit;
+                        HttpGetResponse(url, function (response) {
+                            update_small_cards(JSON.parse(response).data);
+                        }, function () {
+                            ;
+                        })
+                    }
+                }
+            });
+        })
+
+
+    });
 
 </script>
 

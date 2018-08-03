@@ -41,6 +41,13 @@ function show_group_edit(groupId, whenDone) {
         }, undefined);
 }
 
+function show_document(docName, docUrl, whenDone) {
+    HttpGetResponse('/manage/document/getOne?docName=' + docName + '&docUrl=' + docUrl,
+        function (response) {
+            popup_document(JSON.parse(response), whenDone);
+        }, undefined);
+}
+
 function show_popup_layer_engineer_edit(engineerId, whenDone) {
     HttpGetResponse('/manage/engineer/getOne?ID=' + engineerId,
         function (response) {
@@ -706,5 +713,122 @@ function popup_log_edit(theLog, whenDone, groupId, studentId) {
         });
 
 
+    });
+}
+
+function popup_file_upload(theGroupId, theStudentId, whenDone) {
+    layui.use(['layer', 'form', 'upload'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+        var upload = layui.upload;
+
+        layer.open({
+            type: 1,
+            title: '',
+            content: "<div style='width: 90%; margin-right: 30px; margin-top: 30px';>" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>文件描述</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" id=\"docDescription\" name=\"docDescription\" required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+
+                "<div style='padding: 20px'>" +
+                "      <button  class=\"layui-btn\" id='uploadButton'>" + "<i class=\"layui-icon\">&#xe67c;</i>选择文件并上传" + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
+                "</div>" +
+                "</div>",
+            area: '450px',
+        });
+
+        form.render();
+
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#uploadButton' //绑定元素
+            , url: '/manage/document/doUpload' //上传接口
+            , accept: 'file'
+            , data: {
+                description: function () {
+                    return document.getElementById('docDescription').getAttribute('value');
+                },
+                groupID: theGroupId,
+                uploaderID: theStudentId
+            }  //require a document json
+            , done: function (res) {
+                //上传完毕回调
+                window.location.href = '/manage/document';
+            }
+            , error: function () {
+                //请求异常回调
+            }
+        });
+    });
+}
+
+function popup_document(theDocument, whenDone) {
+    console.log(theDocument);
+    var buttonText = '确定';
+
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+
+        layer.open({
+            type: 1,
+            title: '',
+            content: "<div style='width: 90%; margin-right: 30px; margin-top: 30px';>" +
+                "<form class=\"layui-form\" action=\"\"'>" +
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>文档名称</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "<p style='padding-top:10px'>" +
+                "<a href='" + theDocument.docUrl + "'>" +
+                      theDocument.docName +
+                "</a>" +
+                "</p>" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>文档描述</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "<p style='padding-top:10px'>" +
+                      theDocument.docDescription +
+                "</p>" +
+                "    </div>" +
+                "  </div>" +
+
+                "  <div class=\"layui-form-item\" >" +
+                "    <label class=\"layui-form-label\" style='margin-left: 0px'>文档分数</label>" +
+                "    <div class=\"layui-input-block\">" +
+                "      <input type=\"text\" name=\"docEval\" id=\"docEval\" value='" + theDocument.docEval + "' required  lay-verify=\"required\" placeholder=\"必填\" autocomplete=\"off\" class=\"layui-input\">" +
+                "    </div>" +
+                "  </div>" +
+
+
+                "  <div class=\"layui-form-item\">" +
+                "    <div class=\"layui-input-block\">" +
+                "      <button class=\"layui-btn\" lay-submit lay-filter=\"formDemo\">" + buttonText + "</button>" +
+                "      <a href='javascript:layer.close(layer.index)' class=\"layui-btn layui-btn-primary\">取消</a>" +
+                "    </div>" +
+                "  </div>" +
+                "</form>" +
+                "</div>",
+            area: '450px',
+        });
+
+        form.render();
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            theDocument.docEval = data.field.docEval;
+            console.log(theDocument);
+
+            HttpGet("/manage/document/evaluate?docName=" + theDocument.docName + "&docUrl=" + theDocument.docUrl + "&docEval=" + data.field.docEval,
+                function () {
+                    layer.close(layer.index);
+                })
+
+            return false;
+        });
     });
 }
