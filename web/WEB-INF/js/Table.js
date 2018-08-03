@@ -95,7 +95,7 @@ function table_student(theTable, update_table, dataUrl, showClass, toolbar_name)
             , {field: 'studentGrade', title: '年级', width: 150, sort: true}
             , {
                 field: 'studentClass', title: '班级', width: 150, sort: true,
-                templet: '<div><a href="/dashboard/class?id={{d.studentClass}}" class="layui-table-link">{{(typeof d.studentClass != "undefined") ? d.className : ""}}</a></div>'
+                templet: '<div><a href="/dashboard/class?id={{d.studentClass}}" class="layui-table-link">{{(typeof d.studentClass != "undefined") ? d.studentClass : ""}}</a></div>'
             }
             , {fixed: 'right', width: 120, align: 'center', toolbar: toolbar_name}
         ]];

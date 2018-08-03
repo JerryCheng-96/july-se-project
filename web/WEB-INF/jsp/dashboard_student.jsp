@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>XXX - 个人中心</title>
+    <title>个人中心 - TOSIT 实训管理系统</title>
     <link rel="stylesheet" href="/res/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">

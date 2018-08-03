@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>XXX，欢迎来到实训管理系统！</title>
+    <title>查看班级 - TOSIT 实训管理系统</title>
     <link rel="stylesheet" href="/res/layui/css/layui.css">
 </head>
 

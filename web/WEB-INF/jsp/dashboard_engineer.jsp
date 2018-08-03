@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>XXX - 个人中心</title>
+    <title>个人中心 - TOSIT 实训管理系统</title>
     <link rel="stylesheet" href="/res/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -60,7 +60,9 @@
                 <div class="layui-card" style="background-color: #F7F7F7">
                     <div class="layui-card-header"><b>教学任务</b></div>
                     <div class="layui-card-body">
-                        <p style="color: #CCCCCC">当前无教学任务</p>
+                        <div id="taskList"></div>
+                        <br/>
+                        <a href="javascript:showTable('listTasks');" style="color: blue">查看更多...</a>
                     </div>
                 </div>
             </div>
@@ -97,12 +99,22 @@
             <br/>
         </div>
 
+        <div id="listTasks" class="layui-row" style="display: none;">
+            <table id="table_task" lay-filter="table_task"></table>
+            <a style="margin-top: 10px" href="javascript:hideTable('listTasks');" class="layui-btn">完成</a>
+            <br/>
+            <br/>
+        </div>
+
     </div>
 </div>
 <script src="/res/layui/layui.js"></script>
 <script src="/js/Interaction.js"></script>
 <script src="/js/PopUp.js"></script>
 <script src="/js/Table.js"></script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">完成并删除</a>
+</script>
 <script>
     var theEngineerId = false;
 
@@ -178,6 +190,23 @@
             table_class(table, function () {
                 ;
             }, '/manage/engineer/getClass?engineerID=' + theEngineerId);
+        });
+
+        var theTasksJson = {};
+        var theTaskListHtml = '';
+        HttpGetResponse('/manage/engineer/getTask?page=1&limit=3&engineerID=' + theEngineerId, function (response) {
+            theTasksJson = JSON.parse(response);
+            console.log('theTasksJson');
+            console.log(theTasksJson);
+            for (var i = 0; i < theTasksJson.data.length; i++) {
+                theTaskListHtml += '<p><a href="">' + theTasksJson.data[i].taskName + '</a></p>'
+                console.log(theTaskListHtml);
+            }
+            console.log(theTaskListHtml);
+            document.getElementById('taskList').innerHTML = theTaskListHtml;
+            table_task(table, function () {
+                ;
+            }, '/manage/engineer/getTask?engineerID=' + theEngineerId, undefined, '#barDemo');
         });
 
     });
